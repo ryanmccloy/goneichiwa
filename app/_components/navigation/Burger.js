@@ -1,6 +1,17 @@
-export default function Burger({ isOpen, toggle }) {
+export default function Burger({ isOpen, toggleMenu }) {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      toggleMenu();
+    }
+  };
+
   return (
-    <div onClick={toggle} className="cursor-pointer relative w-8 h-6">
+    <div
+      onClick={toggleMenu}
+      onKeyDown={handleKeyDown}
+      className="cursor-pointer relative w-8 h-6 lg:hidden"
+      tabIndex="0"
+    >
       {/* Top Bar */}
       <div
         className={`burger transition-all duration-300

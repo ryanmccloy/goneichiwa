@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Icons() {
   return (
     <div className="flex gap-small md:gap-regular flex-1 flex justify-end ">
-      <Link href="/account">
+      <Link href="/account" aria-label="Go To Account">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -20,7 +20,7 @@ export default function Icons() {
         </svg>
       </Link>
 
-      <Link href="/cart">
+      <Link href="/cart" aria-label="Go to Cart">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

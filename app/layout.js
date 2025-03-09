@@ -1,5 +1,5 @@
 import "@/app/_styles/globals.css";
-import Navigation from "@/app/_components/Navigation";
+import Navigation from "@/app/_components/navigation/Navigation";
 
 import { Anton, Montserrat } from "next/font/google";
 
@@ -18,7 +18,7 @@ const montserrat = Montserrat({
 export const metadata = {
   title: {
     template: "%s - Here & There",
-    default: "Here & There",
+    default: "Here & There | Travel Guides for Smart Explorers",
   },
   description:
     "Discover expertly crafted travel guides for stress-free adventures. Explore top destinations with handpicked recommendations, local tips, and detailed trip plans. Instantly download your perfect itinerary today!",

@@ -14,9 +14,7 @@ export default function NavList() {
   return (
     <div className="flex-1 lg:flex lg:items-center lg:justify-center ">
       {/* Burger */}
-      <div className="lg:hidden">
-        <Burger isOpen={isOpen} toggle={toggleMenu} />
-      </div>
+      <Burger isOpen={isOpen} toggleMenu={toggleMenu} />
 
       {/* Nav List */}
       <div
@@ -26,18 +24,21 @@ export default function NavList() {
             : "opacity-0 invisible -translate-y-5 pointer-events-none"
         } lg:block lg:opacity-100 lg:visible lg:w-fit lg:translate-y-0 lg:relative`}
       >
-        <ul className="uppercase flex items-center justify-between text-small md:text-regular lg:gap-regular lg:justify center">
-          <li>
+        <ul
+          className="uppercase flex items-center justify-between text-small md:text-regular lg:gap-regular lg:justify center lg:pointer-events-auto"
+          role="menu"
+        >
+          <li role="menuitem">
             <Link href="/">About</Link>
           </li>
-          <li>
+          <li role="menuitem">
             <Link href="/catalogue">Catalogue</Link>
           </li>
-          <li>
-            <Link href="blog">Blog</Link>
+          <li role="menuitem">
+            <Link href="/blog">Blog</Link>
           </li>
-          <li>
-            <Link href="consultations">Consultations</Link>
+          <li role="menuitem">
+            <Link href="/consultations">Consultations</Link>
           </li>
         </ul>
       </div>
