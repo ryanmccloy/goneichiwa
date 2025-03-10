@@ -32,7 +32,9 @@ export default function RootLayout({ children }) {
           <Navigation />
         </header>
         <main>{children}</main>
-        <footer>Copyright WebDevRyan</footer>
+        <footer className="section-styles bg-orange-200">
+          Copyright WebDevRyan
+        </footer>
       </body>
     </html>
   );

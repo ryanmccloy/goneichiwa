@@ -12,6 +12,7 @@
   --text-heading-small: 30px;
   --text-heading-large: 60px;
   --text-heading-landing-small: 40px;
+  --text-heading-landing-medium: 70px;
   --text-heading-landing-large: 90px;
   --spacing-small: 15px;
   --spacing-regular: 30px;
@@ -24,13 +25,25 @@
 }
 
 .body-styles {
-  @apply px-regular bg-red-300 text-off-black font-primary text-regular max-w-[1400px] md:px-side mx-auto;
+  @apply text-off-black font-primary text-regular leading-8 bg-green-200 relative;
 }
 
 .section-styles {
-  @apply bg-light-grey;
+  @apply max-w-[1400px] px-regular md:px-side mx-auto;
 }
 
 .burger {
   @apply absolute w-full h-[2px] bg-off-white;
+}
+
+/* HERO SECTION */
+.hero-styles {
+  @apply relative h-screen w-full text-off-white pt-[170px] lg:pt-[200px] pb-bottom min-h-fit;
+}
+
+/* BUTTON */
+.button {
+  @apply bg-accent-blue w-fit px-6 py-2 rounded-full uppercase 
+         font-medium transition-all duration-300 ease-in-out 
+         hover:scale-105 hover:bg-accent-blue/90 hover:cursor-pointer;
 }

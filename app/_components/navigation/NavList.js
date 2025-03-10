@@ -9,8 +9,6 @@ export default function NavList() {
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
-  console.log(isOpen);
-
   return (
     <div className="flex-1 lg:flex lg:items-center lg:justify-center ">
       {/* Burger */}
@@ -18,7 +16,7 @@ export default function NavList() {
 
       {/* Nav List */}
       <div
-        className={`absolute w-full transition-all duration-300 ease-in-out ${
+        className={`absolute left-0 w-full px-regular md:px-side  transition-all duration-300 ease-in-out ${
           isOpen
             ? "opacity-100 visible translate-y-7 pointer-events-auto"
             : "opacity-0 invisible -translate-y-5 pointer-events-none"
