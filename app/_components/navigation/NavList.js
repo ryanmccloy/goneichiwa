@@ -16,14 +16,14 @@ export default function NavList() {
 
       {/* Nav List */}
       <div
-        className={`absolute left-0 w-full px-regular md:px-side  transition-all duration-300 ease-in-out ${
+        className={`absolute left-0 w-full px-30 md:px-60 transition-all duration-300 ease-in-out ${
           isOpen
             ? "opacity-100 visible translate-y-7 pointer-events-auto"
             : "opacity-0 invisible -translate-y-5 pointer-events-none"
         } lg:block lg:opacity-100 lg:visible lg:w-fit lg:translate-y-0 lg:relative`}
       >
         <ul
-          className="uppercase flex items-center justify-between text-small md:text-regular lg:gap-regular lg:justify center lg:pointer-events-auto"
+          className="uppercase flex items-center justify-between text-small md:text-regular lg:gap-30 lg:justify center lg:pointer-events-auto"
           role="menu"
         >
           <li role="menuitem">

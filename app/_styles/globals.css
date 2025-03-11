@@ -5,53 +5,74 @@
   --color-off-black: #333333;
   --color-light-grey: #f5f5f5;
   --color-accent-blue: #80b5d9;
+  --color-hover: rgba(
+    253,
+    253,
+    253,
+    0.2
+  ); /* off white in rgba value - 20% opacity */
   --font-display: var(--font-anton), sans-serif;
   --font-primary: var(--font-montserrat), sans-serif;
   --text-small: 12px;
   --text-regular: 16px;
   --text-heading-small: 30px;
+  --text-heading-medium: 45px;
   --text-heading-large: 60px;
   --text-heading-landing-small: 40px;
   --text-heading-landing-medium: 70px;
   --text-heading-landing-large: 90px;
-  --spacing-small: 15px;
-  --spacing-regular: 30px;
-  --spacing-side: 60px;
-  --spacing-side-small: 30px;
-  --spacing-top: 90px;
-  --spacing-top-small: 60px;
-  --spacing-bottom: 120px;
-  --spacing-bottom-small: 90px;
+  --spacing-15: 15px;
+  --spacing-30: 30px;
+  --spacing-60: 60px;
+  --spacing-90: 90px;
+  --spacing-120: 120px;
 }
 
 .body-styles {
-  @apply text-off-black font-primary text-regular leading-8 bg-green-200 relative tracking-wide font-light;
+  @apply text-off-black font-primary text-regular leading-8 bg-off-white relative tracking-wide font-light;
 }
 
 .width-size {
-  @apply max-w-[1400px] px-side-small md:px-side mx-auto;
+  @apply max-w-[1400px] px-30 md:px-60 mx-auto;
 }
 
 .section-styles {
-  @apply pt-top-small md:pt-top pb-bottom-small md:pb-bottom;
+  @apply pt-60 md:pt-90 pb-90 md:pb-120;
 }
 
-
+.section-heading {
+  @apply text-heading-small md:text-heading-medium lg:text-heading-large uppercase font-display;
+}
+.section-heading-spacing {
+  @apply flex flex-col  gap-60 lg:gap-90;
+}
 
 /* HERO SECTION */
 .hero-styles {
-  @apply relative h-screen w-full text-off-white pt-[170px] lg:pt-[200px] pb-bottom min-h-fit;
+  @apply relative h-screen w-full text-off-white pt-[170px] lg:pt-[200px] pb-120 min-h-fit;
 }
 
 .burger {
   @apply absolute w-full h-[2px] bg-off-white;
 }
 
+.nav-hover {
+  @apply hover:bg-hover p-2 rounded-md transition-all duration-300;
+}
 
+/* ABOUT US */
+
+.process-point {
+  @apply p-15 bg-white rounded-xl shadow-sm flex gap-15;
+}
+
+.process-icon {
+  @apply pt-[7px];
+}
 
 /* FOOTER */
 .footer-styles {
-  @apply w-screen bg-off-black text-off-white py-regular lg:py-side uppercase;
+  @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase;
 }
 
 /* BUTTON */

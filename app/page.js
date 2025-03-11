@@ -1,9 +1,11 @@
-import Landing from "./_components/landing/Landing";
+import Hero from "./_components/landing/Hero";
+import AboutUs from "./_components/landing/about-us/AboutUs";
 
 export default function Page() {
   return (
     <>
-      <Landing />
+      <Hero />
+      <AboutUs />
     </>
   );
 }
