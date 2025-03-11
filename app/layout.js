@@ -1,7 +1,8 @@
+import { Anton, Montserrat } from "next/font/google";
+
 import "@/app/_styles/globals.css";
 import Navigation from "@/app/_components/navigation/Navigation";
-
-import { Anton, Montserrat } from "next/font/google";
+import Footer from "./_components/footer/Footer";
 
 const anton = Anton({
   subsets: ["latin"],
@@ -28,13 +29,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${anton.variable} ${montserrat.variable}`}>
       <body className="body-styles">
-        <header>
-          <Navigation />
-        </header>
+        <Navigation />
         <main>{children}</main>
-        <footer className="section-styles bg-orange-200">
-          Copyright WebDevRyan
-        </footer>
+
+        <Footer />
       </body>
     </html>
   );

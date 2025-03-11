@@ -16,7 +16,7 @@ export default function Landing() {
         priority={true}
       />
 
-      <div className="flex flex-col gap-regular section-styles">
+      <div className="flex flex-col gap-regular width-size">
         <h1 className="font-display text-heading-landing-small uppercase leading-normal flex flex-col md:text-heading-landing-medium lg:text-heading-landing-large ">
           <div>Your Next Adventure,</div>
           <div>Perfectly Planned</div>
