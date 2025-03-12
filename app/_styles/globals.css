@@ -11,10 +11,18 @@
     253,
     0.2
   ); /* off white in rgba value - 20% opacity */
+  --color-off-black-80: rgba(
+    51,
+    51,
+    51,
+    0.8
+  ); /* off black in rgba value - 70% opacity */
+
   --font-display: var(--font-anton), sans-serif;
   --font-primary: var(--font-montserrat), sans-serif;
   --text-small: 12px;
   --text-regular: 16px;
+  --text-large: 22px;
   --text-heading-small: 30px;
   --text-heading-medium: 45px;
   --text-heading-large: 60px;
@@ -47,6 +55,10 @@
   @apply flex flex-col  gap-60 lg:gap-90;
 }
 
+.rounded-global {
+  @apply rounded-xl;
+}
+
 /* HERO SECTION */
 .hero-styles {
   @apply relative h-screen w-full text-off-white pt-[170px] lg:pt-[200px] pb-120 min-h-fit;
@@ -73,6 +85,10 @@
 /* FOOTER */
 .footer-styles {
   @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase;
+}
+
+.card-headings {
+  @apply font-display uppercase text-large text-off-white text-center;
 }
 
 /* BUTTON */
