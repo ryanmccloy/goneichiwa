@@ -39,7 +39,7 @@ function GuidesCards() {
   ];
 
   return (
-    <div className="w-full flex gap-30">
+    <div className="w-full flex gap-15">
       {bestsellingGuides.map((guide, index) => {
         return (
           <BestCard

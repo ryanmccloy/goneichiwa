@@ -82,7 +82,21 @@
 
 /* BUTTON */
 .button {
-  @apply bg-accent-blue w-fit px-6 py-2 rounded-full uppercase 
+  @apply bg-accent-blue w-fit h-fit px-6 py-2 rounded-full uppercase 
          font-medium transition-all duration-300 ease-in-out 
-         hover:scale-105 hover:bg-accent-blue/90 hover:cursor-pointer;
+         hover:scale-105 hover:bg-accent-blue/90 hover:cursor-pointer text-nowrap;
+}
+
+/* REVIEWS BANNER ANIMATION */
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 30px));
+  }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 40s linear infinite;
 }
