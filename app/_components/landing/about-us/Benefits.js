@@ -1,4 +1,4 @@
-import Card from "./Card";
+import BenefitCard from "./BenefitCard";
 
 const cards = [
   {
@@ -36,7 +36,7 @@ export default function Benefits() {
     <div className="grid gap-30 md:grid-cols-2 [@media(min-width:1310px)]:grid-cols-4">
       {cards.map((card, index) => {
         return (
-          <Card
+          <BenefitCard
             key={index}
             url={card.url}
             alt={card.alt}

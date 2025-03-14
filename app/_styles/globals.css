@@ -41,22 +41,15 @@
 }
 
 .width-size {
-  @apply max-w-[1400px] px-30 md:px-60 mx-auto;
+  @apply max-w-[1440px] px-30 md:px-60 mx-auto;
 }
 
 .section-styles {
   @apply pt-60 md:pt-90 pb-90 md:pb-120;
 }
 
-.section-heading {
-  @apply text-heading-small md:text-heading-medium lg:text-heading-large uppercase font-display;
-}
-.section-heading-spacing {
-  @apply flex flex-col  gap-60 lg:gap-90;
-}
-
 .rounded-global {
-  @apply rounded-xl;
+  @apply rounded-sm;
 }
 
 /* HERO SECTION */
@@ -85,10 +78,6 @@
 /* FOOTER */
 .footer-styles {
   @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase;
-}
-
-.card-headings {
-  @apply font-display uppercase text-large text-off-white text-center;
 }
 
 /* BUTTON */
