@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import BestCard from "./BestCard";
 
-function GuidesCards() {
+export default function GuidesCards() {
   const [isActive, setIsActive] = useState(0);
 
   const handleHover = (index) => {
-    setIsActive(index);
+    if (isActive !== index) {
+      setIsActive(index);
+    }
   };
 
   const bestsellingGuides = [
@@ -29,31 +32,38 @@ function GuidesCards() {
     {
       title: "Canada",
       url: "/images/bestsellers/moraine.webp",
-      alt: "Kyoto Pagoda",
+      alt: "Moraine Lake",
     },
     {
       title: "New Zealand",
       url: "/images/bestsellers/wanaka.webp",
       alt: "Lake Wanaka",
     },
+    {
+      title: "View All Guides",
+      url: "/images/bestsellers/view-all.webp",
+      alt: "Japan Souvenir Collage",
+    },
   ];
 
   return (
-    <div className="w-full flex gap-15">
-      {bestsellingGuides.map((guide, index) => {
-        return (
-          <BestCard
-            key={index}
-            isActive={isActive === index}
-            handleHover={() => handleHover(index)}
-            title={guide.title}
-            url={guide.url}
-            alt={guide.alt}
-          />
-        );
-      })}
-    </div>
+    <motion.div
+      className="flex gap-15 cursor-grab pb-30 overflow-x-auto"
+      dragConstraints={{ left: -300, right: 0 }}
+      whileTap={{ cursor: "grabbing" }}
+    >
+      {bestsellingGuides.map((guide, index) => (
+        <BestCard
+          key={index}
+          handleHover={handleHover}
+          index={index}
+          isActive={isActive === index}
+          title={guide.title}
+          url={guide.url}
+          alt={guide.alt}
+          lastCard={index === bestsellingGuides.length - 1}
+        />
+      ))}
+    </motion.div>
   );
 }
-
-export default GuidesCards;

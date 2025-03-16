@@ -4,7 +4,7 @@ import GuidesCards from "./GuidesCards";
 
 function Bestsellers() {
   return (
-    <section className="width-size section-styles">
+    <section className="width-size section-styles ">
       <SectionHeading>Bestsellers</SectionHeading>
 
       <GuidesCards />
@@ -18,9 +18,7 @@ function Bestsellers() {
           give you direct access to a travel expert who will help you craft the
           perfect itinerary based on your interests, budget, and travel style.{" "}
         </p>
-        <Button href="/catalogue">
-          See Our Full Catalouge of Travel Guides
-        </Button>
+        <Button href="/catalogue">See All Travel Guides</Button>
       </div>
     </section>
   );
