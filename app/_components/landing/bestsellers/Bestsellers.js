@@ -9,10 +9,7 @@ function Bestsellers() {
 
       <GuidesCards />
 
-      <div
-        className="mt-90 flex flex-col gap-60 items-center lg:flex-row  lg:gap-120 lg:items-start
-    "
-      >
+      <div className="mt-90 flex flex-col gap-60 items-center lg:flex-row  lg:gap-120 lg:items-start">
         <p>
           Need a trip tailored just for you? Our private video consultations
           give you direct access to a travel expert who will help you craft the

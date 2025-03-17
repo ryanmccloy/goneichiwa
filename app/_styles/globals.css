@@ -11,12 +11,25 @@
     253,
     0.2
   ); /* off white in rgba value - 20% opacity */
+  --color-off-black-40: rgba(
+    51,
+    51,
+    51,
+    0.4
+  ); /* off black in rgba value - 80% opacity */
+  --color-off-black-60: rgba(
+    51,
+    51,
+    51,
+    0.6
+  ); /* off black in rgba value - 80% opacity */
   --color-off-black-80: rgba(
     51,
     51,
     51,
     0.8
-  ); /* off black in rgba value - 70% opacity */
+  ); /* off black in rgba value - 80% opacity */
+  --color-off-black-90: rgba(51, 51, 51, 0.9);
 
   --font-display: var(--font-anton), sans-serif;
   --font-primary: var(--font-montserrat), sans-serif;

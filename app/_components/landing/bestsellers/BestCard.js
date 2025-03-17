@@ -6,6 +6,7 @@ import RightArrow from "./RightArrow";
 
 export default function BestCard({
   isActive,
+  setIsActive,
   handleHover,
   index,
   title,
@@ -16,7 +17,8 @@ export default function BestCard({
   return !lastCard ? (
     <motion.div
       className="min-w-[300px] rounded-global flex flex-col gap-15"
-      onMouseEnter={() => handleHover(index)}
+      onMouseEnter={() => setIsActive(index)}
+      onMouseLeave={() => setIsActive(null)}
     >
       <div className="relative h-[450px] flex justify-center">
         <Image
@@ -33,14 +35,17 @@ export default function BestCard({
         <motion.div
           className="absolute rounded-b-sm inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent transition-all duration-300"
           animate={{ opacity: isActive ? 1 : 0 }}
+          aria-hidden="true"
         />
+
         <motion.span
           className="absolute bottom-0 uppercase text-off-white"
           animate={{
             opacity: isActive ? 1 : 0,
-            bottom: isActive ? "8px" : "0px",
+            translateY: isActive ? "-8px" : "0px",
           }}
-          transition={{ duration: 0.3 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          aria-label={`View guide for ${title}`}
         >
           View Guide
         </motion.span>
@@ -55,7 +60,8 @@ export default function BestCard({
   ) : (
     <motion.div
       className="min-w-[300px] rounded-global flex flex-col gap-15"
-      onMouseEnter={() => handleHover(index)}
+      onMouseEnter={() => setIsActive(index)}
+      onMouseLeave={() => setIsActive(null)}
     >
       <div className="relative h-[450px] flex justify-center items-center flex-col">
         <Image
@@ -68,7 +74,11 @@ export default function BestCard({
           sizes=""
         />
 
-        <motion.div className="absolute rounded-sm inset-0 bg-off-black-80 "></motion.div>
+        <motion.div
+          className={`absolute rounded-sm inset-0  ${
+            isActive ? "bg-off-black-60" : "bg-off-black-40"
+          } transition-all duration-300`}
+        ></motion.div>
 
         <RightArrow color="white" size="10" />
       </div>

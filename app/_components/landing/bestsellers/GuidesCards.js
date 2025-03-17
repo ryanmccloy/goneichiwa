@@ -5,13 +5,7 @@ import { motion } from "framer-motion";
 import BestCard from "./BestCard";
 
 export default function GuidesCards() {
-  const [isActive, setIsActive] = useState(0);
-
-  const handleHover = (index) => {
-    if (isActive !== index) {
-      setIsActive(index);
-    }
-  };
+  const [isActive, setIsActive] = useState(null);
 
   const bestsellingGuides = [
     {
@@ -54,8 +48,8 @@ export default function GuidesCards() {
     >
       {bestsellingGuides.map((guide, index) => (
         <BestCard
-          key={index}
-          handleHover={handleHover}
+          key={guide.title}
+          setIsActive={setIsActive}
           index={index}
           isActive={isActive === index}
           title={guide.title}

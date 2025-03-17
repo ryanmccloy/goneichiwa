@@ -1,8 +1,8 @@
 import AboutUsProcess from "./AboutUsProcess";
 import AboutUsParagraph from "./AboutUsParagraph";
 import Benefits from "./Benefits";
-import Button from "../../ui/Button";
-import SectionHeading from "../../ui/SectionHeading";
+import Button from "../ui/Button";
+import SectionHeading from "../ui/SectionHeading";
 
 export default function AboutUs() {
   return (

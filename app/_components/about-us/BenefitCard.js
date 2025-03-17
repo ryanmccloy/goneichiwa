@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CardHeadings from "../../ui/CardHeadings";
+import CardHeadings from "../ui/CardHeadings";
 
 export default function BenefitCard({ title, description, url, alt }) {
   return (

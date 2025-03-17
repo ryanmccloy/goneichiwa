@@ -7,7 +7,11 @@ const reviews = [
     text: "Saved me so much time planning my trip!",
     name: "Michael R.",
   },
-  { id: 3, text: "The recommendations were spot on!", name: "Ieva V" },
+  {
+    id: 3,
+    text: "Best travel guide ever. Perfectly planned. 10/10. Whoever made this must be incredible.",
+    name: "Ieva V",
+  },
   {
     id: 4,
     text: "I felt like a local thanks to these guides.",
@@ -18,7 +22,7 @@ const reviews = [
 
 export default function ReviewsBanner() {
   return (
-    <div className="bg-off-black py-2 mb-10 text-off-white overflow-hidden flex">
+    <div className="bg-off-black py-2 text-off-white overflow-hidden flex">
       <ul className="flex  gap-60 text-nowrap animate-infinite-scroll">
         {[...reviews, ...reviews].map((review, index) => (
           <li
