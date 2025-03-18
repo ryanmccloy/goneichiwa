@@ -16,7 +16,7 @@ export default function BestCard({
 }) {
   return !lastCard ? (
     <motion.div
-      className="min-w-[300px] rounded-global flex flex-col gap-15"
+      className="group min-w-[300px] rounded-global flex flex-col gap-15"
       onMouseEnter={() => setIsActive(index)}
       onMouseLeave={() => setIsActive(null)}
     >
@@ -53,7 +53,9 @@ export default function BestCard({
       <CardHeadings>
         <div className="flex gap-15 items-center">
           <span>{title}</span>
-          <RightArrow />
+          <span className="group-hover:ml-2 transition-all duration-300">
+            <RightArrow />
+          </span>
         </div>
       </CardHeadings>
     </motion.div>

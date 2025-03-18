@@ -37,11 +37,11 @@
   --text-regular: 16px;
   --text-large: 22px;
   --text-heading-small: 30px;
-  --text-heading-medium: 45px;
-  --text-heading-large: 60px;
-  --text-heading-landing-small: 40px;
-  --text-heading-landing-medium: 70px;
-  --text-heading-landing-large: 90px;
+  --text-heading-medium: 38px;
+  --text-heading-large: 48px;
+  --text-heading-landing-small: 36px;
+  --text-heading-landing-medium: 54px;
+  --text-heading-landing-large: 72px;
   --spacing-15: 15px;
   --spacing-30: 30px;
   --spacing-60: 60px;
@@ -50,7 +50,7 @@
 }
 
 .body-styles {
-  @apply text-off-black font-primary text-regular leading-8 bg-off-white relative tracking-wide font-light;
+  @apply text-off-black font-primary text-regular leading-loose bg-off-white relative tracking-wide font-light;
 }
 
 .width-size {
@@ -58,7 +58,7 @@
 }
 
 .section-styles {
-  @apply pt-60 md:pt-90 pb-90 md:pb-120;
+  @apply pt-60 md:pt-90 lg:pt-120 pb-90 md:pb-120;
 }
 
 .rounded-global {
@@ -95,9 +95,9 @@
 
 /* BUTTON */
 .button {
-  @apply bg-accent-blue w-fit h-fit px-6 py-2 rounded-full uppercase 
+  @apply bg-accent-blue w-fit h-fit px-6 py-2 rounded-md uppercase 
          font-medium transition-all duration-300 ease-in-out 
-         hover:scale-105 hover:bg-accent-blue/90 hover:cursor-pointer text-nowrap;
+         hover:scale-[101%] hover:bg-accent-blue/90 hover:cursor-pointer text-nowrap;
 }
 
 /* REVIEWS BANNER ANIMATION */
