@@ -1,55 +1,61 @@
-import { motion } from "framer-motion";
+"use client";
 
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import CardHeadings from "../../ui/CardHeadings";
 import RightArrow from "./RightArrow";
 
 export default function BestCard({
   isActive,
   setIsActive,
-  handleHover,
   index,
   title,
   url,
   alt,
   lastCard,
 }) {
+  
+  // Reference to the card container
+  const ref = useRef(null);
+
+  // Get the scroll position
+  const { scrollYProgress } = useScroll({
+    target: ref, // Track this element’s scroll position
+    offset: ["start end", "end start"], // When the element enters & leaves the viewport
+  });
+
+  // Move the image slightly up/down
+  const translateY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return !lastCard ? (
-    <motion.div
+    <Link
+      href=""
       className="group min-w-[300px] rounded-global flex flex-col gap-15"
       onMouseEnter={() => setIsActive(index)}
       onMouseLeave={() => setIsActive(null)}
     >
-      <div className="relative h-[450px] flex justify-center">
-        <Image
-          src={url}
-          alt={alt}
-          fill
-          style={{ objectFit: "cover" }}
-          className="rounded-global"
-          quality={70}
-          sizes=""
-          aria-label={alt}
-        />
-        {/* Darker Overlay When Active */}
+      <div
+        className="relative h-[450px] w-full overflow-hidden rounded-global"
+        ref={ref}
+      >
         <motion.div
-          className="absolute rounded-b-sm inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent transition-all duration-300"
-          animate={{ opacity: isActive ? 1 : 0 }}
-          aria-hidden="true"
-        />
-
-        <motion.span
-          className="absolute bottom-0 uppercase text-off-white"
-          animate={{
-            opacity: isActive ? 1 : 0,
-            translateY: isActive ? "-8px" : "0px",
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          aria-label={`View guide for ${title}`}
+          style={{ translateY, scale: 1.1 }}
+          className="absolute inset-0 w-full h-full"
         >
-          View Guide
-        </motion.span>
+          <Image
+            src={url}
+            alt={alt}
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-global"
+            quality={70}
+            aria-label={alt}
+          />
+        </motion.div>
       </div>
+
       <CardHeadings>
         <div className="flex gap-15 items-center">
           <span>{title}</span>
@@ -58,26 +64,35 @@ export default function BestCard({
           </span>
         </div>
       </CardHeadings>
-    </motion.div>
+    </Link>
   ) : (
-    <motion.div
+    <Link
       className="min-w-[300px] rounded-global flex flex-col gap-15"
+      href=""
       onMouseEnter={() => setIsActive(index)}
       onMouseLeave={() => setIsActive(null)}
     >
-      <div className="relative h-[450px] flex justify-center items-center flex-col">
-        <Image
-          src={url}
-          alt={alt}
-          fill
-          style={{ objectFit: "cover" }}
-          className="rounded-global"
-          quality={70}
-          sizes=""
-        />
+      <div
+        className="relative h-[450px] flex justify-center items-center flex-col overflow-hidden rounded-global"
+        ref={ref}
+      >
+        {/* ✅ Apply same scaling here */}
+        <motion.div
+          style={{ translateY, scale: 1.1 }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <Image
+            src={url}
+            alt={alt}
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-global"
+            quality={70}
+          />
+        </motion.div>
 
         <motion.div
-          className={`absolute rounded-sm inset-0  ${
+          className={`absolute rounded-global inset-0 ${
             isActive ? "bg-off-black-60" : "bg-off-black-40"
           } transition-all duration-300`}
         ></motion.div>
@@ -85,6 +100,6 @@ export default function BestCard({
         <RightArrow color="white" size="10" />
       </div>
       <CardHeadings>{title}</CardHeadings>
-    </motion.div>
+    </Link>
   );
 }

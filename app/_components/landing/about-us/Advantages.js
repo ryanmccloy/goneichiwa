@@ -30,8 +30,8 @@ export default function Advantages() {
   ];
 
   return (
-    <div className=" pt-90 pb-60 md:pt-120 flex flex-col gap-30 md:gap-60 lg:gap-90   width-size">
-      <h3 className="uppercase font-bold text-heading-small text-center">
+    <div className=" pt-90 pb-60 md:pt-120 flex flex-col gap-60 lg:gap-90   width-size">
+      <h3 className="uppercase font-bold md:text-heading-small text-center">
         Expertly crafted travel guides that save you time, reduce stress, and
         help you explore like a local — effortlessly.
       </h3>

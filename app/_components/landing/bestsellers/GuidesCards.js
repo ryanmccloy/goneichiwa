@@ -15,22 +15,22 @@ export default function GuidesCards() {
     },
     {
       title: "Dolomites",
-      url: "/images/bestsellers/dolomites-cover.webp",
+      url: "/images/bestsellers/dolomites.webp",
       alt: "Dolomites Mountain Range",
     },
     {
       title: "Ireland",
-      url: "/images/bestsellers/giants-causeway.webp",
+      url: "/images/bestsellers/ireland.webp",
       alt: "Giants Causeway",
     },
     {
       title: "Canada",
-      url: "/images/bestsellers/moraine.webp",
+      url: "/images/bestsellers/canada.webp",
       alt: "Moraine Lake",
     },
     {
       title: "New Zealand",
-      url: "/images/bestsellers/wanaka.webp",
+      url: "/images/bestsellers/new-zealand.webp",
       alt: "Lake Wanaka",
     },
     {
@@ -42,9 +42,10 @@ export default function GuidesCards() {
 
   return (
     <motion.div
-      className="flex gap-15 cursor-grab pb-30 overflow-x-auto"
+      className="flex gap-15 cursor-grab pb-30 overflow-x-auto "
       dragConstraints={{ left: -300, right: 0 }}
       whileTap={{ cursor: "grabbing" }}
+      tabIndex="-1"
     >
       {bestsellingGuides.map((guide, index) => (
         <BestCard

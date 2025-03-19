@@ -5,12 +5,14 @@ export default function FinalCTA() {
   const CTACards = [
     {
       title: " Browse Travel Guides",
-      url: "/images/bestsellers/kyoto-pagoda.webp",
+      url: "/images/final-cta/seattle.webp",
+      alt: "Seattle Skyline",
       href: "/catalogue",
     },
     {
-      title: "Schedule A Video Consultation",
-      url: "/images/bestsellers/wanaka.webp",
+      title: "Book A Video Consultation",
+      url: "/images/final-cta/spain.webp",
+      alt: "Spanish Street",
       href: "/consultations",
     },
   ];
@@ -27,6 +29,7 @@ export default function FinalCTA() {
             <CTACard
               key={card.title}
               title={card.title}
+              alt={card.alt}
               url={card.url}
               href={card.href}
             />
