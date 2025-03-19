@@ -71,7 +71,7 @@
 }
 
 .burger {
-  @apply absolute w-full h-[2px] bg-off-white;
+  @apply absolute w-full h-[2px] transition-all duration-300;
 }
 
 .nav-hover {
@@ -86,6 +86,12 @@
 
 .process-icon {
   @apply pt-[7px];
+}
+
+/* CATALOGUE */
+
+.guide-icons {
+  @apply bg-white h-fit rounded-full p-2 shadow-sm hover:scale-95 transition-all duration-300;
 }
 
 /* FOOTER */

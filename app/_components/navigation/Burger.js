@@ -1,4 +1,6 @@
-export default function Burger({ isOpen, toggleMenu }) {
+import { usePathname } from "next/navigation";
+
+export default function Burger({ isOpen, toggleMenu, isHome }) {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       toggleMenu();
@@ -14,22 +16,25 @@ export default function Burger({ isOpen, toggleMenu }) {
     >
       {/* Top Bar */}
       <div
-        className={`burger transition-all duration-300
+        className={`burger 
         ${isOpen ? "top-1/2 rotate-45" : "top-0"}
+        ${isHome ? "bg-off-white" : "bg-off-black"}
         `}
       ></div>
 
       {/* Middle Bar (Hidden when Open) */}
       <div
-        className={`burger top-1/2 transition-all duration-300
+        className={`burger top-1/2 
         ${isOpen ? "opacity-0" : ""}
+         ${isHome ? "bg-off-white" : "bg-off-black"}
         `}
       ></div>
 
       {/* Bottom Bar */}
       <div
-        className={`burger transition-all duration-300
+        className={`burger 
         ${isOpen ? "top-1/2 -rotate-45" : "bottom-0"}
+         ${isHome ? "bg-off-white" : "bg-off-black"}
         `}
       ></div>
     </div>

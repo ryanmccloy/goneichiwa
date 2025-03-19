@@ -1,3 +1,7 @@
+import FullCatalogue from "@/app/catalogue/FullCatalogue";
+import TrendingGuides from "@/app/catalogue/TrendingGuides.js";
+import NewsLetter from "@/app/_components/newsletter/NewsLetter";
+
 export const metadata = {
   title: "Catalogue",
 };
@@ -5,7 +9,9 @@ export const metadata = {
 export default function Page() {
   return (
     <div>
-      <h1>Catalogue Page</h1>
+      <TrendingGuides />
+      <FullCatalogue />
+      <NewsLetter />
     </div>
   );
 }

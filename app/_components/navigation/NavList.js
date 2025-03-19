@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Burger from "./Burger";
 
-export default function NavList() {
+export default function NavList({ isHome }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
@@ -12,7 +12,7 @@ export default function NavList() {
   return (
     <div className="flex-1 lg:flex lg:items-center lg:justify-center ">
       {/* Burger */}
-      <Burger isOpen={isOpen} toggleMenu={toggleMenu} />
+      <Burger isOpen={isOpen} toggleMenu={toggleMenu} isHome={isHome} />
 
       {/* Nav List */}
       <div
