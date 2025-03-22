@@ -1,4 +1,4 @@
-import SectionHeading from "../_components/ui/SectionHeading";
+import SectionHeading from "../ui/SectionHeading";
 import TrendingCardDesktop from "./TrendingCardDesktop";
 
 export default function TrendingGuidesDesktop({ trending }) {

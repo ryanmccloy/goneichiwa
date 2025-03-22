@@ -1,5 +1,5 @@
-import AddToCartIcon from "../_components/ui/icons/AddToCartIcon";
-import ArrowRightSimpleIcon from "../_components/ui/icons/ArrowRightSimpleIcon";
+import AddToCartIcon from "../ui/icons/AddToCartIcon";
+import ArrowRightSimpleIcon from "../ui/icons/ArrowRightSimpleIcon";
 
 export default function TravelGuideCardIcons() {
   return (

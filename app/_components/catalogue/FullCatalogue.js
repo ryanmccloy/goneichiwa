@@ -1,4 +1,4 @@
-import SectionHeading from "../_components/ui/SectionHeading";
+import SectionHeading from "../ui/SectionHeading";
 import TravelGuides from "./TravelGuides";
 
 export default function FullCatalogue() {

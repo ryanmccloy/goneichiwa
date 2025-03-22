@@ -5,7 +5,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import RightArrow from "../../ui/icons/RightArrow";
-import ArrowLink from "../../ui/ArrowLink";
+import ArrowLinkRight from "../../ui/ArrowLinkRight";
 
 export default function BestCard({
   isActive,
@@ -55,7 +55,7 @@ export default function BestCard({
         </motion.div>
       </div>
 
-      <ArrowLink>{title}</ArrowLink>
+      <ArrowLinkRight>{title}</ArrowLinkRight>
     </Link>
   ) : (
     <Link
@@ -91,7 +91,7 @@ export default function BestCard({
 
         <RightArrow color="white" size="10" />
       </div>
-      <ArrowLink>View All Guides</ArrowLink>
+      <ArrowLinkRight>View All Guides</ArrowLinkRight>
     </Link>
   );
 }

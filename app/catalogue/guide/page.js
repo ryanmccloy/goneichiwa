@@ -1,6 +1,5 @@
-export default function Page() {
-    return (
-        <h1>Travel Guide Page</h1>
-    )
-}
+import ProductOverview from "@/app/_components/product-page/ProductOverview";
 
+export default function Page() {
+  return <ProductOverview />;
+}

@@ -1,5 +1,5 @@
-import SectionHeading from "../_components/ui/SectionHeading";
-import Slider from "../_components/ui/Slider";
+import SectionHeading from "../ui/SectionHeading";
+import Slider from "../ui/Slider";
 import TrendingCardMobile from "./TrendingCardMobile";
 
 export default function TrendingGuidesMobile({ trending }) {

@@ -4,7 +4,7 @@ export default function RightArrow({ color = "black", size = "normal" }) {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
+      strokeWidth={1}
       stroke={color === "black" ? "#333333" : "#fdfdfd"}
       className={`${size === "normal" ? "size-7" : "size-9"} z-30`}
     >

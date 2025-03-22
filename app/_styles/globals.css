@@ -61,6 +61,10 @@
   @apply pt-60 md:pt-90 lg:pt-120 pb-90 md:pb-120;
 }
 
+.top-page-spacing {
+  @apply pt-[135px] md:pt-[165px] lg:pt-[195px];
+}
+
 .rounded-global {
   @apply rounded-sm;
 }
@@ -94,6 +98,11 @@
   @apply bg-white h-fit rounded-full p-2 shadow-sm hover:scale-95 transition-all duration-300;
 }
 
+/* PRODUCT PAGE */
+.icon-gap {
+  @apply mr-[10px];
+}
+
 /* FOOTER */
 .footer-styles {
   @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase;
@@ -118,4 +127,19 @@
 
 .animate-infinite-scroll {
   animation: infinite-scroll 60s linear infinite;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  height: 3px; /* Horizontal scrollbar height */
+  width: 3px; /* Vertical scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-off-black-40);
+  border-radius: 100px;
 }

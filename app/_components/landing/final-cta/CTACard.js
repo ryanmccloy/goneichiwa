@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import ArrowLink from "../../ui/ArrowLink";
+import ArrowLinkRight from "../../ui/ArrowLinkRight";
 
 export default function CTACard({ title, url, alt, href }) {
   // Reference to the card container
@@ -22,7 +22,7 @@ export default function CTACard({ title, url, alt, href }) {
   const translateY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   return (
     <Link href={href} className="group flex flex-col gap-30 flex-1" ref={ref}>
-      <ArrowLink>{title}</ArrowLink>
+      <ArrowLinkRight>{title}</ArrowLinkRight>
 
       <div className="relative h-[450px] w-full overflow-hidden rounded-global">
         <motion.div
