@@ -4,8 +4,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import CardHeadings from "../../ui/CardHeadings";
-import RightArrow from "./RightArrow";
+import RightArrow from "../../ui/icons/RightArrow";
+import ArrowLink from "../../ui/ArrowLink";
 
 export default function BestCard({
   isActive,
@@ -16,7 +16,6 @@ export default function BestCard({
   alt,
   lastCard,
 }) {
-  
   // Reference to the card container
   const ref = useRef(null);
 
@@ -32,7 +31,7 @@ export default function BestCard({
   return !lastCard ? (
     <Link
       href=""
-      className="group min-w-[300px] rounded-global flex flex-col gap-15"
+      className="group min-w-[300px] rounded-global flex flex-col gap-15 snap-start"
       onMouseEnter={() => setIsActive(index)}
       onMouseLeave={() => setIsActive(null)}
     >
@@ -56,18 +55,11 @@ export default function BestCard({
         </motion.div>
       </div>
 
-      <CardHeadings>
-        <div className="flex gap-15 items-center">
-          <span>{title}</span>
-          <span className="group-hover:ml-2 transition-all duration-300">
-            <RightArrow />
-          </span>
-        </div>
-      </CardHeadings>
+      <ArrowLink>{title}</ArrowLink>
     </Link>
   ) : (
     <Link
-      className="min-w-[300px] rounded-global flex flex-col gap-15"
+      className="min-w-[300px] group rounded-global flex flex-col gap-15"
       href=""
       onMouseEnter={() => setIsActive(index)}
       onMouseLeave={() => setIsActive(null)}
@@ -99,7 +91,7 @@ export default function BestCard({
 
         <RightArrow color="white" size="10" />
       </div>
-      <CardHeadings>{title}</CardHeadings>
+      <ArrowLink>View All Guides</ArrowLink>
     </Link>
   );
 }

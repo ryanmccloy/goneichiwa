@@ -6,9 +6,7 @@ import { useRef } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-
-import CardHeadings from "../../ui/CardHeadings";
-import RightArrow from "../bestsellers/RightArrow";
+import ArrowLink from "../../ui/ArrowLink";
 
 export default function CTACard({ title, url, alt, href }) {
   // Reference to the card container
@@ -24,13 +22,7 @@ export default function CTACard({ title, url, alt, href }) {
   const translateY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   return (
     <Link href={href} className="group flex flex-col gap-30 flex-1" ref={ref}>
-      <div className="flex gap-15 items-center">
-        <CardHeadings>{title}</CardHeadings>
-        <span className="group-hover:ml-3 transition-all duration-300">
-          <RightArrow />
-        </span>
-      </div>
-    
+      <ArrowLink>{title}</ArrowLink>
 
       <div className="relative h-[450px] w-full overflow-hidden rounded-global">
         <motion.div

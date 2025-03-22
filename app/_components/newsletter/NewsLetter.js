@@ -3,10 +3,10 @@ import SectionHeading from "../ui/SectionHeading";
 
 export default function NewsLetter() {
   return (
-    <section className="width-size section-styles">
+    <section className="width-size section-styles -mt-60 lg:-mt-90">
       <SectionHeading>Sign Up For Our NewsLetter</SectionHeading>
 
-      <div className="flex flex-col gap-60 lg:flex-row lg:gap-90">
+      <div className="flex flex-col gap-60 lg:flex-row lg:gap-90 ">
         <p className="lg:flex-1">
           Join our newsletter and get exclusive travel tips, insider guides, and
           special discounts on our curated itineraries. Be the first to discover

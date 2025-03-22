@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+
 import BestCard from "./BestCard";
+import Slider from "../../ui/Slider";
 
 export default function GuidesCards() {
   const [isActive, setIsActive] = useState(null);
@@ -41,12 +42,7 @@ export default function GuidesCards() {
   ];
 
   return (
-    <motion.div
-      className="flex gap-15 cursor-grab pb-30 overflow-x-auto "
-      dragConstraints={{ left: -300, right: 0 }}
-      whileTap={{ cursor: "grabbing" }}
-      tabIndex="-1"
-    >
+    <Slider>
       {bestsellingGuides.map((guide, index) => (
         <BestCard
           key={guide.title}
@@ -59,6 +55,6 @@ export default function GuidesCards() {
           lastCard={index === bestsellingGuides.length - 1}
         />
       ))}
-    </motion.div>
+    </Slider>
   );
 }

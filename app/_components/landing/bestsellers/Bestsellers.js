@@ -4,7 +4,7 @@ import GuidesCards from "./GuidesCards";
 
 function Bestsellers() {
   return (
-    <section className="width-size section-styles ">
+    <section className="width-size section-styles -mt-30 lg:-mt-60">
       <SectionHeading>Bestsellers</SectionHeading>
 
       <GuidesCards />

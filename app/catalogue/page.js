@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div>
+    <div className="  pt-[135px] md:pt-[165px] lg:pt-[195px]">
       <TrendingGuides />
       <FullCatalogue />
       <NewsLetter />

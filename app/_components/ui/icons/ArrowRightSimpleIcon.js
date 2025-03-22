@@ -1,6 +1,6 @@
 export default function ArrowRightSimpleIcon() {
   return (
-    <div className="guide-icons">
+    <div className="guide-icons group-hover:-rotate-25">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

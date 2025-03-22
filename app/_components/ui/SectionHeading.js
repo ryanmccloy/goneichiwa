@@ -2,7 +2,7 @@ export default function SectionHeading({ children }) {
   return (
     <h2
       className="text-heading-small md:text-heading-medium lg:text-heading-large uppercase font-bold leading-normal
-  mb-60 lg:mb-90"
+  mb-60 lg:mb-90 "
     >
       {children}
     </h2>
