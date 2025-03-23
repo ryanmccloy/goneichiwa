@@ -5,13 +5,13 @@ export default function FinalCTA() {
   const CTACards = [
     {
       title: " Browse Travel Guides",
-      url: "/images/final-cta/seattle.webp",
+      url: "/images/landing/final-cta/seattle.webp",
       alt: "Seattle Skyline",
       href: "/catalogue",
     },
     {
       title: "Book A Video Consultation",
-      url: "/images/final-cta/spain.webp",
+      url: "/images/landing/final-cta/spain.webp",
       alt: "Spanish Street",
       href: "/consultations",
     },

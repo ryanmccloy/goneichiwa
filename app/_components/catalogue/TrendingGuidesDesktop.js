@@ -9,7 +9,10 @@ export default function TrendingGuidesDesktop({ trending }) {
           <SectionHeading>Featured Guides</SectionHeading>
         </div>
         {/* Left side: first card only */}
-        <TrendingCardDesktop {...trending[0]} />
+        <TrendingCardDesktop
+          {...trending[0]}
+          sizes="(min-width: 1024px) 60vw, 100vw"
+        />
       </div>
 
       <div className="grid grid-rows-2 gap-15 h-full">

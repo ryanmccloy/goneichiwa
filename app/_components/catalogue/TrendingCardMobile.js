@@ -8,7 +8,13 @@ export default function TrendingCardMobile({ href, title, url, alt }) {
       href={href}
       className="group min-w-[300px] rounded-global relative h-[450px] snap-start lg:hidden"
     >
-      <Image src={url} alt={alt} fill className="rounded-global object-cover" />
+      <Image
+        src={url}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 300px, 100vw"
+        className="rounded-global object-cover"
+      />
 
       <div className=" flex flex-col justify-between h-full p-15">
         <div className=" bg-off-white rounded-global w-fit p-15 uppercase font-semibold z-30">

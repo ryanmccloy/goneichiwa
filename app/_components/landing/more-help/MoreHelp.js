@@ -27,10 +27,8 @@ function MoreHelp() {
             src="/images/snow-mountains.webp"
             alt="Snowy Mountains in the Winter"
             fill
-            style={{
-              objectFit: "cover",
-            }}
-            className=" object-[0%_33%] lg:object-center"
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className=" object-[0%_33%] object-cover lg:object-center"
             quality={100}
             priority={true}
           />

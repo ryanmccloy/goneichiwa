@@ -22,6 +22,7 @@ export default function TravelGuideCard({
           src={url}
           alt={alt}
           fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
           className="object-cover rounded-global object-top"
         />
       </div>

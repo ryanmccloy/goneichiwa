@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "../ui/Button";
-import hero from "@/public/images/hero.webp";
+import hero from "@/public/images/landing/hero.webp";
 
 export default function Hero() {
   return (

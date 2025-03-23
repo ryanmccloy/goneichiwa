@@ -48,6 +48,7 @@ export default function ProductPageImages() {
                   src={image.url}
                   alt={image.alt}
                   fill
+                  sizes="(max-width: 1024px) 300px"
                   className="object-cover rounded-global"
                 />
               </div>
@@ -62,6 +63,8 @@ export default function ProductPageImages() {
             src={images[activeImage].url}
             alt="alt"
             fill
+            sizes="(min-width: 1024px) 60vw"
+            priority={true}
             className="object-cover rounded-global"
           />
         </div>
@@ -79,6 +82,7 @@ export default function ProductPageImages() {
                     src={image.url}
                     alt={image.alt}
                     fill
+                    sizes="(min-width: 1024px) 125px"
                     className="object-cover rounded-global"
                   />
                 </div>

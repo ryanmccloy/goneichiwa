@@ -47,6 +47,7 @@ export default function BestCard({
             src={url}
             alt={alt}
             fill
+            sizes="(min-width: 1024px) 350px, 300px"
             style={{ objectFit: "cover" }}
             className="rounded-global"
             quality={70}
@@ -77,6 +78,7 @@ export default function BestCard({
             src={url}
             alt={alt}
             fill
+            sizes="(min-width: 1024px) 350px, 300px"
             style={{ objectFit: "cover" }}
             className="rounded-global"
             quality={70}

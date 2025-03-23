@@ -34,6 +34,7 @@
   --font-display: var(--font-anton), sans-serif;
   --font-primary: var(--font-montserrat), sans-serif;
   --text-small: 12px;
+  --text-medium: 14px;
   --text-regular: 16px;
   --text-large: 22px;
   --text-heading-small: 30px;
@@ -66,7 +67,7 @@
 }
 
 .negative-bottom-spacing {
-  @apply -mt-60 lg:-mt-90
+  @apply -mt-60 lg:-mt-90 lg:-mt-120;
 }
 
 .rounded-global {

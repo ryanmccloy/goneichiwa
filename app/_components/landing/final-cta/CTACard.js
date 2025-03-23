@@ -33,8 +33,8 @@ export default function CTACard({ title, url, alt, href }) {
             src={url}
             alt={alt}
             fill
-            style={{ objectFit: "cover" }}
-            className="rounded-global"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="rounded-global object-cover"
             quality={70}
             aria-label={alt}
           />
