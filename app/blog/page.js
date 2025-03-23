@@ -1,4 +1,6 @@
+import AllBlogPosts from "../_components/blog/AllBlogPosts";
 import FeaturedArticles from "../_components/blog/FeaturedArticles";
+import NewsLetter from "../_components/newsletter/NewsLetter";
 
 export const metadata = {
   title: "Blog",
@@ -54,9 +56,13 @@ export default function Page() {
   ];
 
   return (
-    <div className="width-size  top-page-spacing">
+    <div className=" top-page-spacing">
       <FeaturedArticles title="Featured Posts" featured={featuredArticles} />
       <FeaturedArticles title="Newest Posts" featured={newestArticles} />
+
+      <AllBlogPosts />
+
+      <NewsLetter />
     </div>
   );
 }

@@ -14,6 +14,7 @@ function FeaturedArticlesMobile({ featured }) {
             alt={article.alt}
             href={article.href}
             tags={article.tags}
+            featured={true}
           />
         ))}
       </Slider>

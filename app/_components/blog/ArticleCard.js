@@ -3,13 +3,22 @@ import Link from "next/link";
 import ArrowRightSimpleIcon from "../ui/icons/ArrowRightSimpleIcon";
 import ArticleTag from "./ArticleTag";
 
-export default function ArticleCard({ href, title, url, alt, tags }) {
+export default function ArticleCard({
+  href,
+  title,
+  url,
+  alt,
+  tags,
+  featured = false,
+}) {
   return (
     <Link
       href={href}
-      className="group min-w-[300px] rounded-global snap-start flex flex-col gap-30"
+      className={`group rounded-global snap-start flex flex-col gap-15 ${
+        featured ? "min-w-[300px]" : ""
+      }`}
     >
-      <div className="relative w-full min-h-[275px] ">
+      <div className="relative w-full h-[300px] ">
         <Image
           src={url}
           alt={alt}

@@ -5,7 +5,7 @@ import ArticleTag from "./ArticleTag";
 
 function FeaturedArticleCardDesktop({ title, url, alt, href, tags }) {
   return (
-    <Link href={href} className="group  w-full h-full grow-1">
+    <Link href={href} className="group  w-full h-[450px] grow-1">
       <div className="w-full h-full relative">
         <Image
           src={url}

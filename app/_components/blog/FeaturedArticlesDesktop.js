@@ -3,7 +3,7 @@ import FeaturedArticleCardDesktop from "./FeaturedArticleCardDesktop";
 
 function FeaturedArticlesDesktop({ featured }) {
   return (
-    <div className="hidden lg:flex gap-30 h-[450px]">
+    <div className="hidden lg:flex gap-30">
       {featured.map((article, index) => {
         if (index === 0) {
           return (
@@ -14,7 +14,6 @@ function FeaturedArticlesDesktop({ featured }) {
               alt={article.alt}
               href={article.href}
               tags={article.tags}
-           
             />
           );
         } else {
@@ -26,6 +25,7 @@ function FeaturedArticlesDesktop({ featured }) {
               alt={article.alt}
               href={article.href}
               tags={article.tags}
+              featured={true}
             />
           );
         }
