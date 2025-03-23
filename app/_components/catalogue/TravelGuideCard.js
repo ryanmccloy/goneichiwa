@@ -3,9 +3,20 @@ import Image from "next/image";
 
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
 
-export default function TravelGuideCard({ destination, price, url, alt }) {
+export default function TravelGuideCard({
+  destination,
+  price,
+  url,
+  alt,
+  suggestion = false,
+}) {
   return (
-    <Link href="" className="group flex flex-col gap-15">
+    <Link
+      href={`/catalogue/${destination}`}
+      className={`group flex flex-col gap-15 ${
+        suggestion ? "min-w-[300px]" : ""
+      } `}
+    >
       <div className="relative w-full h-[300px]">
         <Image
           src={url}

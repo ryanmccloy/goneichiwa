@@ -1,10 +1,25 @@
 import Button from "../ui/Button";
+import TickIcon from "../ui/icons/TickIcon";
 import ProductDestinationHeading from "../ui/ProductDestinationHeading";
 
-export default function ProductDescription() {
+export default function ProductDescription({ destination }) {
+  const included = [
+    " Day-by-Day Itinerary (Optimized routes to maximize your time)",
+    " Top Hikes & Scenic Spots",
+
+    "Google Maps Links for every location",
+
+    "Local Hidden Gems & Wildlife Tips",
+    "Food & Drink destination (Best local restaurants & cozy cafes)",
+
+    "Packing Checklist & Travel Essentials",
+    "Offline-Friendly PDF (Access anywhere, anytime!)",
+
+    "BONUS: Exclusive Banff sunrise & sunset photography guide!",
+  ];
   return (
     <div className="flex flex-col gap-30">
-      <ProductDestinationHeading>Banff</ProductDestinationHeading>
+      <ProductDestinationHeading>{destination}</ProductDestinationHeading>
 
       <div className="flex flex-col gap-15">
         <p>
@@ -37,38 +52,15 @@ export default function ProductDescription() {
         <span>
           <span className="icon-gap">📍</span>What&apos;s Included?
         </span>
-        <li>
-          <span className="icon-gap">✅</span>Day-by-Day Itinerary (Optimized
-          routes to maximize your time)
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>
-          Top Hikes & Scenic Spots (Lake Louise, Moraine Lake, Johnston Canyon &
-          more)
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>Google Maps Links for every
-          location
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>Local Hidden Gems & Wildlife Tips
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>Food & Drink Guide (Best local
-          restaurants & cozy cafes)
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>Packing Checklist & Travel
-          Essentials
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>Offline-Friendly PDF (Access
-          anywhere, anytime!)
-        </li>
-        <li>
-          <span className="icon-gap">✅</span>BONUS: Exclusive Banff sunrise &
-          sunset photography guide!
-        </li>
+
+        {included.map((feature, index) => {
+          return (
+            <li key={index} className="flex items-center gap-[5px] mb-1">
+              <TickIcon />
+              <span>{feature}</span>
+            </li>
+          );
+        })}
       </ul>
 
       <div className="flex justify-center mt-30 lg:justify-start">

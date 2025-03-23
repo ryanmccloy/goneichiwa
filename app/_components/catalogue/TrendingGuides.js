@@ -8,19 +8,19 @@ const trendingTravelGuides = [
     title: "Japan",
     url: "/images/trending/japan.webp",
     alt: "tokyo",
-    href: "/blog",
+    href: "/catalogue/japan",
   },
   {
     title: "USA",
     url: "/images/trending/usa.webp",
     alt: "tokyo",
-    href: "/blog",
+    href: "/catalogue/usa",
   },
   {
     title: "Canada",
     url: "/images/trending/canada.webp",
     alt: "tokyo",
-    href: "/blog",
+    href: "/catalogue/canada",
   },
 ];
 

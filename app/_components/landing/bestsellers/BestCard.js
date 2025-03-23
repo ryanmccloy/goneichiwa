@@ -30,7 +30,7 @@ export default function BestCard({
 
   return !lastCard ? (
     <Link
-      href=""
+      href={`/catalogue/${title}`}
       className="group min-w-[300px] rounded-global flex flex-col gap-15 snap-start"
       onMouseEnter={() => setIsActive(index)}
       onMouseLeave={() => setIsActive(null)}
