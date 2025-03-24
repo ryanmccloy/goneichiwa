@@ -13,23 +13,23 @@ export default function ProductPageImages() {
 
   const images = [
     {
-      url: "/images/seceda.webp",
+      url: "/images/landing/seceda.webp",
       alt: "seceda",
     },
     {
-      url: "/images/hero.webp",
+      url: "/images/landing/hero.webp",
       alt: "seceda",
     },
     {
-      url: "/images/lofoten.webp",
+      url: "/images/landing/lofoten.webp",
       alt: "seceda",
     },
     {
-      url: "/images/tokyo.webp",
+      url: "/images/landing/tokyo.webp",
       alt: "seceda",
     },
     {
-      url: "/images/yosemite.webp",
+      url: "/images/landing/yosemite.webp",
       alt: "seceda",
     },
   ];

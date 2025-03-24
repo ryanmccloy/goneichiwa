@@ -48,14 +48,14 @@ export default function ProductDescription({ destination }) {
         </p>
       </div>
 
-      <ul>
+      <ul className="">
         <span>
           <span className="icon-gap">📍</span>What&apos;s Included?
         </span>
 
         {included.map((feature, index) => {
           return (
-            <li key={index} className="flex items-center gap-[5px] mb-1">
+            <li key={index} className="flex items-center gap-[5px] mt-2">
               <TickIcon />
               <span>{feature}</span>
             </li>
