@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Icons() {
   return (
     <div className="flex gap-15 md:gap-30 flex-1 justify-end">
-      <Link href="/account" aria-label="Go To Account" className="nav-hover">
+      <Link href="/auth" aria-label="Go To Account" className="nav-hover">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

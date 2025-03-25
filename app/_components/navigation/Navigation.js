@@ -9,13 +9,15 @@ export default function Navigation() {
   const pathname = usePathname();
 
   const isHome = pathname === "/";
+  const auth = pathname.startsWith("/auth");
+
   return (
     <header>
       <nav className="width-size relative z-50 ">
         <div
           className={`pt-30 flex items-center absolute w-full top-0 left-0 px-30 md:px-60  ${
             isHome ? "text-off-white" : "text-off-black"
-          } `}
+          } ${auth ? "hidden" : "visible"}  `}
           role="navigation"
           aria-label="Main navigation"
         >

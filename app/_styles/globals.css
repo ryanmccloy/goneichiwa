@@ -48,6 +48,7 @@
   --spacing-60: 60px;
   --spacing-90: 90px;
   --spacing-120: 120px;
+  --spacing-150: 150px;
 }
 
 .body-styles {
@@ -106,6 +107,24 @@
 /* PRODUCT PAGE */
 .icon-gap {
   @apply mr-[10px];
+}
+
+/* FORMS */
+
+.input-styles {
+  @apply bg-light-grey rounded-sm p-2 grow;
+}
+
+.sign-in-up-container {
+  @apply flex flex-col gap-60 lg:gap-150;
+}
+
+.sign-in-up-top-links {
+  @apply flex flex-col gap-15 lg:flex-row lg:justify-between;
+}
+
+.sign-in-up-form {
+  @apply flex flex-col gap-30 w-[100%] lg:w-[400px] mx-auto;
 }
 
 /* FOOTER */
