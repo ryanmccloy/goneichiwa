@@ -24,7 +24,7 @@ function MoreHelp() {
 
         <div className="lg:absolute relative lg:w-[40vw]  lg:h-full lg:left-2/3 h-[350px] w-screen -mx-30 md:-mx-60">
           <Image
-            src="/images/snow-mountains.webp"
+            src="/images/landing/snow-mountains.webp"
             alt="Snowy Mountains in the Winter"
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
