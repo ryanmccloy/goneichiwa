@@ -6,6 +6,8 @@ import ConsultationProcess from "../_components/consultations/ConsultationProces
 
 export const metadata = {
   title: "Consultations",
+  description:
+    "Book a personalized travel consultation and receive expert planning help tailored to your dream destination.",
 };
 
 export default function Page() {
@@ -17,8 +19,8 @@ export default function Page() {
         </SectionHeading>
         <div className="relative  rounded-global h-[250px]  lg:h-[350px]">
           <Image
-            src="/images/consultations/roadtrip.webp"
-            alt=""
+            src="/images/consultations/japan.webp"
+            alt="Kyoto skyline with Japanese pagoda"
             fill
             quality={100}
             priority={true}

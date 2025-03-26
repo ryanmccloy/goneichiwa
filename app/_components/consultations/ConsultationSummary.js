@@ -2,7 +2,7 @@ import TickIcon from "../ui/icons/TickIcon";
 
 function ConsultationSummary() {
   const processes = [
-    " Step 1: Fill out the contact form with your destination, trip details, and questions.",
+    " Step 1: Fill out the contact form with your details.",
     "Step 2: We’ll review your request and send available time slots.",
     "Step 3: Confirm your session, and we’ll send a secure payment link.",
     "Step 4: Join the consultation and get expert recommendations!",
@@ -20,11 +20,10 @@ function ConsultationSummary() {
         your itinerary, our travel experts are here to help!
       </p>
 
+      <span className="font-normal -mb-[45px]">
+        <span className="icon-gap">📍</span>How It Works:
+      </span>
       <ul>
-        <span className="font-normal">
-          <span className="icon-gap">📍</span>How It Works:
-        </span>
-
         {processes.map((process, index) => {
           return (
             <li key={index} className="flex items-center gap-[5px] mt-2">

@@ -7,6 +7,8 @@ export default function VideoIcon() {
       strokeWidth={1}
       stroke="currentColor"
       className="size-10"
+      role="img"
+      aria-label="Video icon"
     >
       <path
         strokeLinecap="round"

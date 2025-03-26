@@ -7,6 +7,7 @@ export default function TickIcon() {
       strokeWidth={1}
       stroke="currentColor"
       className="size-6 inline-block shrink-0"
+      aria-hidden
     >
       <path
         strokeLinecap="round"

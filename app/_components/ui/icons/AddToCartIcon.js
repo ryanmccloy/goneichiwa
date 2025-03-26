@@ -8,6 +8,8 @@ export default function AddToCartIcon() {
         strokeWidth={1}
         stroke="currentColor"
         className="size-6 "
+        role="img"
+        aria-label="Add to cart icon"
       >
         <path
           strokeLinecap="round"

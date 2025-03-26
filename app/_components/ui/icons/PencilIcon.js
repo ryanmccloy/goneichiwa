@@ -7,6 +7,8 @@ export default function PencilIcon() {
       strokeWidth={1}
       stroke="currentColor"
       className="size-10"
+      role="img"
+      aria-label="Pencil icon"
     >
       <path
         strokeLinecap="round"

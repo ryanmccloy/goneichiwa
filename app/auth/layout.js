@@ -1,16 +1,18 @@
 import Image from "next/image";
 
 export const metadata = {
-  title: "Account",
+  title: {
+    template: "%s - Here & There",
+    default: "Here & There | Travel Guides for Smart Explorers",
+  },
 };
 
 export default function Page({ children }) {
   return (
- 
-    <section className="h-screen w-screen  lg:width-size  lg:grid lg:grid-cols-2 lg:gap-60 lg:p-30 lg:mb-60">
+    <section className="h-screen w-screen lg:max-w-[1440px] mx-auto  lg:grid lg:grid-cols-2 lg:gap-60 lg:p-30 lg:mb-60">
       <div className="relative h-full w-full flex justify-center items-center">
         <Image
-          src="/images/landing/hero.webp"
+          src="/images/sign-in-up/bamboo.webp"
           alt="Italian Dolomites"
           fill
           className="object-cover rounded-global"

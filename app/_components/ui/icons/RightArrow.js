@@ -7,6 +7,8 @@ export default function RightArrow({ color = "black", size = "normal" }) {
       strokeWidth={1}
       stroke={color === "black" ? "#333333" : "#fdfdfd"}
       className={`${size === "normal" ? "size-7" : "size-9"} z-30`}
+      role="img"
+      aria-label="right arrow"
     >
       <path
         strokeLinecap="round"

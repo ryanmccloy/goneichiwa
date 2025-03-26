@@ -8,6 +8,8 @@ export default function ArrowRightSimpleIcon() {
         strokeWidth={1}
         stroke="currentColor"
         className="size-6"
+        role="img"
+        aria-label="right arrow"
       >
         <path
           strokeLinecap="round"

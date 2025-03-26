@@ -1,10 +1,12 @@
 "use client";
 
-import ArrowLinkLeft from "../ui/ArrowLinkLeft";
-import Button from "../ui/Button";
-import SectionHeading from "../ui/SectionHeading";
+import Link from "next/link";
 
-export default function SignUpForm({ handleToggle }) {
+import ArrowLinkLeft from "@/app/_components/ui/ArrowLinkLeft";
+import SectionHeading from "@/app/_components/ui/SectionHeading";
+import Button from "@/app/_components/ui/Button";
+
+export default function SignUpForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // HAND FORM SUBMIT LOGIC
@@ -16,15 +18,29 @@ export default function SignUpForm({ handleToggle }) {
         <ArrowLinkLeft>Back</ArrowLinkLeft>
         <span className="uppercase">
           Already have an account?{" "}
-          <span className="font-semibold cursor-pointer" onClick={handleToggle}>
+          <Link href="/auth/sign-in" className="font-semibold cursor-pointer">
             Sign In
-          </span>
+          </Link>
         </span>
       </div>
 
-      <form onSubmit={handleSubmit} className="  sign-in-up-form">
+      <form onSubmit={handleSubmit} className=" sign-in-up-form">
         <SectionHeading mb={false}>Sign Up</SectionHeading>
-
+        <label htmlFor="name" className="sr-only">
+          Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Name"
+          required
+          aria-label="Name"
+          className="input-styles"
+        />
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
         <input
           type="email"
           name="email"
@@ -33,7 +49,23 @@ export default function SignUpForm({ handleToggle }) {
           required
           aria-label="Email"
           className="input-styles"
+          autoComplete="email"
         />
+        <label htmlFor="confirmEmail" className="sr-only">
+          Confirm Email
+        </label>
+        <input
+          type="email"
+          name="confirmEmail"
+          id="confirmEmail"
+          placeholder="Confirm email"
+          required
+          aria-label="Confirm email"
+          className="input-styles"
+        />
+        <label htmlFor="password" className="sr-only">
+          Password
+        </label>
         <input
           type="password"
           name="password"
@@ -42,7 +74,11 @@ export default function SignUpForm({ handleToggle }) {
           required
           aria-label="Password"
           className="input-styles"
+          autoComplete="new-password"
         />
+        <label htmlFor="confirmPassword" className="sr-only">
+          Confirm password
+        </label>
         <input
           type="password"
           name="confirmPassword"
@@ -51,9 +87,10 @@ export default function SignUpForm({ handleToggle }) {
           required
           aria-label="Confirm password"
           className="input-styles"
+          autoComplete="new-password"
         />
 
-        <div className="mt-30">
+        <div className="sign-in-up-button">
           <Button>Sign Up</Button>
         </div>
       </form>

@@ -1,33 +1,35 @@
 "use client";
 
-import ArrowLinkLeft from "../ui/ArrowLinkLeft";
-import Button from "../ui/Button";
-import SectionHeading from "../ui/SectionHeading";
+import Link from "next/link";
 
-export default function SignInForm({ handleToggle }) {
+import ArrowLinkLeft from "@/app/_components/ui/ArrowLinkLeft";
+import SectionHeading from "@/app/_components/ui/SectionHeading";
+import Button from "@/app/_components/ui/Button";
+
+export default function SignInForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // HAND FORM SUBMIT LOGIC
   };
 
   return (
-    <div className="flex flex-col ">
-      <div className="flex justify-between">
+    <div className="sign-in-up-container">
+      <div className="sign-in-up-top-links">
         <ArrowLinkLeft>Back</ArrowLinkLeft>
         <span className="uppercase">
           Don&apos;t have an account?{" "}
-          <span className="font-semibold cursor-pointer" onClick={handleToggle}>
+          <Link href="/auth/sign-up" className="font-semibold cursor-pointer">
             Sign Up
-          </span>
+          </Link>
         </span>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className=" flex flex-col gap-30 mt-[30%] w-[400px] mx-auto"
-      >
+      <form onSubmit={handleSubmit} className=" sign-in-up-form">
         <SectionHeading mb={false}>Sign In</SectionHeading>
 
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
         <input
           type="email"
           name="email"
@@ -36,7 +38,11 @@ export default function SignInForm({ handleToggle }) {
           required
           aria-label="Email"
           className="input-styles"
+          autoComplete="email"
         />
+        <label htmlFor="password" className="sr-only">
+          Password
+        </label>
         <input
           type="password"
           name="password"
@@ -45,9 +51,10 @@ export default function SignInForm({ handleToggle }) {
           required
           aria-label="Password"
           className="input-styles"
+          autoComplete="current-password"
         />
 
-        <div className="mt-30">
+        <div className="sign-in-up-button">
           <Button>Sign In</Button>
         </div>
       </form>

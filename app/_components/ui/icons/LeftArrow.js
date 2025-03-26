@@ -7,6 +7,7 @@ export default function LeftArrow() {
       strokeWidth={1}
       stroke="currentColor"
       className="size-6"
+      aria-hidden
     >
       <path
         strokeLinecap="round"

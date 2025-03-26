@@ -1,4 +1,4 @@
-export default function Process({ icon, title, description }) {
+export default function ProcessStep({ icon, title, description }) {
   return (
     <div className="flex flex-col gap-30 text-center items-center">
       <span>{icon}</span>

@@ -16,6 +16,10 @@ export default function ConsultationForm() {
       <h4 className={`uppercase  text-regular`}>Request A Consultation</h4>
 
       <div className={`${layoutSpacing}`}>
+        <label htmlFor="name" className="sr-only">
+          Name
+        </label>
+
         <input
           type="text"
           name="name"
@@ -24,7 +28,12 @@ export default function ConsultationForm() {
           placeholder="Name"
           aria-label="Name"
           className={`${inputStyles} `}
+          autoComplete="name"
         />
+        <label htmlFor="consultation-date" className="sr-only">
+          Consultation date
+        </label>
+
         <input
           type="text"
           name="consultation-date"
@@ -36,6 +45,10 @@ export default function ConsultationForm() {
         />
       </div>
 
+      <label htmlFor="email" className="sr-only">
+        Email
+      </label>
+
       <input
         type="email"
         name="email"
@@ -44,7 +57,11 @@ export default function ConsultationForm() {
         placeholder="Email"
         aria-label="Email"
         className={`${inputStyles} max-h-fit`}
+        autoComplete="email"
       />
+      <label htmlFor="destination" className="sr-only">
+        Destination
+      </label>
 
       <div className={`${layoutSpacing}`}>
         <input
@@ -56,6 +73,10 @@ export default function ConsultationForm() {
           aria-label="Destination"
           className={`${inputStyles} `}
         />
+        <label htmlFor="duration" className="sr-only">
+          Trip Duration
+        </label>
+
         <input
           type="text"
           name="duration"
@@ -66,6 +87,10 @@ export default function ConsultationForm() {
           className={`${inputStyles} `}
         />
       </div>
+
+      <label htmlFor="message" className="sr-only">
+        Message
+      </label>
 
       <textarea
         name="message"

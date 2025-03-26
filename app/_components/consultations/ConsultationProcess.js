@@ -1,7 +1,7 @@
 import CalendarIcon from "../ui/icons/CalendarIcon";
 import PencilIcon from "../ui/icons/PencilIcon";
 import VideoIcon from "../ui/icons/VideoIcon";
-import Process from "./Process";
+import ProcessStep from "./ProcessStep";
 
 const processes = [
   {
@@ -28,13 +28,13 @@ export default function ConsultationProcess() {
   return (
     <div className="bg-light-grey section-styles">
       <div className="width-size flex flex-col gap-60 lg:flex-row">
-        {processes.map((process) => {
+        {processes.map((processStep) => {
           return (
-            <Process
-              key={process.title}
-              icon={process.icon}
-              title={process.title}
-              description={process.description}
+            <ProcessStep
+              key={processStep.title}
+              icon={processStep.icon}
+              title={processStep.title}
+              description={processStep.description}
             />
           );
         })}

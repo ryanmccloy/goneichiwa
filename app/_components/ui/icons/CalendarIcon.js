@@ -7,6 +7,8 @@ export default function CalendarIcon() {
       strokeWidth={1}
       stroke="currentColor"
       className="size-10"
+      role="img"
+      aria-label="Calendar icon"
     >
       <path
         strokeLinecap="round"
