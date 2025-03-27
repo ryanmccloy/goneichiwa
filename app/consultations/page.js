@@ -19,7 +19,7 @@ export default function Page() {
         </SectionHeading>
         <div className="relative  rounded-global h-[250px]  lg:h-[350px]">
           <Image
-            src="/images/consultations/japan.webp"
+            src="/images/consultations/italy.webp"
             alt="Kyoto skyline with Japanese pagoda"
             fill
             quality={100}
