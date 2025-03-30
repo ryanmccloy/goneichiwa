@@ -1,6 +1,6 @@
 import GuideSuggestions from "@/app/_components/product-page/GuideSuggestions";
 import ProductOverview from "@/app/_components/product-page/ProductOverview";
-import formatTitleRoute from "@/app/_lib/utils/helpers/formatTitleRoute";
+import formatTitleRoute from "@/app/_lib/helpers/formatTitleRoute";
 
 export async function generateMetadata({ params }) {
   const guide = await params.destination;

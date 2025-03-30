@@ -17,9 +17,10 @@ export default function Page() {
         <SectionHeading>
           Get A Personalised Travel Guide, Just For You!
         </SectionHeading>
+
         <div className="relative  rounded-global h-[250px]  lg:h-[350px]">
           <Image
-            src="/images/consultations/italy.webp"
+            src="/images/consultations/japan.webp"
             alt="Kyoto skyline with Japanese pagoda"
             fill
             quality={100}

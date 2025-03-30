@@ -1,3 +1,4 @@
+import { getTravelGuides } from "@/app/_lib/data-service";
 import TravelGuideCard from "./TravelGuideCard";
 
 const guides = [
@@ -51,7 +52,10 @@ const guides = [
   },
 ];
 
-export default function TravelGuides() {
+export default async function TravelGuides() {
+  const testGuides = await getTravelGuides();
+  console.log(testGuides);
+
   return (
     <div className="grid gap-x-30 gap-y-60 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {guides.map((guide) => {
