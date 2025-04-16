@@ -4,35 +4,35 @@ import Image from "next/image";
 import Slider from "../ui/Slider";
 import { useState } from "react";
 
-export default function ProductPageImages() {
+export default function ProductPageImages({ images }) {
   const [activeImage, setActiveImage] = useState(0);
 
   const handleImageClick = (index) => {
     setActiveImage(index);
   };
 
-  const images = [
-    {
-      url: "/images/landing/seceda.webp",
-      alt: "seceda",
-    },
-    {
-      url: "/images/landing/hero.webp",
-      alt: "seceda",
-    },
-    {
-      url: "/images/landing/lofoten.webp",
-      alt: "seceda",
-    },
-    {
-      url: "/images/landing/tokyo.webp",
-      alt: "seceda",
-    },
-    {
-      url: "/images/landing/yosemite.webp",
-      alt: "seceda",
-    },
-  ];
+  // const images = [
+  //   {
+  //     url: "/images/landing/seceda.webp",
+  //     alt: "seceda",
+  //   },
+  //   {
+  //     url: "/images/landing/hero.webp",
+  //     alt: "seceda",
+  //   },
+  //   {
+  //     url: "/images/landing/lofoten.webp",
+  //     alt: "seceda",
+  //   },
+  //   {
+  //     url: "/images/landing/tokyo.webp",
+  //     alt: "seceda",
+  //   },
+  //   {
+  //     url: "/images/landing/yosemite.webp",
+  //     alt: "seceda",
+  //   },
+  // ];
 
   return (
     <>
