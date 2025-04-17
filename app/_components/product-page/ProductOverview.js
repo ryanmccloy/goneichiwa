@@ -24,7 +24,7 @@ export default async function ProductOverview({ destination }) {
         </div>
       </div>
 
-      <ProductDescription destination={destination} />
+      <ProductDescription guide={guide} />
 
       <div className="lg:hidden">
         <ProductReviews />
