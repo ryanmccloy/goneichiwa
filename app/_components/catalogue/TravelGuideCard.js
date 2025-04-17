@@ -30,7 +30,7 @@ export default function TravelGuideCard({
       <div className="flex justify-between">
         <div className="flex flex-col">
           <h5 className="uppercase">{destination}</h5>
-          <span>{price}</span>
+          <span>£{price}</span>
         </div>
         <TravelGuideCardIcons />
       </div>

@@ -9,9 +9,9 @@ export default async function ProductOverview({ destination }) {
   const { gallery } = guide;
 
   const guideImages = await Promise.all(
-    gallery.map(async (path) => {
-      const url = await getImageUrl(path);
-      return { url };
+    gallery.map(async (imageData) => {
+      const url = await getImageUrl(imageData.path);
+      return { url, alt: imageData.alt };
     })
   );
 

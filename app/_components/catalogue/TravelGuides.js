@@ -53,12 +53,13 @@ import TravelGuideCard from "./TravelGuideCard";
 // ];
 
 export default async function TravelGuides() {
-  const testGuides = await getTravelGuides();
+  const travelGuides = await getTravelGuides();
 
   const guidesWithImageUrls = await Promise.all(
-    testGuides.map(async (guide) => ({
+    travelGuides.map(async (guide) => ({
       ...guide,
-      coverImageUrl: await getImageUrl(guide.coverImage),
+      coverImageUrl: await getImageUrl(guide.coverImage.path),
+      coverImageAlt: guide.coverImage.alt,
     }))
   );
 
@@ -71,7 +72,7 @@ export default async function TravelGuides() {
             destination={guide.title}
             price={guide.price}
             url={guide.coverImageUrl}
-            alt={guide.title}
+            alt={guide.coverImageAlt}
           />
         );
       })}
