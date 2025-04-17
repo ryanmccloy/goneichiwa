@@ -27,6 +27,7 @@ export const getSpecificTravelGuide = async (destination) => {
     return {
       id: docSnap.id,
       ...docSnap.data(),
+      reviews: docSnap.data().reviews ?? [],
     };
   } else {
     // docSnap.data() will be undefined in this case
