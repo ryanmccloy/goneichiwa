@@ -12,7 +12,7 @@ export default function TravelGuideCard({
 }) {
   return (
     <Link
-      href={`/catalogue/${destination.toLowerCase()}`}
+      href={`/catalogue/${destination.toLowerCase().replace(" ", "-")}`}
       className={`group flex flex-col gap-15 ${
         suggestion ? "min-w-[300px]" : ""
       } `}

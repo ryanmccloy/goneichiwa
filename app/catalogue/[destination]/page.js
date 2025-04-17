@@ -11,12 +11,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const guide = await params.destination;
-  const destination = formatTitleRoute(guide);
+  const guideId = await params.destination;
 
   return (
     <>
-      <ProductOverview destination={destination} />
+      <ProductOverview destination={guideId} />
       <GuideSuggestions />
     </>
   );
