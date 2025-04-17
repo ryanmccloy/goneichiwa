@@ -3,7 +3,7 @@ import TickIcon from "../ui/icons/TickIcon";
 import ProductDestinationHeading from "../ui/ProductDestinationHeading";
 
 export default function ProductDescription({ guide }) {
-  const { title, description, country, continent, type } = guide;
+  const { title, description, country, continent, type, language } = guide;
 
   return (
     <div className="flex flex-col gap-30">
@@ -28,6 +28,10 @@ export default function ProductDescription({ guide }) {
         <p>
           <span className="font-medium">Format: </span>
           {type}
+        </p>
+        <p>
+          <span className="font-medium">Language: </span>
+          {language}
         </p>
       </div>
 
