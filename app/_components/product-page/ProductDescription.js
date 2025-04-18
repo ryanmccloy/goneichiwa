@@ -3,11 +3,14 @@ import TickIcon from "../ui/icons/TickIcon";
 import ProductDestinationHeading from "../ui/ProductDestinationHeading";
 
 export default function ProductDescription({ guide }) {
-  const { title, description, country, continent, type, language } = guide;
+  const { title, description, country, continent, type, language, price } =
+    guide;
 
   return (
     <div className="flex flex-col gap-30">
-      <ProductDestinationHeading>{title}</ProductDestinationHeading>
+      <ProductDestinationHeading price={price}>
+        {title}
+      </ProductDestinationHeading>
 
       <div className="flex flex-col gap-15">
         <p>{description.intro}</p>

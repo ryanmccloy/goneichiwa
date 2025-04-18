@@ -6,8 +6,8 @@ import {
   getTravelGuidesByContinent,
   getTravelGuidesByCountry,
 } from "@/app/_lib/data-service";
-import { formatGuidesWithImage } from "@/app/_lib/helpers/formatGuidesWithImage";
 import { formatSuggestedGuides } from "@/app/_lib/helpers/formatSuggestedGuides";
+import { formatGuidesWithImageUrl } from "@/app/_lib/helpers/formatGuidesWithImageUrl";
 
 export default async function GuideSuggestions({
   country,
@@ -16,13 +16,13 @@ export default async function GuideSuggestions({
 }) {
   // fetching travel guides in same country
   const relatedCountryGuides = await getTravelGuidesByCountry(country);
-  const suggestedGuidesByCountry = await formatGuidesWithImage(
+  const suggestedGuidesByCountry = await formatGuidesWithImageUrl(
     relatedCountryGuides
   );
 
   //fetching travel guides in same continent
   const relatedContinentGuides = await getTravelGuidesByContinent(continent);
-  const suggestedGuidesByContinent = await formatGuidesWithImage(
+  const suggestedGuidesByContinent = await formatGuidesWithImageUrl(
     relatedContinentGuides
   );
 
@@ -45,11 +45,11 @@ export default async function GuideSuggestions({
         {suggestedGuides.map((suggestion) => {
           return (
             <TravelGuideCard
-              key={suggestion.destination}
-              destination={suggestion.destination}
+              key={suggestion.id}
+              destination={suggestion.title}
               price={suggestion.price}
-              url={suggestion.url}
-              alt={suggestion.alt}
+              url={suggestion.coverImageUrl}
+              alt={suggestion.coverImageAlt}
               suggestion={true}
             />
           );

@@ -1,16 +1,21 @@
 import BestCard from "./BestCard";
 import Slider from "../../ui/Slider";
 import { getFeaturedTravelGuides, getImageUrl } from "@/app/_lib/data-service";
+import { formatGuidesWithImageUrl } from "@/app/_lib/helpers/formatGuidesWithImageUrl";
 
 export default async function GuidesCards() {
   const featuredGuides = await getFeaturedTravelGuides();
 
-  const featuredGuidesWithImageUrls = await Promise.all(
-    featuredGuides.map(async (guide) => ({
-      ...guide,
-      coverImageUrl: await getImageUrl(guide.coverImage.path),
-      coverImageAlt: guide.coverImage.alt,
-    }))
+  if (!featuredGuides?.length)
+    return (
+      <p>
+        We&apos;re having trouble displaying the featured guides. Please try
+        again later.
+      </p>
+    );
+
+  const featuredGuidesWithImageUrls = await formatGuidesWithImageUrl(
+    featuredGuides
   );
 
   featuredGuidesWithImageUrls.push({
