@@ -1,58 +1,34 @@
-"use client";
-
-import { useState } from "react";
-
 import BestCard from "./BestCard";
 import Slider from "../../ui/Slider";
+import { getFeaturedTravelGuides, getImageUrl } from "@/app/_lib/data-service";
 
-export default function GuidesCards() {
-  const [isActive, setIsActive] = useState(null);
+export default async function GuidesCards() {
+  const featuredGuides = await getFeaturedTravelGuides();
 
-  const bestsellingGuides = [
-    {
-      title: "Japan",
-      url: "/images/bestsellers/kyoto-pagoda.webp",
-      alt: "Kyoto Pagoda",
-    },
-    {
-      title: "Dolomites",
-      url: "/images/bestsellers/dolomites.webp",
-      alt: "Dolomites Mountain Range",
-    },
-    {
-      title: "Ireland",
-      url: "/images/bestsellers/ireland.webp",
-      alt: "Giants Causeway",
-    },
-    {
-      title: "Canada",
-      url: "/images/bestsellers/canada.webp",
-      alt: "Moraine Lake",
-    },
-    {
-      title: "New Zealand",
-      url: "/images/bestsellers/new-zealand.webp",
-      alt: "Lake Wanaka",
-    },
-    {
-      title: "View All Guides",
-      url: "/images/bestsellers/view-all.webp",
-      alt: "Japan Souvenir Collage",
-    },
-  ];
+  const featuredGuidesWithImageUrls = await Promise.all(
+    featuredGuides.map(async (guide) => ({
+      ...guide,
+      coverImageUrl: await getImageUrl(guide.coverImage.path),
+      coverImageAlt: guide.coverImage.alt,
+    }))
+  );
+
+  featuredGuidesWithImageUrls.push({
+    id: "view-all-guides",
+    title: "View All Guides",
+    coverImageUrl: "/images/bestsellers/view-all.webp",
+    coverImageAlt: "Japanese Souvenir Collage",
+  });
 
   return (
     <Slider>
-      {bestsellingGuides.map((guide, index) => (
+      {featuredGuidesWithImageUrls.map((guide, index) => (
         <BestCard
-          key={guide.title}
-          setIsActive={setIsActive}
-          index={index}
-          isActive={isActive === index}
+          key={guide.id}
           title={guide.title}
-          url={guide.url}
-          alt={guide.alt}
-          lastCard={index === bestsellingGuides.length - 1}
+          url={guide.coverImageUrl}
+          alt={guide.coverImageAlt}
+          lastCard={index === featuredGuidesWithImageUrls.length - 1}
         />
       ))}
     </Slider>

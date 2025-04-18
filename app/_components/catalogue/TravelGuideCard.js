@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
+import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
 
 export default function TravelGuideCard({
   destination,
@@ -12,7 +13,7 @@ export default function TravelGuideCard({
 }) {
   return (
     <Link
-      href={`/catalogue/${destination.toLowerCase().replace(" ", "-")}`}
+      href={`/catalogue/${formatGuideIdRoute(destination)}`}
       className={`group flex flex-col gap-15 ${
         suggestion ? "min-w-[300px]" : ""
       } `}

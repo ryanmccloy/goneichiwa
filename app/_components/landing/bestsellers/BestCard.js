@@ -6,16 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import RightArrow from "../../ui/icons/RightArrow";
 import ArrowLinkRight from "../../ui/ArrowLinkRight";
+import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
 
-export default function BestCard({
-  isActive,
-  setIsActive,
-  index,
-  title,
-  url,
-  alt,
-  lastCard,
-}) {
+export default function BestCard({ title, url, alt, lastCard }) {
   // Reference to the card container
   const ref = useRef(null);
 
@@ -30,10 +23,8 @@ export default function BestCard({
 
   return !lastCard ? (
     <Link
-      href={`/catalogue/${title}`}
+      href={`/catalogue/${formatGuideIdRoute(title)}`}
       className="group min-w-[300px] rounded-global flex flex-col gap-15 snap-start"
-      onMouseEnter={() => setIsActive(index)}
-      onMouseLeave={() => setIsActive(null)}
     >
       <div
         className="relative h-[450px] w-full overflow-hidden rounded-global"
@@ -61,9 +52,7 @@ export default function BestCard({
   ) : (
     <Link
       className="min-w-[300px] group rounded-global flex flex-col gap-15"
-      href=""
-      onMouseEnter={() => setIsActive(index)}
-      onMouseLeave={() => setIsActive(null)}
+      href="/catalogue"
     >
       <div
         className="relative h-[450px] flex justify-center items-center flex-col overflow-hidden rounded-global"
@@ -86,9 +75,8 @@ export default function BestCard({
         </motion.div>
 
         <motion.div
-          className={`absolute rounded-global inset-0 ${
-            isActive ? "bg-off-black-60" : "bg-off-black-40"
-          } transition-all duration-300`}
+          className={`absolute rounded-global inset-0 bg-off-black-40
+         `}
         ></motion.div>
 
         <RightArrow color="white" size="10" />

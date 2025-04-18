@@ -72,6 +72,21 @@ export const getTravelGuidesByContinent = async (continent) => {
   return guides;
 };
 
+//fetching featured travel guides
+export const getFeaturedTravelGuides = async () => {
+  const related = query(
+    collection(db, "travel-guides"),
+    where("featured", "==", true)
+  );
+
+  const querySnapshot = await getDocs(related);
+  const guides = [];
+  querySnapshot.forEach((doc) => {
+    guides.push({ id: doc.id, ...doc.data() });
+  });
+  return guides;
+};
+
 // fetching travel guide image url
 export const getImageUrl = async (path) => {
   const fileRef = ref(storage, path);
