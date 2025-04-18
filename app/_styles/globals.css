@@ -52,7 +52,7 @@
 }
 
 .body-styles {
-  @apply text-off-black font-primary text-regular leading-loose bg-off-white relative tracking-wide font-light;
+  @apply text-off-black font-primary text-regular leading-loose bg-off-white relative tracking-wide font-light min-h-screen flex flex-col;
 }
 
 .width-size {

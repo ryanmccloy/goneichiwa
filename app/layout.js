@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${anton.variable} ${montserrat.variable}`}>
       <body className="body-styles">
         <Navigation />
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
 
         <Footer />
       </body>
