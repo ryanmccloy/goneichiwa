@@ -1,5 +1,12 @@
 import { db, storage } from "./firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 // fetching all travel guides
@@ -33,6 +40,36 @@ export const getSpecificTravelGuide = async (destination) => {
     // docSnap.data() will be undefined in this case
     console.error("Failed to fetch travel guide: No such document!");
   }
+};
+
+// fetching travel guides based on country
+export const getTravelGuidesByCountry = async (country) => {
+  const related = query(
+    collection(db, "travel-guides"),
+    where("country", "==", country)
+  );
+
+  const querySnapshot = await getDocs(related);
+  const guides = [];
+  querySnapshot.forEach((doc) => {
+    guides.push({ id: doc.id, ...doc.data() });
+  });
+  return guides;
+};
+
+//fetching travel guides based on continent
+export const getTravelGuidesByContinent = async (continent) => {
+  const related = query(
+    collection(db, "travel-guides"),
+    where("continent", "==", continent)
+  );
+
+  const querySnapshot = await getDocs(related);
+  const guides = [];
+  querySnapshot.forEach((doc) => {
+    guides.push({ id: doc.id, ...doc.data() });
+  });
+  return guides;
 };
 
 // fetching travel guide image url

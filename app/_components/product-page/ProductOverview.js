@@ -2,12 +2,10 @@ import { getSpecificTravelGuide, getImageUrl } from "@/app/_lib/data-service";
 import ProductDescription from "./ProductDescription";
 import ProductPageImages from "./ProductPageImages";
 import ProductReviews from "./ProductReviews";
+import NoReviewsYet from "./NoReviewsYet";
 
-export default async function ProductOverview({ destination }) {
-  const guide = await getSpecificTravelGuide(destination);
-
+export default async function ProductOverview({ guide }) {
   const { gallery, reviews } = guide;
-  console.log(reviews);
 
   const guideImages = await Promise.all(
     gallery.map(async (imageData) => {
@@ -20,7 +18,7 @@ export default async function ProductOverview({ destination }) {
     Array.isArray(reviews) && reviews.length > 0 ? (
       <ProductReviews reviews={reviews} />
     ) : (
-      <p>No reviews yet :(</p>
+      <NoReviewsYet />
     );
 
   return (

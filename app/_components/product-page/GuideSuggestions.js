@@ -2,53 +2,47 @@ import SectionHeading from "../ui/SectionHeading";
 import Slider from "../ui/Slider";
 import TravelGuideCard from "../catalogue/TravelGuideCard";
 import ArrowLinkLeft from "../ui/ArrowLinkLeft";
+import {
+  getTravelGuidesByContinent,
+  getTravelGuidesByCountry,
+} from "@/app/_lib/data-service";
+import { formatGuidesWithImage } from "@/app/_lib/helpers/formatGuidesWithImage";
+import { formatSuggestedGuides } from "@/app/_lib/helpers/formatSuggestedGuides";
 
-export default function GuideSuggestions() {
-  const suggestions = [
-    {
-      destination: "Rome",
-      price: "£5",
-      url: "/images/guides/rome.webp",
-      alt: "rome",
-    },
-    {
-      destination: "Florence",
-      price: "£5",
-      url: "/images/guides/florence.webp",
-      alt: "florence",
-    },
-    {
-      destination: "Venice",
-      price: "£5",
-      url: "/images/guides/venice.webp",
-      alt: "venice",
-    },
-    {
-      destination: "dolomites",
-      price: "£15",
-      url: "/images/guides/dolomites.webp",
-      alt: "dolomites",
-    },
-    {
-      destination: "Osaka",
-      price: "£5",
-      url: "/images/guides/osaka.webp",
-      alt: "osaka",
-    },
-    {
-      destination: "Fuji",
-      price: "£5",
-      url: "/images/guides/fuji.webp",
-      alt: "Mt. Fuji",
-    },
-  ];
+export default async function GuideSuggestions({
+  country,
+  continent,
+  currentGuide,
+}) {
+  // fetching travel guides in same country
+  const relatedCountryGuides = await getTravelGuidesByCountry(country);
+  const suggestedGuidesByCountry = await formatGuidesWithImage(
+    relatedCountryGuides
+  );
 
+  //fetching travel guides in same continent
+  const relatedContinentGuides = await getTravelGuidesByContinent(continent);
+  const suggestedGuidesByContinent = await formatGuidesWithImage(
+    relatedContinentGuides
+  );
+
+  // sorting related guides to avoid duplicates and current guide
+  const suggestedGuides = formatSuggestedGuides(
+    suggestedGuidesByCountry,
+    suggestedGuidesByContinent,
+    currentGuide
+  );
+
+  // early return if no suggestions
+  if (suggestedGuides.length === 0) return null;
+
+  // returning suggestions if there are any
   return (
     <section className="section-styles width-size negative-bottom-spacing">
       <SectionHeading>You May Also Be Interested In...</SectionHeading>
 
       <Slider>
-        {suggestions.map((suggestion) => {
+        {suggestedGuides.map((suggestion) => {
           return (
             <TravelGuideCard
               key={suggestion.destination}
