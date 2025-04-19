@@ -1,6 +1,7 @@
 import { getTravelGuides } from "@/app/_lib/data-service";
 import TravelGuideCard from "./TravelGuideCard";
 import { formatGuidesWithImageUrl } from "@/app/_lib/helpers/formatGuidesWithImageUrl";
+import { formatGuidesByIsActive } from "@/app/_lib/helpers/filterFunctions/formatGuidesByIsActive";
 
 // const testGuides = [
 //   {
@@ -57,10 +58,13 @@ export default async function TravelGuides() {
   const travelGuides = await getTravelGuides();
 
   const guidesWithImageUrls = await formatGuidesWithImageUrl(travelGuides);
+  console.log(travelGuides);
+
+  const sortedGuides = formatGuidesByIsActive(guidesWithImageUrls);
 
   return (
     <div className="grid gap-x-30 gap-y-60 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {guidesWithImageUrls.map((guide) => {
+      {sortedGuides.map((guide) => {
         return (
           <TravelGuideCard
             key={guide.title}

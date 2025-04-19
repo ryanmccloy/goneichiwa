@@ -21,15 +21,13 @@ export default async function Page({ params }) {
     return <GuideCannotBeFound />;
   }
 
-  const { country, continent, id } = guide;
+  
 
   return (
     <>
       <ProductOverview guide={guide} />
       <GuideSuggestions
-        country={country}
-        continent={continent}
-        currentGuide={id}
+       guide={guide}
       />
     </>
   );
