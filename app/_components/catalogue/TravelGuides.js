@@ -58,7 +58,6 @@ export default async function TravelGuides() {
   const travelGuides = await getTravelGuides();
 
   const guidesWithImageUrls = await formatGuidesWithImageUrl(travelGuides);
-  console.log(travelGuides);
 
   const sortedGuides = formatGuidesByIsActive(guidesWithImageUrls);
 

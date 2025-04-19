@@ -85,7 +85,7 @@
 }
 
 .nav-hover {
-  @apply hover:bg-hover p-2 rounded-md transition-all duration-300;
+  @apply rounded-md p-2 transition-all duration-300 cursor-pointer hover:bg-hover;
 }
 
 /* ABOUT US */
