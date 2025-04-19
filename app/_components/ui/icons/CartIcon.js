@@ -88,7 +88,9 @@ function CartIcon() {
         </svg>
       </button>
 
-      {isOpen && <MiniCart items={items} subtotal={subtotal} />}
+      {isOpen && (
+        <MiniCart items={items} subtotal={subtotal} handleClose={setIsOpen} />
+      )}
     </div>
   );
 }
