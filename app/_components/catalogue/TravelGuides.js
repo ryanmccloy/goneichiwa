@@ -68,6 +68,7 @@ export default async function TravelGuides() {
             price={guide.price}
             url={guide.coverImageUrl}
             alt={guide.coverImageAlt}
+            isActive={guide.isActive}
           />
         );
       })}

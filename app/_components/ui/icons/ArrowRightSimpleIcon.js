@@ -1,6 +1,24 @@
-export default function ArrowRightSimpleIcon() {
+"use client";
+
+import { useRouter } from "next/navigation";
+import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
+
+export default function ArrowRightSimpleIcon({ route }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (!route) return;
+    router.push(`/catalogue/${formatGuideIdRoute(route)}`);
+  };
+
   return (
-    <div className="guide-icons group-hover:-rotate-25">
+    <button
+      type="button"
+      onClick={handleClick}
+      className="guide-icons cursor-pointer hover:-rotate-25 transition-transform duration-300"
+      aria-label={`View Travel Guide: ${route}`}
+      title={`View Travel Guide: ${route}`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -8,8 +26,6 @@ export default function ArrowRightSimpleIcon() {
         strokeWidth={1}
         stroke="currentColor"
         className="size-6"
-        role="img"
-        aria-label="right arrow"
       >
         <path
           strokeLinecap="round"
@@ -17,6 +33,6 @@ export default function ArrowRightSimpleIcon() {
           d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
         />
       </svg>
-    </div>
+    </button>
   );
 }
