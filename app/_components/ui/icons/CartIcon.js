@@ -10,56 +10,6 @@ function CartIcon() {
 
   useOutsideClick(cartRef, () => setIsOpen(false));
 
-  const items = [
-    {
-      id: "tokyo-guide",
-      title: "Tokyo Travel Guide",
-      image: "/images/guides/tokyo.webp",
-      quantity: 1,
-      price: 5.0,
-    },
-    {
-      id: "dolomites-guide",
-      title: "Dolomites Adventure Guide",
-      image: "/images/guides/dolomites.webp",
-      quantity: 2,
-      price: 10.0,
-    },
-    {
-      id: "rome-guide",
-      title: "Rome Historical Guide",
-      image: "/images/guides/rome.webp",
-      quantity: 1,
-      price: 5.0,
-    },
-    {
-      id: "tokyo-guide2",
-      title: "Tokyo Travel Guide",
-      image: "/images/guides/tokyo.webp",
-      quantity: 1,
-      price: 5.0,
-    },
-    {
-      id: "dolomites-guide2",
-      title: "Dolomites Adventure Guide",
-      image: "/images/guides/dolomites.webp",
-      quantity: 2,
-      price: 10.0,
-    },
-    {
-      id: "rome-guide2",
-      title: "Rome Historical Guide",
-      image: "/images/guides/rome.webp",
-      quantity: 1,
-      price: 5.0,
-    },
-  ];
-
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-
   return (
     <div className="relative" ref={cartRef}>
       <button
@@ -88,9 +38,7 @@ function CartIcon() {
         </svg>
       </button>
 
-      {isOpen && (
-        <MiniCart items={items} subtotal={subtotal} handleClose={setIsOpen} />
-      )}
+      {isOpen && <MiniCart handleClose={setIsOpen} />}
     </div>
   );
 }

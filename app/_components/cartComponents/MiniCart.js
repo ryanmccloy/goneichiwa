@@ -1,12 +1,18 @@
 "use client";
 
-import Link from "next/link";
+import { useCartStore } from "@/app/_lib/stores/cartStore";
 import { motion, AnimatePresence } from "framer-motion";
+
+import Link from "next/link";
 import Image from "next/image";
+
 import XIcon from "../ui/icons/XIcon";
 
-export default function MiniCart({ items = [], subtotal = 0, handleClose }) {
-  const isEmpty = items.length === 0;
+export default function MiniCart({ handleClose }) {
+  const cart = useCartStore((state) => state.items);
+  const subTotal = useCartStore((state) => state.subTotal);
+
+  const isEmpty = cart.length === 0;
 
   return (
     <AnimatePresence>
@@ -30,7 +36,7 @@ export default function MiniCart({ items = [], subtotal = 0, handleClose }) {
         ) : (
           <>
             <ul className="flex flex-col gap-15 max-h-[300px] overflow-y-auto mt-15 pr-15">
-              {items.map((item) => (
+              {cart.map((item) => (
                 <li key={item.id} className="flex gap-15 items-center">
                   <Image
                     src={item.image}
@@ -57,7 +63,7 @@ export default function MiniCart({ items = [], subtotal = 0, handleClose }) {
 
             <div className="flex justify-between mt-15 text-sm font-semibold">
               <span>Subtotal</span>
-              <span>£{subtotal}</span>
+              <span className="pr-15">£{subTotal}</span>
             </div>
 
             <Link
