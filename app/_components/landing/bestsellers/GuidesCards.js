@@ -2,6 +2,7 @@ import BestCard from "./BestCard";
 import Slider from "../../ui/Slider";
 import { getFeaturedTravelGuides, getImageUrl } from "@/app/_lib/data-service";
 import { formatGuidesWithImageUrl } from "@/app/_lib/helpers/formatGuidesWithImageUrl";
+import { formatGuidesByIsActive } from "@/app/_lib/helpers/filterFunctions/formatGuidesByIsActive";
 
 export default async function GuidesCards() {
   const featuredGuides = await getFeaturedTravelGuides();
@@ -18,7 +19,11 @@ export default async function GuidesCards() {
     featuredGuides
   );
 
-  featuredGuidesWithImageUrls.push({
+  const sortedFeaturedGuidesWithImageUrls = formatGuidesByIsActive(
+    featuredGuidesWithImageUrls
+  );
+
+  sortedFeaturedGuidesWithImageUrls.push({
     id: "view-all-guides",
     title: "View All Guides",
     coverImageUrl: "/images/bestsellers/view-all.webp",
@@ -27,13 +32,14 @@ export default async function GuidesCards() {
 
   return (
     <Slider>
-      {featuredGuidesWithImageUrls.map((guide, index) => (
+      {sortedFeaturedGuidesWithImageUrls.map((guide, index) => (
         <BestCard
           key={guide.id}
           title={guide.title}
           url={guide.coverImageUrl}
           alt={guide.coverImageAlt}
-          lastCard={index === featuredGuidesWithImageUrls.length - 1}
+          lastCard={index === sortedFeaturedGuidesWithImageUrls.length - 1}
+          isActive={guide.isActive}
         />
       ))}
     </Slider>

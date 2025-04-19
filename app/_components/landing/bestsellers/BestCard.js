@@ -1,14 +1,19 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+
 import RightArrow from "../../ui/icons/RightArrow";
 import ArrowLinkRight from "../../ui/ArrowLinkRight";
+import ComingSoonOverlay from "../../catalogue/ComingSoonOverlay";
+
 import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
 
-export default function BestCard({ title, url, alt, lastCard }) {
+export default function BestCard({ title, url, alt, lastCard, isActive }) {
   // Reference to the card container
   const ref = useRef(null);
 
@@ -44,6 +49,8 @@ export default function BestCard({ title, url, alt, lastCard }) {
             quality={70}
             aria-label={alt}
           />
+          {/* Overlay */}
+          {!isActive && <ComingSoonOverlay />}
         </motion.div>
       </div>
 
