@@ -1,14 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
 
-export default function ArrowRightSimpleIcon({ route }) {
+export default function ArrowRightSimpleIcon({ id, destination }) {
   const router = useRouter();
 
   const handleClick = () => {
-    if (!route) return;
-    router.push(`/catalogue/${formatGuideIdRoute(route)}`);
+    if (!id) return;
+    router.push(`/catalogue/${id}`);
   };
 
   return (
@@ -16,8 +15,8 @@ export default function ArrowRightSimpleIcon({ route }) {
       type="button"
       onClick={handleClick}
       className="guide-icons cursor-pointer hover:-rotate-25 transition-transform duration-300"
-      aria-label={`View Travel Guide: ${route}`}
-      title={`View Travel Guide: ${route}`}
+      aria-label={`View Travel Guide: ${destination}`}
+      title={`View Travel Guide: ${destination}`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

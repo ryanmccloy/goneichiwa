@@ -1,7 +1,14 @@
-export default function AddToCartIcon({ isActive }) {
+"use client";
+
+import { useCartStore } from "@/app/_lib/stores/cartStore";
+
+export default function AddToCartIcon({ isActive, item }) {
+  const addToCart = useCartStore((state) => state.addToCart);
+
   return (
     <button
       type="button"
+      onClick={() => addToCart(item)}
       disabled={!isActive}
       className={`guide-icons ${
         !isActive ? "opacity-40 cursor-not-allowed" : "cursor-pointer"

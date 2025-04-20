@@ -48,7 +48,8 @@ export default async function GuideSuggestions({ guide }) {
           return (
             <TravelGuideCard
               key={suggestion.id}
-              destination={suggestion.title}
+              id={suggestion.id}
+              title={suggestion.title}
               price={suggestion.price}
               url={suggestion.coverImageUrl}
               alt={suggestion.coverImageAlt}

@@ -1,24 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
-
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
 import ComingSoonOverlay from "./ComingSoonOverlay";
 
 export default function TravelGuideCard({
-  destination,
+  id,
+  title,
   price,
   url,
   alt,
   isActive,
   suggestion = false,
 }) {
+  const item = {
+    id,
+    title,
+    price,
+    image: url,
+    quantity: 1,
+  };
+
+  console.log(item);
   return (
     <div
       className={`flex flex-col gap-15   ${suggestion ? "min-w-[300px]" : ""}`}
     >
-      <Link href={`/catalogue/${formatGuideIdRoute(destination)}`}>
+      <Link href={`/catalogue/${id}`} className="cursor-pointer">
         <div className=" relative w-full h-[300px]">
           <Image
             src={url}
@@ -35,10 +43,10 @@ export default function TravelGuideCard({
 
       <div className="flex justify-between">
         <div className="flex flex-col">
-          <h5 className="uppercase">{destination}</h5>
+          <h5 className="uppercase">{title}</h5>
           <span>£{price}</span>
         </div>
-        <TravelGuideCardIcons destination={destination} isActive={isActive} />
+        <TravelGuideCardIcons isActive={isActive} item={item} />
       </div>
     </div>
   );

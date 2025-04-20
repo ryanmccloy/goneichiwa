@@ -3,57 +3,6 @@ import TravelGuideCard from "./TravelGuideCard";
 import { formatGuidesWithImageUrl } from "@/app/_lib/helpers/formatGuidesWithImageUrl";
 import { formatGuidesByIsActive } from "@/app/_lib/helpers/filterFunctions/formatGuidesByIsActive";
 
-// const testGuides = [
-//   {
-//     destination: "Tokyo",
-//     price: "£5",
-//     url: "/images/guides/tokyo.webp",
-//     alt: "Tokyo Scenery",
-//   },
-//   {
-//     destination: "Kyoto",
-//     price: "£5",
-//     url: "/images/guides/kyoto.webp",
-//     alt: "Kyoto Pagoda",
-//   },
-//   {
-//     destination: "Osaka",
-//     price: "£5",
-//     url: "/images/guides/osaka.webp",
-//     alt: "Osaka Street",
-//   },
-//   {
-//     destination: "Mt. Fuji",
-//     price: "£5",
-//     url: "/images/guides/fuji.webp",
-//     alt: "Mt Fuji View",
-//   },
-//   {
-//     destination: "Dolomites",
-//     price: "£10",
-//     url: "/images/guides/dolomites.webp",
-//     alt: "Dolomites Mountains",
-//   },
-//   {
-//     destination: "Rome",
-//     price: "£5",
-//     url: "/images/guides/rome.webp",
-//     alt: "Roman Colosseum",
-//   },
-//   {
-//     destination: "Florence",
-//     price: "£5",
-//     url: "/images/guides/florence.webp",
-//     alt: "Florence City View",
-//   },
-//   {
-//     destination: "Venice",
-//     price: "£5",
-//     url: "/images/guides/venice.webp",
-//     alt: "Venice Canal",
-//   },
-// ];
-
 export default async function TravelGuides() {
   const travelGuides = await getTravelGuides();
 
@@ -66,8 +15,9 @@ export default async function TravelGuides() {
       {sortedGuides.map((guide) => {
         return (
           <TravelGuideCard
-            key={guide.title}
-            destination={guide.title}
+            key={guide.id}
+            id={guide.id}
+            title={guide.title}
             price={guide.price}
             url={guide.coverImageUrl}
             alt={guide.coverImageAlt}

@@ -5,11 +5,10 @@ import Link from "next/link";
 import BinIcon from "../ui/icons/BinIcon";
 
 function MiniCartItem({ item }) {
-
-    const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
   return (
-    <li  className="flex gap-15 items-start">
-      <Link href={`/catalogue/${item.id}`} className="flex gap-15">
+    <li className="flex gap-15 items-start">
+      <Link href={`/catalogue/${item.id}`} className="flex gap-15 flex-1">
         <Image
           src={item.image}
           alt={item.title}
@@ -18,7 +17,7 @@ function MiniCartItem({ item }) {
           className="object-cover rounded object-top"
         />
         <div className="flex-1">
-          <div className=" flex justify-between">
+          <div className="flex justify-between">
             <p className="text-sm font-medium">{item.title}</p>
 
             <div className="flex gap-15">
