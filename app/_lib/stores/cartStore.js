@@ -28,7 +28,7 @@ export const useCartStore = create((set, get) => ({
     const newItems = get().items.filter((i) => i.id !== id);
     set({
       items: newItems,
-      subtotal: newItems.reduce((acc, i) => acc + i.price * i.quantity, 0),
+      subTotal: newItems.reduce((acc, i) => acc + i.price * i.quantity, 0),
     });
   },
 

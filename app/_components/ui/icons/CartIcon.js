@@ -13,7 +13,7 @@ function CartIcon() {
   const closeMiniCart = useCartStore((state) => state.closeMiniCart);
   const toggleMiniCart = useCartStore((state) => state.toggleMiniCart);
 
-  useOutsideClick(cartRef, () => closeMiniCart());
+  useOutsideClick(cartRef, closeMiniCart);
 
   return (
     <div ref={cartRef}>
