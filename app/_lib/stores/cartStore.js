@@ -36,4 +36,6 @@ export const useCartStore = create((set, get) => ({
 
   openMiniCart: () => set({ isMiniCartOpen: true }),
   closeMiniCart: () => set({ isMiniCartOpen: false }),
+  toggleMiniCart: () =>
+    set((state) => ({ isMiniCartOpen: !state.isMiniCartOpen })),
 }));

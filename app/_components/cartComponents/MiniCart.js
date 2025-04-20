@@ -22,7 +22,7 @@ export default function MiniCart({ handleClose }) {
         animate={{ opacity: 1, y: 15 }}
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.2 }}
-        className="absolute top-full right-0 w-[320px] bg-off-white rounded-md text-off-black  z-50 p-5 shadow-lg"
+        className="absolute top-full right-0 w-[320px] bg-off-white rounded-md text-off-black  z-50 p-5 shadow-md"
       >
         <div className="flex justify-between ">
           <h4 className="text-sm font-semibold ">Your Cart</h4>

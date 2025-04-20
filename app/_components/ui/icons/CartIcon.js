@@ -1,23 +1,28 @@
 "use client";
 
-import { useRef, useState } from "react";
-import MiniCart from "../../cartComponents/MiniCart";
+import { useRef } from "react";
+
 import useOutsideClick from "@/app/_lib/hooks/useOutsideClick";
+import { useCartStore } from "@/app/_lib/stores/cartStore";
+
+import MiniCart from "../../cartComponents/MiniCart";
 
 function CartIcon() {
-  const [isOpen, setIsOpen] = useState(false);
   const cartRef = useRef();
+  const isMiniCartOpen = useCartStore((state) => state.isMiniCartOpen);
+  const closeMiniCart = useCartStore((state) => state.closeMiniCart);
+  const toggleMiniCart = useCartStore((state) => state.toggleMiniCart);
 
-  useOutsideClick(cartRef, () => setIsOpen(false));
+  useOutsideClick(cartRef, () => closeMiniCart());
 
   return (
-    <div className="relative" ref={cartRef}>
+    <div ref={cartRef}>
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={toggleMiniCart}
         aria-label="Toggle cart"
-        className={`nav-hover flex items-center justify-center ${
-          isOpen ? "bg-off-white" : ""
+        className={`nav-styles flex items-center justify-center ${
+          isMiniCartOpen ? "bg-off-white" : ""
         }`}
       >
         <svg
@@ -27,7 +32,7 @@ function CartIcon() {
           strokeWidth="1"
           stroke="currentColor"
           className={`size-7 ${
-            isOpen ? "text-off-black" : ""
+            isMiniCartOpen ? "text-off-black" : ""
           } transition-colors`}
         >
           <path
@@ -38,7 +43,7 @@ function CartIcon() {
         </svg>
       </button>
 
-      {isOpen && <MiniCart handleClose={setIsOpen} />}
+      {isMiniCartOpen && <MiniCart handleClose={closeMiniCart} />}
     </div>
   );
 }

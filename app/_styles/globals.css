@@ -9,7 +9,7 @@
     253,
     253,
     253,
-    0.2
+    0.8
   ); /* off white in rgba value - 20% opacity */
   --color-off-black-40: rgba(
     51,
@@ -84,8 +84,8 @@
   @apply absolute w-full h-[2px] transition-all duration-300;
 }
 
-.nav-hover {
-  @apply rounded-md p-2 transition-all duration-300 cursor-pointer hover:bg-hover;
+.nav-styles {
+  @apply rounded-md bg-off-white shadow-md text-off-black p-2 transition-all duration-300 cursor-pointer hover:bg-hover;
 }
 
 /* ABOUT US */

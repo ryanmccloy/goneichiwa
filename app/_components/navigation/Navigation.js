@@ -25,7 +25,10 @@ export default function Navigation() {
 
           <Logo />
 
+
+
           <Icons />
+
         </div>
       </nav>
     </header>
