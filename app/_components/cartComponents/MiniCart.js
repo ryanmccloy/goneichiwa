@@ -4,9 +4,9 @@ import { useCartStore } from "@/app/_lib/stores/cartStore";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Link from "next/link";
-import Image from "next/image";
 
 import XIcon from "../ui/icons/XIcon";
+import MiniCartItem from "./MiniCartItem";
 
 export default function MiniCart({ handleClose }) {
   const cart = useCartStore((state) => state.items);
@@ -37,27 +37,7 @@ export default function MiniCart({ handleClose }) {
           <>
             <ul className="flex flex-col gap-15 max-h-[300px] overflow-y-auto mt-15 pr-15">
               {cart.map((item) => (
-                <li key={item.id} className="flex gap-15 items-center">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={56} // 14 * 4
-                    height={56}
-                    className="object-cover rounded object-top"
-                  />
-                  <div className="flex-1">
-                    <div className=" flex justify-between">
-                      <p className="text-sm font-medium">{item.title}</p>
-                      <span className="text-sm font-semibold ml-30  ">
-                        £{item.price}
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-neutral-500">
-                      Qty: {item.quantity}
-                    </p>
-                  </div>
-                </li>
+                <MiniCartItem key={item.id} item={item} />
               ))}
             </ul>
 
