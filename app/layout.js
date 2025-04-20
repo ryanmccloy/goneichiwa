@@ -1,4 +1,5 @@
 import { Anton, Montserrat } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 import "@/app/_styles/globals.css";
 import Navigation from "@/app/_components/navigation/Navigation";
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${anton.variable} ${montserrat.variable}`}>
       <body className="body-styles">
+        <Toaster />
         <Navigation />
         <main className="flex-grow">{children}</main>
 

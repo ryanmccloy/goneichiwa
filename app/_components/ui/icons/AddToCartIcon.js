@@ -1,14 +1,13 @@
 "use client";
 
-import { useCartStore } from "@/app/_lib/stores/cartStore";
+import { useAddToCartWithFeedback } from "@/app/_lib/utils/useAddToCartWithFeedback";
 
 export default function AddToCartIcon({ isActive, item }) {
-  const addToCart = useCartStore((state) => state.addToCart);
-
+  const addToCartWithFeedback = useAddToCartWithFeedback();
   return (
     <button
       type="button"
-      onClick={() => addToCart(item)}
+      onClick={() => addToCartWithFeedback(item)}
       disabled={!isActive}
       className={`guide-icons ${
         !isActive ? "opacity-40 cursor-not-allowed" : "cursor-pointer"

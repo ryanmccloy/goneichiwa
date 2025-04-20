@@ -21,7 +21,6 @@ export default function TravelGuideCard({
     quantity: 1,
   };
 
-  console.log(item);
   return (
     <div
       className={`flex flex-col gap-15   ${suggestion ? "min-w-[300px]" : ""}`}

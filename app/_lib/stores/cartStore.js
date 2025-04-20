@@ -3,6 +3,7 @@ import { create } from "zustand";
 export const useCartStore = create((set, get) => ({
   items: [],
   subTotal: 45,
+  isMiniCartOpen: false,
 
   addToCart: (item) => {
     const items = get().items;
@@ -32,4 +33,7 @@ export const useCartStore = create((set, get) => ({
   },
 
   clearCart: () => set({ items: [], subtotal: 0 }),
+
+  openMiniCart: () => set({ isMiniCartOpen: true }),
+  closeMiniCart: () => set({ isMiniCartOpen: false }),
 }));

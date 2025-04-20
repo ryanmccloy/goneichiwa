@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Button({ children, href, onClick }) {
+export default function Button({ children, href, onClick, isActive = "true" }) {
   if (href) {
     return (
       <Link className="button" href={href}>
@@ -10,7 +10,7 @@ export default function Button({ children, href, onClick }) {
   }
 
   return (
-    <button className="button" onClick={onClick}>
+    <button disabled={!isActive} className="button" onClick={onClick}>
       {children}
     </button>
   );
