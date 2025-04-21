@@ -5,6 +5,8 @@ import { useCartStore } from "@/app/_lib/stores/cartStore";
 
 function CartSummaryAndCheckout() {
   const subTotal = useCartStore((state) => state.subTotal);
+  const discount = useCartStore((s) => s.getDiscount());
+
   const total = useCartStore((state) => state.getTotal());
 
   return (
@@ -17,6 +19,13 @@ function CartSummaryAndCheckout() {
       </div>
 
       <PromoCodeInput />
+
+      {discount > 0 && (
+        <div className="flex justify-between text-sm text-green-600 font-medium">
+          <span>Promo Discount</span>
+          <span>-£{discount.toFixed(2)}</span>
+        </div>
+      )}
 
       <div className="flex justify-between font-semibold ">
         <span>Total</span>
