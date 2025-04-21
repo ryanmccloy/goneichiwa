@@ -1,15 +1,47 @@
 "use client";
 
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import ArrowLinkLeft from "@/app/_components/ui/ArrowLinkLeft";
 import SectionHeading from "@/app/_components/ui/SectionHeading";
 import Button from "@/app/_components/ui/Button";
+import { useSignUp } from "@/app/_lib/hooks/useSignUp";
+
+// 1. Schema
+const signUpSchema = z
+  .object({
+    name: z.string().min(2, "Name is required"),
+    email: z.string().email("Invalid email"),
+    confirmEmail: z.string().email("Invalid email"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.email === data.confirmEmail, {
+    message: "Emails do not match",
+    path: ["confirmEmail"],
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export default function SignUpForm() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // HAND FORM SUBMIT LOGIC
+  const { handleSubmit: handleSignUpSubmit } = useSignUp();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    await handleSignUpSubmit(email, password);
   };
 
   return (
@@ -24,74 +56,68 @@ export default function SignUpForm() {
         </span>
       </div>
 
-      <form onSubmit={handleSubmit} className=" sign-in-up-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="sign-in-up-form">
         <SectionHeading mb={false}>Sign Up</SectionHeading>
-        <label htmlFor="name" className="sr-only">
-          Name
-        </label>
+
         <input
+          {...register("name")}
           type="text"
-          name="name"
-          id="name"
           placeholder="Name"
-          required
-          aria-label="Name"
           className="input-styles"
         />
-        <label htmlFor="email" className="sr-only">
-          Email
-        </label>
+        {errors.name && (
+          <p className="text-sm text-red-500">{errors.name.message}</p>
+        )}
+
         <input
+          {...register("email")}
           type="email"
-          name="email"
-          id="email"
           placeholder="Email"
-          required
-          aria-label="Email"
           className="input-styles"
           autoComplete="email"
         />
-        <label htmlFor="confirmEmail" className="sr-only">
-          Confirm Email
-        </label>
+        {errors.email && (
+          <p className="text-sm text-red-500">{errors.email.message}</p>
+        )}
+
         <input
+          {...register("confirmEmail")}
           type="email"
-          name="confirmEmail"
-          id="confirmEmail"
-          placeholder="Confirm email"
-          required
-          aria-label="Confirm email"
+          placeholder="Confirm Email"
           className="input-styles"
         />
-        <label htmlFor="password" className="sr-only">
-          Password
-        </label>
+        {errors.confirmEmail && (
+          <p className="text-sm text-red-500">{errors.confirmEmail.message}</p>
+        )}
+
         <input
+          {...register("password")}
           type="password"
-          name="password"
-          id="password"
           placeholder="Password"
-          required
-          aria-label="Password"
           className="input-styles"
           autoComplete="new-password"
         />
-        <label htmlFor="confirmPassword" className="sr-only">
-          Confirm password
-        </label>
+        {errors.password && (
+          <p className="text-sm text-red-500">{errors.password.message}</p>
+        )}
+
         <input
+          {...register("confirmPassword")}
           type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder="Confirm password"
-          required
-          aria-label="Confirm password"
+          placeholder="Confirm Password"
           className="input-styles"
           autoComplete="new-password"
         />
+        {errors.confirmPassword && (
+          <p className="text-sm text-red-500">
+            {errors.confirmPassword.message}
+          </p>
+        )}
 
         <div className="sign-in-up-button">
-          <Button>Sign Up</Button>
+          <Button isActive={!isSubmitting}>
+            {isSubmitting ? "Signing Up..." : "Sign Up"}
+          </Button>
         </div>
       </form>
     </div>

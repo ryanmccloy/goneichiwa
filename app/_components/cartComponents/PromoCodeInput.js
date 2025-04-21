@@ -14,7 +14,6 @@ export default function PromoCodeInput() {
 
   const handleApply = async () => {
     const promo = await getPromoCodeFromFirebase(input);
-    console.log(promo);
 
     if (!promo || !promo.isActive) {
       toast.error("Invalid promo code");

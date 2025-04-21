@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Page({ children }) {
   return (
-    <section className="h-screen w-screen lg:max-w-[1440px] mx-auto  lg:grid lg:grid-cols-2 lg:gap-60 lg:p-30 lg:mb-60">
+    <section className="h-screen min-h-[850px] w-screen lg:max-w-[1440px] mx-auto  lg:grid lg:grid-cols-2 lg:gap-60 lg:p-30 lg:mb-60">
       <div className="relative h-full w-full flex justify-center items-center">
         <Image
           src="/images/sign-in-up/bamboo.webp"

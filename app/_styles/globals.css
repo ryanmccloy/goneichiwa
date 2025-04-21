@@ -112,11 +112,11 @@
 /* FORMS */
 
 .input-styles {
-  @apply bg-light-grey rounded-sm py-1 px-2;
+  @apply bg-light-grey rounded-sm p-2 w-[100%];
 }
 
 .sign-in-up-container {
-  @apply flex flex-col gap-60 lg:gap-120;
+  @apply flex flex-col gap-30 text-sm  h-[100%];
 }
 
 .sign-in-up-top-links {
@@ -124,11 +124,11 @@
 }
 
 .sign-in-up-form {
-  @apply flex flex-col gap-30 w-[100%] lg:w-[400px] mx-auto;
+  @apply flex flex-col items-center gap-30 w-[100%] lg:w-[400px] mx-auto mt-60;
 }
 
 .sign-in-up-button {
-  @apply mt-30 flex justify-center lg:justify-start;
+  @apply mt-30 flex justify-center;
 }
 
 /* FOOTER */
