@@ -11,7 +11,7 @@ export const useSignUp = () => {
     try {
       const user = await signUpWithEmail(email, password);
       toast.success(`Welcome ${user.email}!`);
-      router.push("/auth/account");
+      router.push("/account");
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         toast.error("Email is already in use");

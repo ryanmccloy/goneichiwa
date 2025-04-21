@@ -1,11 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import CartIcon from "../ui/icons/CartIcon";
+import { useAuthStore } from "@/app/_lib/stores/authStore";
 
 export default function Icons() {
+  const user = useAuthStore((s) => s.user);
   return (
     <div className="flex-1 flex justify-end items-center ">
       <div className="flex gap-15 md:gap-30 fixed">
-        <Link href="/auth" aria-label="Go To Account" className="nav-styles ">
+        <Link
+          href={user ? "/account" : "/auth/sign-in"}
+          aria-label="Go To Account"
+          className="nav-styles "
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

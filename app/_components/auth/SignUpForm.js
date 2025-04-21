@@ -9,6 +9,7 @@ import ArrowLinkLeft from "@/app/_components/ui/ArrowLinkLeft";
 import SectionHeading from "@/app/_components/ui/SectionHeading";
 import Button from "@/app/_components/ui/Button";
 import { useSignUp } from "@/app/_lib/hooks/useSignUp";
+import { useGoogleLogIn } from "@/app/_lib/hooks/useGoogleLogIn";
 
 // 1. Schema
 const signUpSchema = z
@@ -30,6 +31,7 @@ const signUpSchema = z
 
 export default function SignUpForm() {
   const { handleSubmit: handleSignUpSubmit } = useSignUp();
+  const handleGoogleLogin = useGoogleLogIn();
 
   const {
     register,
@@ -120,6 +122,9 @@ export default function SignUpForm() {
           </Button>
         </div>
       </form>
+      <div className="flex justify-center">
+        <Button onClick={handleGoogleLogin}>Sign In With Google</Button>
+      </div>
     </div>
   );
 }

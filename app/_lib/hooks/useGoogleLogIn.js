@@ -11,11 +11,11 @@ export const useGoogleLogIn = () => {
     try {
       const user = await loginWithGoogle();
       toast.success(`Welcome ${user.displayName || user.email}!`);
-      router.push("/auth/account");
+      router.push("/account");
     } catch (err) {
       toast.error("Google sign-in failed");
     }
   };
 
-  return { handleGoogleLogin };
+  return handleGoogleLogin;
 };
