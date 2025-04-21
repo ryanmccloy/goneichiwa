@@ -13,8 +13,13 @@ export const useSignUp = () => {
       toast.success(`Welcome ${user.email}!`);
       router.push("/auth/account");
     } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        toast.error("Email is already in use");
+      } else {
+        toast.error("Something went wrong");
+      }
+
       console.error("Error creating user account:", err);
-      toast.error("Something went wrong");
     }
   };
 
