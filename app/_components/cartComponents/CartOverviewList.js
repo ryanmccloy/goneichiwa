@@ -3,7 +3,8 @@ import Link from "next/link";
 import BinIcon from "../ui/icons/BinIcon";
 import { useCartStore } from "@/app/_lib/stores/cartStore";
 
-function CartOverviewList({ items }) {
+function CartOverviewList() {
+  const items = useCartStore((state) => state.items);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   return (
     <ul className="flex flex-col gap-15">

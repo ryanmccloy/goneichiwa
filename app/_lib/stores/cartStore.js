@@ -4,7 +4,9 @@ export const useCartStore = create((set, get) => ({
   items: [],
   subTotal: 45,
   isMiniCartOpen: false,
+  promo: null,
 
+  // adding an item to the cart
   addToCart: (item) => {
     const items = get().items;
     const existing = items.find((i) => i.id === item.id);
@@ -24,6 +26,7 @@ export const useCartStore = create((set, get) => ({
     });
   },
 
+  // removing an item from the cart
   removeFromCart: (id) => {
     const newItems = get().items.filter((i) => i.id !== id);
     set({
@@ -32,10 +35,50 @@ export const useCartStore = create((set, get) => ({
     });
   },
 
+  // clearing entire cart
   clearCart: () => set({ items: [], subtotal: 0 }),
 
+  // opening the MiniCart
   openMiniCart: () => set({ isMiniCartOpen: true }),
+
+  // closing the MiniCart
   closeMiniCart: () => set({ isMiniCartOpen: false }),
+
+  // toggling the open and closing MiniCart
   toggleMiniCart: () =>
     set((state) => ({ isMiniCartOpen: !state.isMiniCartOpen })),
+
+  // applying a promo code to the subTotal
+  applyPromo: (promo) => {
+    set({ promo });
+  },
+
+  // getting discount value
+  getDiscount: () => {
+    const { subTotal, promo } = get();
+  
+    if (!promo) return 0;
+  
+    return promo.type === "percentage"
+      ? (subTotal * promo.amount) / 100
+      : promo.amount;
+  },
+  
+
+  // removing a promo code from the cart
+  removePromo: () => set({ promo: null, discount: 0 }),
+
+  // getting the total cart value including any discounts
+  getTotal: () => {
+    const { subTotal, promo } = get();
+
+    if (!promo) return subTotal;
+
+    const discount =
+      promo.type === "percentage"
+        ? (subTotal * promo.amount) / 100
+        : promo.amount;
+
+    return Math.max(0, subTotal - discount); // Ensure total can't go negative
+  },
 }));

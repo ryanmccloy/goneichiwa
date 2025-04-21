@@ -93,3 +93,12 @@ export const getImageUrl = async (path) => {
   const url = await getDownloadURL(fileRef);
   return url;
 };
+
+// fetching promo code
+export const getPromoCodeFromFirebase = async (code) => {
+  const promoRef = doc(db, "promo-codes", code.toUpperCase());
+  const promoSnap = await getDoc(promoRef);
+
+  if (promoSnap.exists()) return promoSnap.data();
+  return null;
+};
