@@ -12,7 +12,7 @@ export default function ArrowLinkLeft({ children }) {
       className={`flex gap-15 items-center cursor-pointer `}
     >
       <LeftArrow />
-      <p className={`uppercase text-xs  text-regular  z-10 `}>{children}</p>
+      <p className={`uppercase text-sm z-10 `}>{children}</p>
     </button>
   );
 }

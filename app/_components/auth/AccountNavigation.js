@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const links = [
-  { href: "/account/guides", label: "My Guides" },
+  { href: "/account/my-guides", label: "My Guides" },
   { href: "/account/orders", label: "Orders" },
   { href: "/account/saved-blog-posts", label: "Saved Blog Posts" },
   { href: "/account/settings", label: "Settings" },

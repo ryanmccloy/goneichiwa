@@ -2,14 +2,15 @@
 
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { signUpWithEmail } from "../auth-service";
+import { createUserDoc, signUpWithEmail } from "../auth-service";
 
 export const useSignUp = () => {
   const router = useRouter();
 
-  const handleSubmit = async (email, password) => {
+  const handleSubmit = async (email, password, name) => {
     try {
-      const user = await signUpWithEmail(email, password);
+      const user = await signUpWithEmail(email, password, name);
+      await createUserDoc(user);
       toast.success(`Welcome ${user.email}!`);
       router.push("/account");
     } catch (err) {

@@ -42,8 +42,8 @@ export default function SignUpForm() {
   });
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
-    await handleSignUpSubmit(email, password);
+    const { email, password, name } = data;
+    await handleSignUpSubmit(email, password, name);
   };
 
   return (

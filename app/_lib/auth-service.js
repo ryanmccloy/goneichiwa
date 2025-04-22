@@ -4,9 +4,11 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import { useAuthStore } from "./stores/authStore";
+import { doc, setDoc } from "firebase/firestore";
 
 export const loginWithGoogle = async () => {
   const { setUser } = useAuthStore.getState();
@@ -23,11 +25,28 @@ export const loginWithEmail = async (email, password) => {
   return res.user;
 };
 
-export const signUpWithEmail = async (email, password) => {
+export const signUpWithEmail = async (email, password, name) => {
   const { setUser } = useAuthStore.getState();
   const res = await createUserWithEmailAndPassword(auth, email, password);
+
+  // Set display name manually
+  await updateProfile(res.user, { displayName: name });
+  await res.user.reload(); //  pulls fresh data from Firebase
+
   setUser(res.user);
   return res.user;
+};
+
+export const createUserDoc = async (user) => {
+  const userRef = doc(db, "users", user.uid);
+
+  const userData = {
+    email: user.email,
+    name: user.displayName || "",
+    isAdmin: false,
+  };
+
+  await setDoc(userRef, userData);
 };
 
 export const logout = async () => {
