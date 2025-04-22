@@ -102,3 +102,15 @@ export const getPromoCodeFromFirebase = async (code) => {
   if (promoSnap.exists()) return promoSnap.data();
   return null;
 };
+
+// fetching user orders
+export const getUserOrders = async (userId) => {
+  const ordersRef = collection(db, "orders");
+  const q = query(ordersRef, where("userId", "==", userId));
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
