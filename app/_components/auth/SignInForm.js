@@ -1,15 +1,37 @@
 "use client";
 
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import ArrowLinkLeft from "@/app/_components/ui/ArrowLinkLeft";
 import SectionHeading from "@/app/_components/ui/SectionHeading";
 import Button from "@/app/_components/ui/Button";
+import { useLogIn } from "@/app/_lib/hooks/useLogIn";
+import { useGoogleLogIn } from "@/app/_lib/hooks/useGoogleLogIn";
+
+// Schema
+const signInSchema = z.object({
+  email: z.string().email("Please enter a valid email"),
+  password: z.string().min(1, "Password is required"),
+});
 
 export default function SignInForm() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // HAND FORM SUBMIT LOGIC
+  const { handleSubmit: handleEmailSignIn } = useLogIn();
+  const handleGoogleLogin = useGoogleLogIn();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(signInSchema),
+  });
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    await handleEmailSignIn(email, password);
   };
 
   return (
@@ -24,40 +46,42 @@ export default function SignInForm() {
         </span>
       </div>
 
-      <form onSubmit={handleSubmit} className=" sign-in-up-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="sign-in-up-form">
         <SectionHeading mb={false}>Sign In</SectionHeading>
 
-        <label htmlFor="email" className="sr-only">
-          Email
-        </label>
         <input
+          {...register("email")}
           type="email"
-          name="email"
-          id="email"
           placeholder="Email"
-          required
-          aria-label="Email"
           className="input-styles"
           autoComplete="email"
         />
-        <label htmlFor="password" className="sr-only">
-          Password
-        </label>
+        {errors.email && (
+          <p className="text-sm text-red-500">{errors.email.message}</p>
+        )}
+
         <input
+          {...register("password")}
           type="password"
-          name="password"
-          id="password"
           placeholder="Password"
-          required
-          aria-label="Password"
           className="input-styles"
           autoComplete="current-password"
         />
+        {errors.password && (
+          <p className="text-sm text-red-500">{errors.password.message}</p>
+        )}
 
         <div className="sign-in-up-button">
-          <Button>Sign In</Button>
+          <Button isActive={!isSubmitting}>
+            {isSubmitting ? "Signing In..." : "Sign In"}
+          </Button>
         </div>
       </form>
+
+      {/* Google Sign In Button */}
+      <div className="flex justify-center">
+        <Button onClick={handleGoogleLogin}>Sign In With Google</Button>
+      </div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function NavList({ isHome }) {
           role="menu"
         >
           <li role="menuitem">
-            <Link href="/">About</Link>
+            <Link href="/">Home</Link>
           </li>
           <li role="menuitem">
             <Link href="/catalogue">Catalogue</Link>

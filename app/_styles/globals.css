@@ -120,11 +120,11 @@
 }
 
 .sign-in-up-top-links {
-  @apply flex flex-col gap-15 lg:flex-row lg:justify-between;
+  @apply flex flex-col gap-15 lg:flex-row lg:justify-between text-sm;
 }
 
 .sign-in-up-form {
-  @apply flex flex-col items-center gap-30 w-[100%] lg:w-[400px] mx-auto mt-60;
+  @apply flex flex-col items-center gap-30 w-[100%] lg:w-[400px] mx-auto mt-30;
 }
 
 .sign-in-up-button {

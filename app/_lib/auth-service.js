@@ -20,6 +20,7 @@ export const loginWithEmail = async (email, password) => {
   const { setUser } = useAuthStore.getState();
   const res = await signInWithEmailAndPassword(auth, email, password);
   setUser(res.user);
+  return res.user;
 };
 
 export const signUpWithEmail = async (email, password) => {
