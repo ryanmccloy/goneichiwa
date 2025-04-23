@@ -20,7 +20,7 @@ export default function Icons() {
             viewBox="0 0 24 24"
             strokeWidth="1"
             stroke="currentColor"
-            className="size-7"
+            className="size-6"
           >
             <path
               strokeLinecap="round"

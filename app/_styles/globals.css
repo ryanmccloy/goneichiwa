@@ -85,7 +85,7 @@
 }
 
 .nav-styles {
-  @apply rounded-md bg-off-white shadow-md text-off-black p-2 transition-all duration-300 cursor-pointer hover:bg-hover;
+  @apply rounded-md bg-off-white shadow-md text-off-black p-2 transition-all duration-300 cursor-pointer hover:bg-hover flex justify-center items-center;
 }
 
 /* ABOUT US */

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import DownloadIcon from "../ui/icons/DownloadIcon";
@@ -33,7 +35,7 @@ function MyGuidesCard({ guideId }) {
           alt={guide.coverImage.alt}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-          className="object-cover rounded-global"
+          className="object-cover object-top rounded-global"
         />
       </div>
       <div className="flex justify-between flex-wrap">

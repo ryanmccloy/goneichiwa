@@ -1,10 +1,9 @@
 "use client";
-
 import MyGuidesCard from "@/app/_components/account/MyGuidesCard";
-import { useUserOrders } from "@/app/_lib/hooks/useUserOrders";
+import { useOrderStore } from "@/app/_lib/stores/ordersStore";
 
 function Page() {
-  const { orders, isLoading } = useUserOrders();
+  const { orders, isLoading } = useOrderStore();
 
   if (isLoading) {
     return <p>Loading your guides</p>;

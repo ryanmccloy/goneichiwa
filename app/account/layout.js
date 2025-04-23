@@ -1,5 +1,6 @@
-import ProtectedRoute from "@/app/_components/auth/ProtectedRoute";
-import AccountNavigation from "../_components/auth/AccountNavigation";
+import ProtectedRoute from "@/app/_components/account/ProtectedRoute";
+import AccountNavigation from "../_components/account/AccountNavigation";
+import AccountClientProvider from "../_components/account/AccountClientProvider";
 
 export default function AccountLayout({ children }) {
   return (
@@ -8,7 +9,7 @@ export default function AccountLayout({ children }) {
         {/* Sidebar or Top Nav */}
         <AccountNavigation />
         {/* Main Content */}
-        <div className="min-h-[400px]">{children}</div>
+        <AccountClientProvider>{children}</AccountClientProvider>
       </section>
     </ProtectedRoute>
   );

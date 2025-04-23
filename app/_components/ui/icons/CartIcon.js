@@ -31,7 +31,7 @@ function CartIcon() {
           viewBox="0 0 24 24"
           strokeWidth="1"
           stroke="currentColor"
-          className={`size-7 ${
+          className={`size-6 ${
             isMiniCartOpen ? "text-off-black" : ""
           } transition-colors`}
         >
