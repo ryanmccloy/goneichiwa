@@ -1,8 +1,8 @@
-import { useOrderStore } from "@/app/_lib/stores/ordersStore";
+import { useAccountStore } from "@/app/_lib/stores/accountStore";
 import { format } from "date-fns";
 
 function OrdersList() {
-  const { orders, isLoading } = useOrderStore();
+  const { orders, isLoading } = useAccountStore();
 
   if (isLoading) return <p>Loading your orders...</p>;
 

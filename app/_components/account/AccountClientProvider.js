@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import { useAuthStore } from "@/app/_lib/stores/authStore";
-import { useOrderStore } from "@/app/_lib/stores/ordersStore";
+import { useAccountStore } from "@/app/_lib/stores/accountStore";
 
 export default function AccountClientProvider({ children }) {
   const { user } = useAuthStore();
-  const fetchOrders = useOrderStore((s) => s.fetchOrders);
+  const fetchOrders = useAccountStore((s) => s.fetchOrders);
 
   useEffect(() => {
     if (user?.uid) {

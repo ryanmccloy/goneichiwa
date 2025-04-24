@@ -114,3 +114,38 @@ export const getUserOrders = async (userId) => {
     ...doc.data(),
   }));
 };
+
+/// ----- ACCOUNT UPDATE FUNCTIONS ------ ///
+
+// updating display name
+export const updateUserName = async (name) => {
+  await updateProfile(auth.currentUser, { displayName: name });
+};
+
+// update account email address
+export const updateUserEmail = async (newEmail, currentPassword) => {
+  const cred = EmailAuthProvider.credential(
+    auth.currentUser.email,
+    currentPassword
+  );
+  await reauthenticateWithCredential(auth.currentUser, cred);
+  await updateEmail(auth.currentUser, newEmail);
+};
+
+// update account password
+export const updateUserPassword = async (newPassword) => {
+  await updatePassword(auth.currentUser, newPassword);
+};
+
+// update newsletter subscription
+export const updateNewsletterPreference = async (uid, subscribed) => {
+  await updateDoc(doc(db, "users", uid), {
+    "settings.newsletter": subscribed,
+  });
+};
+
+// delete user account
+export const deleteUserAccount = async (uid) => {
+  await deleteDoc(doc(db, "users", uid));
+  await deleteUser(auth.currentUser);
+};
