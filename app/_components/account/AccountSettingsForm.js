@@ -11,9 +11,12 @@ function AccountSettingsForm() {
   const { settings } = useAccountStore();
 
   const [name, setName] = useState(user?.displayName || "");
-  const [email, setEmail] = useState(user?.email || "");
+  const [newEmail, setNewEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
+
+  // determining user sign up method
+  const isGoogleUser = user?.providerData[0]?.providerId === "google.com";
 
   useEffect(() => {
     if (settings?.newsletter !== undefined) {
@@ -23,7 +26,7 @@ function AccountSettingsForm() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    saveSettings({ name, email, password, newsletter });
+    saveSettings({ name, newEmail, password, newsletter });
   };
 
   const handlePasswordChange = async () => {
@@ -55,19 +58,34 @@ function AccountSettingsForm() {
         <label className="block text-sm font-medium">Email</label>
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input-styles"
+          value={newEmail}
+          onChange={(e) => setNewEmail(e.target.value)}
+          className={`input-styles ${isGoogleUser ? "cursor-not-allowed" : ""}`}
+          disabled={isGoogleUser}
         />
+        {isGoogleUser && (
+          <div className="text-xs text-gray-500 italic">
+            To change your email, please update it in your Google account
+            settings.
+          </div>
+        )}
       </div>
 
-      <button
-        type="button"
-        onClick={handlePasswordChange}
-        className="text-sm text-accent-blue underline w-fit"
-      >
-        Change Password
-      </button>
+      {!isGoogleUser && (
+        <button
+          type="button"
+          onClick={handlePasswordChange}
+          className="text-sm text-accent-blue underline w-fit"
+        >
+          Change Password
+        </button>
+      )}
+      {isGoogleUser && (
+        <p className="text-xs text-gray-500 italic">
+          To update your password, please change it via your Google Account
+          settings.
+        </p>
+      )}
 
       <div className={style1}>
         <label className="block text-sm font-medium">Newsletter</label>
@@ -81,6 +99,16 @@ function AccountSettingsForm() {
           Subscribe to newsletter
         </label>
       </div>
+
+      {/* Show password input only for email/password users */}
+      {!isGoogleUser && (
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Current password for changes"
+        />
+      )}
 
       <div className="flex justify-between">
         <button type="submit" className="button text-sm">

@@ -13,21 +13,25 @@ import { useAuthStore } from "../stores/authStore";
 export const useAccountActions = () => {
   const { user } = useAuthStore();
 
-  const saveSettings = async ({ name, email, password, newsletter }) => {
+  const saveSettings = async ({ name, newEmail, password, newsletter }) => {
+    const isGoogleUser = user?.providerData[0]?.providerId === "google.com";
+    const shouldUpdateEmail = newEmail && newEmail !== user.email;
+
     try {
-      if (name && name !== user.displayName) {
-        await updateUserName(name);
+      if (!isGoogleUser && shouldUpdateEmail) {
+        await updateUserEmail(user, newEmail, password);
       }
 
-      if (email && email !== user.email) {
-        await updateUserEmail(email, password);
+      if (name && name !== user.displayName) {
+        await updateUserName(user, name);
       }
 
       await updateNewsletterPreference(user.uid, newsletter);
+
       toast.success("Settings updated!");
     } catch (err) {
+      toast.error("Update failed");
       console.error(err);
-      toast.error("Something went wrong. Failed to update settings.");
     }
   };
 

@@ -1,3 +1,11 @@
+import {
+  EmailAuthProvider,
+  GoogleAuthProvider,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
+  updateEmail,
+  updateProfile,
+} from "firebase/auth";
 import { db, storage } from "./firebase";
 import {
   collection,
@@ -5,6 +13,7 @@ import {
   getDoc,
   getDocs,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
@@ -117,19 +126,46 @@ export const getUserOrders = async (userId) => {
 
 /// ----- ACCOUNT UPDATE FUNCTIONS ------ ///
 
+// reathenticating user depending on google sign up or email/password
+export const reauthenticateUser = async (user, password = null) => {
+  const providerId = user.providerData[0]?.providerId;
+
+  if (providerId === "google.com") {
+    const provider = new GoogleAuthProvider();
+    await reauthenticateWithPopup(user, provider);
+  } else if (providerId === "password") {
+    if (!password)
+      throw new Error("Password is required for re-authentication");
+    const cred = EmailAuthProvider.credential(user.email, password);
+    await reauthenticateWithCredential(user, cred);
+  } else {
+    throw new Error("Unsupported sign-in method.");
+  }
+};
+
 // updating display name
-export const updateUserName = async (name) => {
-  await updateProfile(auth.currentUser, { displayName: name });
+export const updateUserName = async (user, name) => {
+  if (!user?.uid) throw new Error("User not authenticated");
+
+  // 1. Update Firebase Auth profile
+  await updateProfile(user, { displayName: name });
+
+  // 2. Update Firestore user document
+  const userRef = doc(db, "users", user.uid);
+  await updateDoc(userRef, { name });
 };
 
 // update account email address
-export const updateUserEmail = async (newEmail, currentPassword) => {
-  const cred = EmailAuthProvider.credential(
-    auth.currentUser.email,
-    currentPassword
-  );
-  await reauthenticateWithCredential(auth.currentUser, cred);
-  await updateEmail(auth.currentUser, newEmail);
+export const updateUserEmail = async (user, newEmail, password) => {
+  const providerId = user.providerData[0]?.providerId;
+
+  if (providerId === "google.com") {
+    throw new Error("Email updates must be done through your Google account.");
+  }
+
+  await reauthenticateUser(user, password);
+  await updateEmail(user, newEmail);
+  await updateDoc(doc(db, "users", user.uid), { email: newEmail });
 };
 
 // update account password
