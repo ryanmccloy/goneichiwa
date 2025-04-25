@@ -26,7 +26,7 @@ export const useAccountActions = () => {
         await updateUserName(user, name);
       }
 
-      await updateNewsletterPreference(user.uid, newsletter);
+      await updateNewsletterPreference(user, newsletter);
 
       toast.success("Settings updated!");
     } catch (err) {

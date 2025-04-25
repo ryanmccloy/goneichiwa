@@ -124,7 +124,22 @@ export const getUserOrders = async (userId) => {
   }));
 };
 
-/// ----- ACCOUNT UPDATE FUNCTIONS ------ ///
+/// ----- ACCOUNT FUNCTIONS ------ ///
+
+export const getUserSettings = async (userId) => {
+  if (!userId) throw new Error("No userId provided");
+
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    const userData = userSnap.data();
+    return userData.settings || {};
+  } else {
+    console.error("User document not found");
+    return {};
+  }
+};
 
 // reathenticating user depending on google sign up or email/password
 export const reauthenticateUser = async (user, password = null) => {
@@ -174,8 +189,8 @@ export const updateUserPassword = async (newPassword) => {
 };
 
 // update newsletter subscription
-export const updateNewsletterPreference = async (uid, subscribed) => {
-  await updateDoc(doc(db, "users", uid), {
+export const updateNewsletterPreference = async (user, subscribed) => {
+  await updateDoc(doc(db, "users", user.uid), {
     "settings.newsletter": subscribed,
   });
 };
