@@ -19,6 +19,7 @@ const signUpSchema = z
     confirmEmail: z.string().email("Invalid email"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string(),
+    newsletter: z.boolean().optional(),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
@@ -42,8 +43,8 @@ export default function SignUpForm() {
   });
 
   const onSubmit = async (data) => {
-    const { email, password, name } = data;
-    await handleSignUpSubmit(email, password, name);
+    const { email, password, name, newsletter } = data;
+    await handleSignUpSubmit(email, password, name, newsletter);
   };
 
   return (
@@ -115,6 +116,15 @@ export default function SignUpForm() {
             {errors.confirmPassword.message}
           </p>
         )}
+
+        <label className="inline-flex items-center gap-15 text-sm">
+          <input
+            type="checkbox"
+            {...register("newsletter")}
+            className="accent-accent-blue"
+          />
+          Subscribe to our newsletter
+        </label>
 
         <div className="sign-in-up-button">
           <Button isActive={!isSubmitting}>
