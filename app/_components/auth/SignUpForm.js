@@ -123,7 +123,7 @@ export default function SignUpForm() {
         </div>
       </form>
       <div className="flex justify-center">
-        <Button onClick={handleGoogleLogin}>Sign In With Google</Button>
+        <Button onClick={handleGoogleLogin}>Sign Up With Google</Button>
       </div>
     </div>
   );

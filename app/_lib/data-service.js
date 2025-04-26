@@ -1,4 +1,5 @@
 import {
+  deleteUser,
   EmailAuthProvider,
   GoogleAuthProvider,
   reauthenticateWithCredential,
@@ -6,9 +7,10 @@ import {
   updateEmail,
   updateProfile,
 } from "firebase/auth";
-import { db, storage } from "./firebase";
+import { auth, db, storage } from "./firebase";
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -16,7 +18,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 
 // fetching all travel guides
 export const getTravelGuides = async () => {
@@ -196,7 +198,15 @@ export const updateNewsletterPreference = async (user, subscribed) => {
 };
 
 // delete user account
-export const deleteUserAccount = async (uid) => {
-  await deleteDoc(doc(db, "users", uid));
-  await deleteUser(auth.currentUser);
+export const deleteUserAccount = async (user, password = null) => {
+  if (!user) throw new Error("No user provided");
+
+  // 1. Reauthenticate
+  await reauthenticateUser(user, password);
+
+  // 2. Delete Firestore user document
+  await deleteDoc(doc(db, "users", user.uid));
+
+  // 3. Delete Firebase Auth user
+  await deleteUser(user); // use passed-in user object
 };

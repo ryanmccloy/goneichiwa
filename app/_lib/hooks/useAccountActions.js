@@ -46,8 +46,22 @@ export const useAccountActions = () => {
   };
 
   const deleteAccount = async () => {
+    if (!user) return;
+
+    const providerId = user?.providerData[0]?.providerId;
+    let password = null;
+
     try {
-      await deleteUserAccount(user.uid);
+      // Only ask for password if user signed up with email/password
+      if (providerId === "password") {
+        password = prompt("Please re-enter your password to confirm:");
+        if (!password) {
+          toast.error("Password is required to delete account.");
+          return;
+        }
+      }
+
+      await deleteUserAccount(user, password);
       toast.success("Account deleted.");
     } catch (err) {
       console.error(err);

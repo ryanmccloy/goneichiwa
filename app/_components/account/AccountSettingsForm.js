@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAccountActions } from "@/app/_lib/hooks/useAccountActions";
 import { useAuthStore } from "@/app/_lib/stores/authStore";
 import { useAccountStore } from "@/app/_lib/stores/accountStore";
+import { useRouter } from "next/navigation";
 
 function AccountSettingsForm() {
   const { saveSettings, changePassword, deleteAccount } = useAccountActions();
@@ -14,6 +15,8 @@ function AccountSettingsForm() {
   const [newEmail, setNewEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
+
+  const router = useRouter();
 
   // determining user sign up method
   const isGoogleUser = user?.providerData[0]?.providerId === "google.com";
@@ -38,6 +41,7 @@ function AccountSettingsForm() {
     if (confirm("Are you sure? This cannot be undone.")) {
       await deleteAccount();
     }
+    router.push("/");
   };
 
   const style1 = "flex flex-col gap-15";
@@ -102,12 +106,18 @@ function AccountSettingsForm() {
 
       {/* Show password input only for email/password users */}
       {!isGoogleUser && (
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Current password for changes"
-        />
+        <div className={`${style1} mt-60`}>
+          <label className="block text-sm font-medium">
+            Confirm password to save changes
+          </label>
+          <input
+            type="password"
+            className="input-styles"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Confirm password"
+          />
+        </div>
       )}
 
       <div className="flex justify-between">
