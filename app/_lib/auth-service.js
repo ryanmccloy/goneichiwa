@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -50,6 +51,9 @@ export const signUpWithEmail = async (email, password, name) => {
 
   // Set display name manually
   await updateProfile(res.user, { displayName: name });
+  //  Send verification email immediately
+  await sendEmailVerification(res.user);
+
   await res.user.reload(); //  pulls fresh data from Firebase
 
   setUser(res.user);

@@ -4,7 +4,11 @@ import {
   GoogleAuthProvider,
   reauthenticateWithCredential,
   reauthenticateWithPopup,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  signOut,
   updateEmail,
+  updatePassword,
   updateProfile,
 } from "firebase/auth";
 import { auth, db, storage } from "./firebase";
@@ -138,7 +142,7 @@ export const getUserSettings = async (userId) => {
     const userData = userSnap.data();
     return userData.settings || {};
   } else {
-    console.error("User document not found");
+    console.error("Failed to get user settings. User document not found");
     return {};
   }
 };
@@ -150,11 +154,13 @@ export const reauthenticateUser = async (user, password = null) => {
   if (providerId === "google.com") {
     const provider = new GoogleAuthProvider();
     await reauthenticateWithPopup(user, provider);
+    return user;
   } else if (providerId === "password") {
     if (!password)
       throw new Error("Password is required for re-authentication");
     const cred = EmailAuthProvider.credential(user.email, password);
     await reauthenticateWithCredential(user, cred);
+    return user;
   } else {
     throw new Error("Unsupported sign-in method.");
   }
@@ -164,49 +170,90 @@ export const reauthenticateUser = async (user, password = null) => {
 export const updateUserName = async (user, name) => {
   if (!user?.uid) throw new Error("User not authenticated");
 
-  // 1. Update Firebase Auth profile
-  await updateProfile(user, { displayName: name });
-
-  // 2. Update Firestore user document
-  const userRef = doc(db, "users", user.uid);
-  await updateDoc(userRef, { name });
+  try {
+    // 1. Update Firebase Auth profile
+    await updateProfile(user, { displayName: name });
+    // 2. Update Firestore user document
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, { name });
+  } catch (err) {
+    console.error("Failed to update username", err);
+  }
 };
 
 // update account email address
 export const updateUserEmail = async (user, newEmail, password) => {
+  // handle errors please //////
+
   const providerId = user.providerData[0]?.providerId;
 
   if (providerId === "google.com") {
     throw new Error("Email updates must be done through your Google account.");
   }
 
-  await reauthenticateUser(user, password);
-  await updateEmail(user, newEmail);
-  await updateDoc(doc(db, "users", user.uid), { email: newEmail });
+  // 🛡️ Reload to get latest verified status
+  await auth.currentUser.reload();
+  const freshUserBefore = auth.currentUser;
+
+  if (!freshUserBefore.emailVerified) {
+    throw new Error("Please verify your current email before updating it.");
+  }
+
+  // 🔥 Reauthenticate
+  await reauthenticateUser(freshUserBefore, password);
+
+  // 🔥 Sign out and sign back in
+  const email = freshUserBefore.email;
+  await signOut(auth);
+
+  await signInWithEmailAndPassword(auth, email, password); // Fresh sign-in = fresh token
+  await auth.currentUser.reload();
+
+  const fullyFreshUser = auth.currentUser;
+
+  // 🔥 NOW update email safely
+  await updateEmail(fullyFreshUser, newEmail);
+
+  // 🔥 Send email verification to new email
+  await sendEmailVerification(fullyFreshUser);
+
+  await updateDoc(doc(db, "users", fullyFreshUser.uid), { email: newEmail });
 };
 
 // update account password
 export const updateUserPassword = async (newPassword) => {
-  await updatePassword(auth.currentUser, newPassword);
+  try {
+    await updatePassword(auth.currentUser, newPassword);
+  } catch (err) {
+    console.error("Error updating user password", err);
+  }
 };
 
 // update newsletter subscription
 export const updateNewsletterPreference = async (user, subscribed) => {
-  await updateDoc(doc(db, "users", user.uid), {
-    "settings.newsletter": subscribed,
-  });
+  try {
+    await updateDoc(doc(db, "users", user.uid), {
+      "settings.newsletter": subscribed,
+    });
+  } catch (err) {
+    console.error("Error updating newsletter subscription", err);
+  }
 };
 
 // delete user account
 export const deleteUserAccount = async (user, password = null) => {
   if (!user) throw new Error("No user provided");
 
-  // 1. Reauthenticate
-  await reauthenticateUser(user, password);
+  try {
+    // 1. Reauthenticate
+    await reauthenticateUser(user, password);
 
-  // 2. Delete Firestore user document
-  await deleteDoc(doc(db, "users", user.uid));
+    // 2. Delete Firestore user document
+    await deleteDoc(doc(db, "users", user.uid));
 
-  // 3. Delete Firebase Auth user
-  await deleteUser(user); // use passed-in user object
+    // 3. Delete Firebase Auth user
+    await deleteUser(user); // use passed-in user object
+  } catch (err) {
+    console.error("Failed to delete user account", err);
+  }
 };

@@ -5,14 +5,18 @@ import { useAccountActions } from "@/app/_lib/hooks/useAccountActions";
 import { useAuthStore } from "@/app/_lib/stores/authStore";
 import { useAccountStore } from "@/app/_lib/stores/accountStore";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { toastConfirmAction } from "./toastConfirmAction";
 
 function AccountSettingsForm() {
-  const { saveSettings, changePassword, deleteAccount } = useAccountActions();
+  const { saveSettings, deleteAccount } = useAccountActions();
   const { user } = useAuthStore();
   const { settings } = useAccountStore();
 
   const [name, setName] = useState(user?.displayName || "");
   const [newEmail, setNewEmail] = useState(user?.email || "");
+  const [changePasswordRequest, setChangePasswordRequest] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
 
@@ -29,19 +33,32 @@ function AccountSettingsForm() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    saveSettings({ name, newEmail, password, newsletter });
-  };
-
-  const handlePasswordChange = async () => {
-    const newPass = prompt("Enter a new password:");
-    if (newPass) await changePassword(newPass);
+    if (!password) {
+      toast.error(
+        "You must confirm your current password to update your settings"
+      );
+      return;
+    }
+    saveSettings({ name, newEmail, password, newPassword, newsletter });
+    setChangePasswordRequest(false);
+    setNewPassword("");
+    setPassword("");
   };
 
   const handleDeleteAccount = async () => {
-    if (confirm("Are you sure? This cannot be undone.")) {
-      await deleteAccount();
+    if (!password) {
+      toast.error(
+        "Please confirm your current password to delete your account"
+      );
+      return;
     }
-    router.push("/");
+    toastConfirmAction(
+      "Are you sure you want to delete your account? This action cannot be reversed",
+      async () => {
+        await deleteAccount(password);
+        router.push("/");
+      }
+    );
   };
 
   const style1 = "flex flex-col gap-15";
@@ -78,11 +95,23 @@ function AccountSettingsForm() {
       {!isGoogleUser && (
         <button
           type="button"
-          onClick={handlePasswordChange}
+          onClick={() => setChangePasswordRequest((r) => !r)}
           className="text-sm text-accent-blue underline w-fit"
         >
           Change Password
         </button>
+      )}
+      {changePasswordRequest && (
+        <div className={`${style1} `}>
+          <label className="block text-sm font-medium">New Password</label>
+          <input
+            type="password"
+            className="input-styles"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="Confirm password"
+          />
+        </div>
       )}
       {isGoogleUser && (
         <p className="text-xs text-gray-500 italic">
@@ -108,7 +137,7 @@ function AccountSettingsForm() {
       {!isGoogleUser && (
         <div className={`${style1} mt-60`}>
           <label className="block text-sm font-medium">
-            Confirm password to save changes
+            Confirm current password to save changes
           </label>
           <input
             type="password"
