@@ -36,7 +36,7 @@ export const useAccountActions = () => {
       }
 
       if (!isGoogleUser && shouldUpdateEmail) {
-        await updateUserEmail(user, newEmail, password);
+        await updateUserEmail(user, newEmail);
         toast.success(
           "Verification email sent. Please verify your new email address!"
         );
@@ -58,13 +58,7 @@ export const useAccountActions = () => {
         toast.success("Newsletter subscription updated!");
       }
     } catch (err) {
-      console.error(err);
-
-      if (err.code === "auth/wrong-password") {
-        toast.error("Incorrect password. Please try again.");
-      } else {
-        toast.error("Something went wrong.");
-      }
+      handleAccountError(err);
     }
   };
 
@@ -74,11 +68,26 @@ export const useAccountActions = () => {
     const providerId = user?.providerData[0]?.providerId;
 
     try {
+      await reauthenticateUser(user, password);
       await deleteUserAccount(user, password);
       toast.success("Account deleted.");
     } catch (err) {
-      console.error(err);
-      toast.error("Failed to delete account.");
+      handleAccountError(err);
+      throw err;
+    }
+  };
+
+  const handleAccountError = (err) => {
+    console.error(err);
+
+    if (err.code === "auth/wrong-password") {
+      toast.error("Incorrect password. Please try again.");
+    } else if (err.code === "auth/too-many-requests") {
+      toast.error("Too many attempts. Please try again later.");
+    } else if (err.code === "auth/user-not-found") {
+      toast.error("User not found. Please sign in again.");
+    } else {
+      toast.error("Something went wrong. Please try again.");
     }
   };
 

@@ -151,18 +151,24 @@ export const getUserSettings = async (userId) => {
 export const reauthenticateUser = async (user, password = null) => {
   const providerId = user.providerData[0]?.providerId;
 
-  if (providerId === "google.com") {
-    const provider = new GoogleAuthProvider();
-    await reauthenticateWithPopup(user, provider);
-    return user;
-  } else if (providerId === "password") {
-    if (!password)
-      throw new Error("Password is required for re-authentication");
-    const cred = EmailAuthProvider.credential(user.email, password);
-    await reauthenticateWithCredential(user, cred);
-    return user;
-  } else {
-    throw new Error("Unsupported sign-in method.");
+  try {
+    if (providerId === "google.com") {
+      const provider = new GoogleAuthProvider();
+      await reauthenticateWithPopup(user, provider);
+      return user;
+    } else if (providerId === "password") {
+      if (!password) {
+        throw new Error("Password is required for re-authentication");
+      }
+      const cred = EmailAuthProvider.credential(user.email, password);
+      await reauthenticateWithCredential(user, cred);
+      return user;
+    } else {
+      throw new Error("Unsupported sign-in method.");
+    }
+  } catch (err) {
+    console.error("[updateUserEmail Error]:", err);
+    throw err;
   }
 };
 
@@ -177,12 +183,16 @@ export const updateUserName = async (user, name) => {
     const userRef = doc(db, "users", user.uid);
     await updateDoc(userRef, { name });
   } catch (err) {
-    console.error("Failed to update username", err);
+    console.error("[updateUserName Error]", err);
+    throw err;
   }
 };
 
 // update account email address
-export const updateUserEmail = async (user, newEmail, password) => {
+export const updateUserEmail = async (user, newEmail) => {
+  if (!user?.uid) throw new Error("User not authenticated");
+  if (!newEmail) throw new Error("New email is required to update email.");
+
   const providerId = user.providerData[0]?.providerId;
 
   if (providerId === "google.com") {
@@ -207,34 +217,48 @@ export const updateUserEmail = async (user, newEmail, password) => {
     // 🔥 Update Firestore user document
     await updateDoc(doc(db, "users", freshUser.uid), { email: newEmail });
   } catch (error) {
-    console.error("Error updating email:", error);
+    console.error("[updateUserEmail Error]:", error);
     throw error;
   }
 };
 
 // update account password
 export const updateUserPassword = async (newPassword) => {
+  if (!newPassword || newPassword.trim() === "") {
+    throw new Error("New password must not be empty.");
+  }
+
   try {
     await updatePassword(auth.currentUser, newPassword);
   } catch (err) {
-    console.error("Error updating user password", err);
+    console.error("[updateUserPassword Error]:", err);
+    throw err;
   }
 };
 
 // update newsletter subscription
 export const updateNewsletterPreference = async (user, subscribed) => {
+  if (!user?.uid) {
+    throw new Error(
+      "User not authenticated for updating newsletter preference."
+    );
+  }
+
   try {
     await updateDoc(doc(db, "users", user.uid), {
       "settings.newsletter": subscribed,
     });
   } catch (err) {
-    console.error("Error updating newsletter subscription", err);
+    console.error("[updateNewsletterPreference Error]:", err);
+    throw err;
   }
 };
 
 // delete user account
 export const deleteUserAccount = async (user, password = null) => {
-  if (!user) throw new Error("No user provided");
+  if (!user?.uid) {
+    throw new Error("No user provided for account deletion.");
+  }
 
   try {
     // 1. Reauthenticate
@@ -246,6 +270,7 @@ export const deleteUserAccount = async (user, password = null) => {
     // 3. Delete Firebase Auth user
     await deleteUser(user); // use passed-in user object
   } catch (err) {
-    console.error("Failed to delete user account", err);
+    console.error("[deleteUserAccount Error]:", err);
+    throw err;
   }
 };

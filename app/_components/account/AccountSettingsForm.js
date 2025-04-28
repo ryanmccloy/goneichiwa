@@ -31,7 +31,7 @@ function AccountSettingsForm() {
     }
   }, [settings]);
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     if (!password) {
       toast.error(
@@ -55,8 +55,12 @@ function AccountSettingsForm() {
     toastConfirmAction(
       "Are you sure you want to delete your account? This action cannot be reversed",
       async () => {
-        await deleteAccount(password);
-        router.push("/");
+        try {
+          await deleteAccount(password);
+          router.push("/");
+        } catch (err) {
+          // Do nothing here — error already handled inside deleteAccount
+        }
       }
     );
   };
