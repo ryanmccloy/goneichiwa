@@ -33,7 +33,7 @@ function AccountSettingsForm() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (!password) {
+    if (!isGoogleUser && !password) {
       toast.error(
         "You must confirm your current password to update your settings"
       );
@@ -46,23 +46,25 @@ function AccountSettingsForm() {
   };
 
   const handleDeleteAccount = async () => {
-    if (!password) {
+    if (!isGoogleUser && !password) {
       toast.error(
         "Please confirm your current password to delete your account"
       );
       return;
     }
-    toastConfirmAction(
-      "Are you sure you want to delete your account? This action cannot be reversed",
-      async () => {
-        try {
-          await deleteAccount(password);
-          router.push("/");
-        } catch (err) {
-          // Do nothing here — error already handled inside deleteAccount
-        }
+
+    const deleteMessage = isGoogleUser
+      ? "You will be asked to confirm your Google account before deleting.\n\nAre you sure you want to delete your account? This action cannot be reversed."
+      : "Are you sure you want to delete your account? This action cannot be reversed.";
+
+    toastConfirmAction(deleteMessage, async () => {
+      try {
+        await deleteAccount(password);
+        router.push("/");
+      } catch (err) {
+        // Do nothing here — error already handled inside deleteAccount
       }
-    );
+    });
   };
 
   const style1 = "flex flex-col gap-15";
