@@ -65,7 +65,7 @@ function AccountNavigation() {
           <div>
             <button
               onClick={handleLogout}
-              className="text-sm w-fit text-red-500 hover:underline "
+              className="text-sm w-fit text-red-500 hover:underline cursor-pointer "
             >
               Log out
             </button>

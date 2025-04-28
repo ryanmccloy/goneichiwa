@@ -167,7 +167,8 @@ export const reauthenticateUser = async (user, password = null) => {
       throw new Error("Unsupported sign-in method.");
     }
   } catch (err) {
-    console.error("[updateUserEmail Error]:", err);
+    console.error("[reauthenticateUser Error]:", err);
+
     throw err;
   }
 };
@@ -255,19 +256,16 @@ export const updateNewsletterPreference = async (user, subscribed) => {
 };
 
 // delete user account
-export const deleteUserAccount = async (user, password = null) => {
+export const deleteUserAccount = async (user) => {
   if (!user?.uid) {
     throw new Error("No user provided for account deletion.");
   }
 
   try {
-    // 1. Reauthenticate
-    await reauthenticateUser(user, password);
-
-    // 2. Delete Firestore user document
+    // 1. Delete Firestore user document
     await deleteDoc(doc(db, "users", user.uid));
 
-    // 3. Delete Firebase Auth user
+    // 2. Delete Firebase Auth user
     await deleteUser(user); // use passed-in user object
   } catch (err) {
     console.error("[deleteUserAccount Error]:", err);
