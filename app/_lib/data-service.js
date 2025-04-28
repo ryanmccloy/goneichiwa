@@ -183,41 +183,33 @@ export const updateUserName = async (user, name) => {
 
 // update account email address
 export const updateUserEmail = async (user, newEmail, password) => {
-  // handle errors please //////
-
   const providerId = user.providerData[0]?.providerId;
 
   if (providerId === "google.com") {
     throw new Error("Email updates must be done through your Google account.");
   }
 
-  // 🛡️ Reload to get latest verified status
-  await auth.currentUser.reload();
-  const freshUserBefore = auth.currentUser;
+  try {
+    // 🛡️ Reload user
+    await auth.currentUser.reload();
+    const freshUser = auth.currentUser;
 
-  if (!freshUserBefore.emailVerified) {
-    throw new Error("Please verify your current email before updating it.");
+    if (!freshUser.emailVerified) {
+      throw new Error("Please verify your current email before updating it.");
+    }
+
+    // 🔥 Directly update email
+    await updateEmail(freshUser, newEmail);
+
+    // 🔥 Send verification to new email
+    await sendEmailVerification(freshUser);
+
+    // 🔥 Update Firestore user document
+    await updateDoc(doc(db, "users", freshUser.uid), { email: newEmail });
+  } catch (error) {
+    console.error("Error updating email:", error);
+    throw error;
   }
-
-  // 🔥 Reauthenticate
-  await reauthenticateUser(freshUserBefore, password);
-
-  // 🔥 Sign out and sign back in
-  const email = freshUserBefore.email;
-  await signOut(auth);
-
-  await signInWithEmailAndPassword(auth, email, password); // Fresh sign-in = fresh token
-  await auth.currentUser.reload();
-
-  const fullyFreshUser = auth.currentUser;
-
-  // 🔥 NOW update email safely
-  await updateEmail(fullyFreshUser, newEmail);
-
-  // 🔥 Send email verification to new email
-  await sendEmailVerification(fullyFreshUser);
-
-  await updateDoc(doc(db, "users", fullyFreshUser.uid), { email: newEmail });
 };
 
 // update account password

@@ -7,6 +7,7 @@ import {
   updateUserPassword,
   updateNewsletterPreference,
   deleteUserAccount,
+  reauthenticateUser,
 } from "../data-service";
 import { useAuthStore } from "../stores/authStore";
 import { useAccountStore } from "../stores/accountStore";
@@ -20,16 +21,20 @@ export const useAccountActions = () => {
     name,
     newEmail,
     password,
-    newPassword = null,
+    newPassword,
     newsletter,
   }) => {
     const isGoogleUser = user?.providerData[0]?.providerId === "google.com";
     const shouldUpdateEmail = newEmail && newEmail !== user.email;
-    const shouldUpdatePassword = newPassword !== null;
+    const shouldUpdatePassword = newPassword && newPassword.trim() !== "";
     const shouldUpdateNewsletterSubscription =
       newsletter !== settings.newsletter;
 
     try {
+      if (!isGoogleUser) {
+        await reauthenticateUser(user, password);
+      }
+
       if (!isGoogleUser && shouldUpdateEmail) {
         await updateUserEmail(user, newEmail, password);
         toast.success(
@@ -53,8 +58,13 @@ export const useAccountActions = () => {
         toast.success("Newsletter subscription updated!");
       }
     } catch (err) {
-      toast.error("Something went wrong");
       console.error(err);
+
+      if (err.code === "auth/wrong-password") {
+        toast.error("Incorrect password. Please try again.");
+      } else {
+        toast.error("Something went wrong.");
+      }
     }
   };
 
