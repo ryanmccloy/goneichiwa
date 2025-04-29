@@ -8,6 +8,7 @@ import {
   updateNewsletterPreference,
   deleteUserAccount,
   reauthenticateUser,
+  sendUserVerificationEmail,
 } from "../data-service";
 import { useAuthStore } from "../stores/authStore";
 import { useAccountStore } from "../stores/accountStore";
@@ -18,6 +19,7 @@ export const useAccountActions = () => {
   const setSettings = useAccountStore((s) => s.setSettings);
 
   const saveSettings = async ({
+    isVerified,
     name,
     newEmail,
     password,
@@ -37,6 +39,17 @@ export const useAccountActions = () => {
         await reauthenticateUser(user, password);
       }
 
+      if (
+        !isGoogleUser &&
+        !isVerified &&
+        (shouldUpdateEmail || shouldUpdatePassword)
+      ) {
+        toast.error(
+          "Please verify your email before updating sensitive information."
+        );
+        return;
+      }
+
       if (!isGoogleUser && shouldUpdateEmail) {
         if (!emailRegex.test(newEmail)) {
           toast.error("Please enter a valid email address.");
@@ -45,7 +58,7 @@ export const useAccountActions = () => {
 
         await updateUserEmail(user, newEmail);
         toast.success(
-          "Verification email sent. Please verify your new email address!"
+          "Email Updated!\n\nVerification email sent. Please verify your new email address!"
         );
       }
 
@@ -71,6 +84,20 @@ export const useAccountActions = () => {
       }
     } catch (err) {
       handleAccountError(err);
+    }
+  };
+
+  const resendVerificationEmail = async () => {
+    if (!user) {
+      toast.error("No user found to send verification email.");
+      return;
+    }
+
+    try {
+      await sendUserVerificationEmail(user);
+      toast.success("Verification email sent! Please check your inbox.");
+    } catch (err) {
+      toast.error("Failed to send verification email. Please try again.");
     }
   };
 
@@ -115,6 +142,7 @@ export const useAccountActions = () => {
 
   return {
     saveSettings,
+    resendVerificationEmail,
     deleteAccount,
   };
 };

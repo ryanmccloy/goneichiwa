@@ -9,9 +9,13 @@ import toast from "react-hot-toast";
 import { toastConfirmAction } from "./toastConfirmAction";
 
 function AccountSettingsForm() {
-  const { saveSettings, deleteAccount } = useAccountActions();
+  const { saveSettings, resendVerificationEmail, deleteAccount } =
+    useAccountActions();
   const { user } = useAuthStore();
   const { settings } = useAccountStore();
+
+  const [isVerified, setIsVerified] = useState(user?.emailVerified || false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const [name, setName] = useState(user?.displayName || "");
   const [newEmail, setNewEmail] = useState(user?.email || "");
@@ -25,6 +29,32 @@ function AccountSettingsForm() {
   // determining user sign up method
   const isGoogleUser = user?.providerData[0]?.providerId === "google.com";
 
+  // check if email is verified
+  useEffect(() => {
+    if (
+      !user ||
+      user.providerData[0]?.providerId === "google.com" ||
+      user.emailVerified
+    )
+      return;
+
+    const interval = setInterval(async () => {
+      try {
+        await user.reload();
+        if (user.emailVerified) {
+          setIsVerified(true);
+          clearInterval(interval);
+          toast.success("Email verified! You can now update your settings.");
+        }
+      } catch (err) {
+        console.error("Error reloading user:", err);
+      }
+    }, 5000); // ⏳ Check every 5 seconds
+
+    return () => clearInterval(interval); // 🧹 Cleanup on unmount
+  }, [user]);
+
+  // check newsletter subscription
   useEffect(() => {
     if (settings?.newsletter !== undefined) {
       setNewsletter(settings.newsletter);
@@ -39,10 +69,23 @@ function AccountSettingsForm() {
       );
       return;
     }
-    saveSettings({ name, newEmail, password, newPassword, newsletter });
-    setChangePasswordRequest(false);
-    setNewPassword("");
-    setPassword("");
+
+    setIsSaving(true);
+    try {
+      await saveSettings({
+        isVerified,
+        name,
+        newEmail,
+        password,
+        newPassword,
+        newsletter,
+      });
+      setChangePasswordRequest(false);
+      setNewPassword("");
+      setPassword("");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleDeleteAccount = async () => {
@@ -71,6 +114,21 @@ function AccountSettingsForm() {
 
   return (
     <form onSubmit={handleSave} className="flex flex-col gap-30 max-w-xl">
+      {!isVerified && (
+        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-15 mb-15 flex flex-col gap-15">
+          <p className="font-bold">Email Not Verified</p>
+          <p className="text-sm">
+            Please verify your email to update your email address or password.{" "}
+          </p>
+          <button
+            className="underline w-fit cursor-pointer"
+            onClick={resendVerificationEmail}
+            type="button"
+          >
+            Resend Verification Email
+          </button>
+        </div>
+      )}
       <div className={style1}>
         <label className="block text-sm font-medium">Name</label>
         <input
@@ -156,8 +214,8 @@ function AccountSettingsForm() {
       )}
 
       <div className="flex justify-between">
-        <button type="submit" className="button text-sm">
-          Save Changes
+        <button type="submit" className="button text-sm" disabled={isSaving}>
+          {isSaving ? "Saving..." : "Save Changes"}
         </button>
 
         <button

@@ -173,6 +173,18 @@ export const reauthenticateUser = async (user, password = null) => {
   }
 };
 
+export const sendUserVerificationEmail = async (user) => {
+  if (!user)
+    throw new Error("No user provided for sending verification email.");
+
+  try {
+    await sendEmailVerification(user);
+  } catch (err) {
+    console.error("[sendUserVerificationEmail Error]:", err);
+    throw err;
+  }
+};
+
 // updating display name
 export const updateUserName = async (user, name) => {
   if (!user?.uid) throw new Error("User not authenticated");
