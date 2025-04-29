@@ -40,6 +40,7 @@ export default async function GuidesCards() {
           alt={guide.coverImageAlt}
           lastCard={index === sortedFeaturedGuidesWithImageUrls.length - 1}
           isActive={guide.isActive}
+          id={guide.id}
         />
       ))}
     </Slider>

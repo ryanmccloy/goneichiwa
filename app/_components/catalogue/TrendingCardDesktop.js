@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
 
-function TrendingCardDesktop({ href, title, url, alt, sizes = "" }) {
+function TrendingCardDesktop({ id, title, url, alt, sizes = "" }) {
+  console.log(url, alt);
   return (
     <Link
-      href={href}
+      href={`/catalogue/${id}`}
       className="hidden group relative rounded-global lg:flex flex-col justify-between p-15"
     >
       <Image

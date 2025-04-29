@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
 
-export default function TrendingCardMobile({ href, title, url, alt }) {
+export default function TrendingCardMobile({ id, title, url, alt }) {
   return (
     <Link
-      href={href}
+      href={`/catalogue/${id}`}
       className="group min-w-[300px] rounded-global relative h-[450px] snap-start lg:hidden"
     >
       <Image
