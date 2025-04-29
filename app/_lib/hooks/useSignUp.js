@@ -3,18 +3,22 @@
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { createUserDoc, signUpWithEmail } from "../auth-service";
+import { useCartSync } from "./useCartSync";
 
 export const useSignUp = () => {
   const router = useRouter();
+  const { syncUserCartOnLogin } = useCartSync();
 
   const handleSubmit = async (email, password, name, newsletter = false) => {
     try {
       const user = await signUpWithEmail(email, password, name);
       await createUserDoc(user, newsletter);
+      await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.email}!`);
       router.push("/account");
     } catch (err) {
-      const message = errorMap[err.code] || "Something went wrong. Please try again.";
+      const message =
+        errorMap[err.code] || "Something went wrong. Please try again.";
       toast.error(message);
     }
   };

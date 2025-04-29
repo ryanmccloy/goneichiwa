@@ -17,6 +17,7 @@ import {
   getDoc,
   getDocs,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -277,7 +278,10 @@ export const deleteUserAccount = async (user) => {
     // 1. Delete Firestore user document
     await deleteDoc(doc(db, "users", user.uid));
 
-    // 2. Delete Firebase Auth user
+    // 2. Delete Firestore cart document
+    await deleteDoc(doc(db, "carts", user.uid));
+
+    // 3. Delete Firebase Auth user
     await deleteUser(user); // use passed-in user object
   } catch (err) {
     console.error("[deleteUserAccount Error]:", err);

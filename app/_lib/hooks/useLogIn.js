@@ -3,9 +3,11 @@
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { loginWithEmail, sendResetPasswordEmail } from "../auth-service";
+import { useCartSync } from "./useCartSync";
 
 export const useLogIn = () => {
   const router = useRouter();
+  const { syncUserCartOnLogin } = useCartSync();
 
   const errorMap = {
     "auth/user-not-found": "Invalid email or password.",
@@ -20,6 +22,7 @@ export const useLogIn = () => {
   const handleSubmit = async (email, password) => {
     try {
       const user = await loginWithEmail(email, password);
+      await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.email}!`);
       router.push("/account");
     } catch (err) {

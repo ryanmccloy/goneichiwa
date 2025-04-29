@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { loginWithGoogle } from "../auth-service";
+import { useCartSync } from "./useCartSync";
 
 export const useGoogleLogIn = () => {
   const router = useRouter();
+  const { syncUserCartOnLogin } = useCartSync();
 
   const errorMap = {
     "auth/popup-closed-by-user": "Sign in canceled. Please try again.",
@@ -16,6 +18,7 @@ export const useGoogleLogIn = () => {
   const handleGoogleLogin = async () => {
     try {
       const user = await loginWithGoogle();
+      await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.displayName || user.email}!`);
       router.push("/account");
     } catch (err) {
