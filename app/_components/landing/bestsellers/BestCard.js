@@ -11,9 +11,7 @@ import RightArrow from "../../ui/icons/RightArrow";
 import ArrowLinkRight from "../../ui/ArrowLinkRight";
 import ComingSoonOverlay from "../../catalogue/ComingSoonOverlay";
 
-import { formatGuideIdRoute } from "@/app/_lib/helpers/formatGuideIdRoute";
-
-export default function BestCard({ title, url, alt, lastCard, isActive }) {
+export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
   // Reference to the card container
   const ref = useRef(null);
 
@@ -28,7 +26,7 @@ export default function BestCard({ title, url, alt, lastCard, isActive }) {
 
   return !lastCard ? (
     <Link
-      href={`/catalogue/${formatGuideIdRoute(title)}`}
+      href={`/catalogue/${id}`}
       className="group min-w-[300px] rounded-global flex flex-col gap-15 snap-start"
     >
       <div

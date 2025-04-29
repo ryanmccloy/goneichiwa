@@ -11,10 +11,7 @@ export default function TrendingGuidesMobile({ trending }) {
         {trending.map((guide) => (
           <TrendingCardMobile
             key={guide.id}
-            title={guide.title}
-            url={guide.coverImageUrl}
-            alt={guide.coverImageAlt}
-            id={guide.id}
+            guide={guide}
           />
         ))}
       </Slider>

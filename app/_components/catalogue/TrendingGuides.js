@@ -47,7 +47,9 @@ export default async function TrendingGuides() {
   return (
     <section className="width-size">
       <TrendingGuidesMobile trending={sortedFeaturedGuidesWithImageUrls} />
-      <TrendingGuidesDesktop trending={sortedFeaturedGuidesWithImageUrls} />
+      <TrendingGuidesDesktop
+        trending={sortedFeaturedGuidesWithImageUrls.slice(0, 3)}
+      />
     </section>
   );
 }

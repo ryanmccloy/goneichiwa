@@ -1,30 +1,42 @@
 import Link from "next/link";
 import Image from "next/image";
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
+import ComingSoonOverlay from "./ComingSoonOverlay";
 
-function TrendingCardDesktop({ id, title, url, alt, sizes = "" }) {
-  console.log(url, alt);
+function TrendingCardDesktop({ guide, sizes = "" }) {
+  const item = {
+    id: guide.id,
+    title: guide.title,
+    price: guide.price,
+    image: guide.coverImageUrl,
+    quantity: 1,
+  };
   return (
-    <Link
-      href={`/catalogue/${id}`}
-      className="hidden group relative rounded-global lg:flex flex-col justify-between p-15"
-    >
-      <Image
-        src={url}
-        alt={alt}
-        sizes={`${sizes === "" ? "(min-width: 1024px) 40vw, 100vw" : sizes} `}
-        fill
-        className="rounded-global object-cover"
-      />
+    <div className="hidden group relative rounded-global lg:flex flex-col justify-between p-15">
+      {/* Image and Title wrapped in Link */}
+      <Link
+        href={`/catalogue/${guide.id}`}
+        className="absolute inset-0 z-10 rounded-global"
+      >
+        <Image
+          src={guide.coverImageUrl}
+          alt={guide.coverImageAlt}
+          sizes={`${sizes === "" ? "(min-width: 1024px) 40vw, 100vw" : sizes}`}
+          fill
+          className="rounded-global object-cover"
+        />
+        {/* Overlay */}
+        {!guide.isActive && <ComingSoonOverlay />}
+      </Link>
 
-      <div className="z-30 bg-off-white rounded-global w-fit p-15 uppercase font-semibold ">
-        {title}
+      <div className="z-20 bg-off-white rounded-global w-fit p-15 uppercase font-semibold">
+        {guide.title}
       </div>
 
-      <div className="self-end z-30">
-        <TravelGuideCardIcons />
+      <div className="self-end z-20">
+        <TravelGuideCardIcons item={item} isActive={guide.isActive} />
       </div>
-    </Link>
+    </div>
   );
 }
 

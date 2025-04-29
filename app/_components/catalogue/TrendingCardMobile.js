@@ -1,30 +1,43 @@
 import Link from "next/link";
 import Image from "next/image";
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
+import ComingSoonOverlay from "./ComingSoonOverlay";
 
-export default function TrendingCardMobile({ id, title, url, alt }) {
+export default function TrendingCardMobile({ guide }) {
+  const item = {
+    id: guide.id,
+    title: guide.title,
+    price: guide.price,
+    image: guide.coverImageUrl,
+    quantity: 1,
+  };
   return (
-    <Link
-      href={`/catalogue/${id}`}
-      className="group min-w-[300px] rounded-global relative h-[450px] snap-start lg:hidden"
-    >
-      <Image
-        src={url}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 300px, 100vw"
-        className="rounded-global object-cover"
-      />
+    <div className="group min-w-[300px] rounded-global relative h-[450px] snap-start lg:hidden overflow-hidden">
+      {/* Image and Link only */}
+      <Link
+        href={`/catalogue/${guide.id}`}
+        className="absolute inset-0 z-10 rounded-global"
+      >
+        <Image
+          src={guide.coverImageUrl}
+          alt={guide.coverImageAlt}
+          fill
+          sizes="(max-width: 768px) 300px, 100vw"
+          className="rounded-global object-cover"
+        />
 
-      <div className=" flex flex-col justify-between h-full p-15">
-        <div className=" bg-off-white rounded-global w-fit p-15 uppercase font-semibold z-30">
-          {title}
-        </div>
+        {!guide.isActive && <ComingSoonOverlay />}
+      </Link>
 
-        <div className="self-end z-30">
-          <TravelGuideCardIcons />
-        </div>
+      {/* Title */}
+      <div className="absolute top-15 left-15 z-20 bg-off-white rounded-global w-fit p-15 uppercase font-semibold">
+        {guide.title}
       </div>
-    </Link>
+
+      {/* Cart Icons */}
+      <div className="absolute bottom-15 right-15 z-20">
+        <TravelGuideCardIcons item={item} isActive={guide.isActive} />
+      </div>
+    </div>
   );
 }
