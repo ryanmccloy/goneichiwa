@@ -1,10 +1,38 @@
+"use client";
+
 import { create } from "zustand";
+import { saveUserCart } from "../data-service";
+import { useAuthStore } from "./authStore";
 
 export const useCartStore = create((set, get) => ({
   items: [],
-  subTotal: 45,
+  subTotal: null,
   isMiniCartOpen: false,
   promo: null,
+
+  // Set the cart when the user logs in
+  setCart: (cartItems) => {
+    set({
+      items: cartItems,
+      subTotal: cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      ),
+    });
+  },
+
+  // Sync the cart to Firestore
+  syncCart: async () => {
+    try {
+      const { user } = useAuthStore.getState();
+      if (!user) return; // no user, don't sync
+
+      const items = get().items;
+      await saveUserCart(user.uid, items);
+    } catch (err) {
+      console.error("[syncCart Error]:", err);
+    }
+  },
 
   // adding an item to the cart
   addToCart: (item) => {
@@ -24,6 +52,8 @@ export const useCartStore = create((set, get) => ({
       items: newItems,
       subTotal: newItems.reduce((acc, i) => acc + i.price * i.quantity, 0),
     });
+
+    get().syncCart();
   },
 
   // removing an item from the cart
@@ -33,10 +63,16 @@ export const useCartStore = create((set, get) => ({
       items: newItems,
       subTotal: newItems.reduce((acc, i) => acc + i.price * i.quantity, 0),
     });
+
+    get().syncCart();
   },
 
   // clearing entire cart
-  clearCart: () => set({ items: [], subtotal: 0 }),
+  clearCart: () => {
+    set({ items: [], subTotal: 0 });
+
+    get().syncCart();
+  },
 
   // opening the MiniCart
   openMiniCart: () => set({ isMiniCartOpen: true }),
@@ -56,17 +92,16 @@ export const useCartStore = create((set, get) => ({
   // getting discount value
   getDiscount: () => {
     const { subTotal, promo } = get();
-  
+
     if (!promo) return 0;
-  
+
     return promo.type === "percentage"
       ? (subTotal * promo.amount) / 100
       : promo.amount;
   },
-  
 
   // removing a promo code from the cart
-  removePromo: () => set({ promo: null, discount: 0 }),
+  removePromo: () => set({ promo: null }),
 
   // getting the total cart value including any discounts
   getTotal: () => {

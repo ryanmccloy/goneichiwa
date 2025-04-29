@@ -5,8 +5,6 @@ import {
   reauthenticateWithCredential,
   reauthenticateWithPopup,
   sendEmailVerification,
-  signInWithEmailAndPassword,
-  signOut,
   updateEmail,
   updatePassword,
   updateProfile,
@@ -23,6 +21,8 @@ import {
   where,
 } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
+
+// ------ GUIDE LOGIC ------- //
 
 // fetching all travel guides
 export const getTravelGuides = async () => {
@@ -281,6 +281,50 @@ export const deleteUserAccount = async (user) => {
     await deleteUser(user); // use passed-in user object
   } catch (err) {
     console.error("[deleteUserAccount Error]:", err);
+    throw err;
+  }
+};
+
+// -------- CART LOGIC -------- //
+
+// Fetch user cart
+export const fetchUserCart = async (userId) => {
+  if (!userId) throw new Error("No userId provided");
+
+  try {
+    const cartRef = doc(db, "carts", userId);
+    const cartSnap = await getDoc(cartRef);
+
+    if (!cartSnap.exists()) return [];
+    return cartSnap.data().items || [];
+  } catch (err) {
+    console.error("[fetchUserCart Error]:", err);
+    throw err; // Pass it up so your hook can handle it (toast, etc)
+  }
+};
+
+// Save user cart
+export const saveUserCart = async (userId, cartItems) => {
+  if (!userId) throw new Error("No userId provided");
+
+  try {
+    const cartRef = doc(db, "carts", userId);
+    await setDoc(cartRef, { items: cartItems }, { merge: true });
+  } catch (err) {
+    console.error("[saveUserCart Error]:", err);
+    throw err;
+  }
+};
+
+// Clear user cart
+export const clearUserCart = async (userId) => {
+  if (!userId) throw new Error("No userId provided");
+
+  try {
+    const cartRef = doc(db, "carts", userId);
+    await setDoc(cartRef, { items: [] });
+  } catch (err) {
+    console.error("[clearUserCart Error]:", err);
     throw err;
   }
 };
