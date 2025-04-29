@@ -131,6 +131,12 @@
   @apply mt-30 flex justify-center;
 }
 
+/* ACCOUNT */
+
+.account-settings-form-div {
+  @apply flex flex-col gap-15
+}
+
 /* FOOTER */
 .footer-styles {
   @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase;

@@ -7,9 +7,12 @@ import { useAccountStore } from "@/app/_lib/stores/accountStore";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { toastConfirmAction } from "./toastConfirmAction";
+import IsNotVerifiedBanner from "./IsNotVerifiedBanner";
+import IsGoogleUserEmailUpdateWarning from "./IsGoogleUserEmailUpdateWarning";
+import IsGoogleUserPasswordUpdateWarning from "./IsGoogleUserPasswordUpdateWarning";
 
 function AccountSettingsForm() {
-  const { saveSettings, resendVerificationEmail, deleteAccount } =
+  const { saveSettings, deleteAccount } =
     useAccountActions();
   const { user } = useAuthStore();
   const { settings } = useAccountStore();
@@ -110,26 +113,11 @@ function AccountSettingsForm() {
     });
   };
 
-  const style1 = "flex flex-col gap-15";
-
   return (
     <form onSubmit={handleSave} className="flex flex-col gap-30 max-w-xl">
-      {!isVerified && (
-        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-15 mb-15 flex flex-col gap-15">
-          <p className="font-bold">Email Not Verified</p>
-          <p className="text-sm">
-            Please verify your email to update your email address or password.{" "}
-          </p>
-          <button
-            className="underline w-fit cursor-pointer"
-            onClick={resendVerificationEmail}
-            type="button"
-          >
-            Resend Verification Email
-          </button>
-        </div>
-      )}
-      <div className={style1}>
+      <IsNotVerifiedBanner isVerified={isVerified}  />
+
+      <div className="account-settings-form-div">
         <label className="block text-sm font-medium">Name</label>
         <input
           type="text"
@@ -139,7 +127,7 @@ function AccountSettingsForm() {
         />
       </div>
 
-      <div className={style1}>
+      <div className="account-settings-form-div">
         <label className="block text-sm font-medium">Email</label>
         <input
           type="email"
@@ -148,12 +136,7 @@ function AccountSettingsForm() {
           className={`input-styles ${isGoogleUser ? "cursor-not-allowed" : ""}`}
           disabled={isGoogleUser}
         />
-        {isGoogleUser && (
-          <div className="text-xs text-gray-500 italic">
-            To change your email, please update it in your Google account
-            settings.
-          </div>
-        )}
+        <IsGoogleUserEmailUpdateWarning isGoogleUser={isGoogleUser} />
       </div>
 
       {!isGoogleUser && (
@@ -166,7 +149,7 @@ function AccountSettingsForm() {
         </button>
       )}
       {changePasswordRequest && (
-        <div className={`${style1} `}>
+        <div className={`$"account-settings-form-div" `}>
           <label className="block text-sm font-medium">New Password</label>
           <input
             type="password"
@@ -177,14 +160,8 @@ function AccountSettingsForm() {
           />
         </div>
       )}
-      {isGoogleUser && (
-        <p className="text-xs text-gray-500 italic">
-          To update your password, please change it via your Google Account
-          settings.
-        </p>
-      )}
-
-      <div className={style1}>
+      <IsGoogleUserPasswordUpdateWarning isGoogleUser={isGoogleUser} />
+      <div className="account-settings-form-div">
         <label className="block text-sm font-medium">Newsletter</label>
         <label className="inline-flex items-center gap-2 text-sm">
           <input
@@ -199,7 +176,7 @@ function AccountSettingsForm() {
 
       {/* Show password input only for email/password users */}
       {!isGoogleUser && (
-        <div className={`${style1} mt-60`}>
+        <div className={`$"account-settings-form-div" mt-60`}>
           <label className="block text-sm font-medium">
             Confirm current password to save changes
           </label>
