@@ -10,6 +10,7 @@ import SectionHeading from "@/app/_components/ui/SectionHeading";
 import Button from "@/app/_components/ui/Button";
 import { useLogIn } from "@/app/_lib/hooks/useLogIn";
 import { useGoogleLogIn } from "@/app/_lib/hooks/useGoogleLogIn";
+import toast from "react-hot-toast";
 
 // Schema
 const signInSchema = z.object({
@@ -18,12 +19,13 @@ const signInSchema = z.object({
 });
 
 export default function SignInForm() {
-  const { handleSubmit: handleEmailSignIn } = useLogIn();
+  const { handleSubmit: handleEmailSignIn, handleForgotPassword } = useLogIn();
   const handleGoogleLogin = useGoogleLogIn();
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(signInSchema),
@@ -31,7 +33,21 @@ export default function SignInForm() {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    await handleEmailSignIn(email, password);
+    try {
+      await handleEmailSignIn(email, password);
+    } catch (err) {
+      console.error("[SignInForm onSubmit Error]:", err);
+      toast.error("Unable to sign in. Please try again.");
+    }
+  };
+
+  const handleForgotPasswordClick = async () => {
+    const email = getValues("email");
+    if (!email) {
+      toast.error("Please enter your email first.");
+      return;
+    }
+    await handleForgotPassword(email);
   };
 
   return (
@@ -71,6 +87,14 @@ export default function SignInForm() {
           <p className="text-sm text-red-500">{errors.password.message}</p>
         )}
 
+        <button
+          type="button"
+          onClick={handleForgotPasswordClick}
+          className="text-sm text-accent-blue underline cursor-pointer w-fit"
+        >
+          Forgot Password?
+        </button>
+
         <div className="sign-in-up-button">
           <Button isActive={!isSubmitting}>
             {isSubmitting ? "Signing In..." : "Sign In"}
@@ -80,7 +104,10 @@ export default function SignInForm() {
 
       {/* Google Sign In Button */}
       <div className="flex justify-center">
-        <Button onClick={handleGoogleLogin}>Sign In With Google</Button>
+        <Button onClick={handleGoogleLogin} isActive={!isSubmitting}>
+          {" "}
+          {isSubmitting ? "Signing In..." : "Sign In With Google"}
+        </Button>
       </div>
     </div>
   );

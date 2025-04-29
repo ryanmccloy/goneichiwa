@@ -14,14 +14,18 @@ export const useSignUp = () => {
       toast.success(`Welcome ${user.email}!`);
       router.push("/account");
     } catch (err) {
-      if (err.code === "auth/email-already-in-use") {
-        toast.error("Email is already in use");
-      } else {
-        toast.error("Something went wrong");
-      }
-
-      console.error("Error creating user account:", err);
+      const message = errorMap[err.code] || "Something went wrong. Please try again.";
+      toast.error(message);
     }
+  };
+
+  const errorMap = {
+    "auth/email-already-in-use": "Email is already in use.",
+    "auth/invalid-email": "Invalid email address.",
+    "auth/weak-password": "Password should be at least 6 characters.",
+    "auth/network-request-failed": "Network error. Please try again.",
+    "auth/operation-not-allowed":
+      "Sign ups are currently disabled. Please contact support.",
   };
 
   return { handleSubmit };

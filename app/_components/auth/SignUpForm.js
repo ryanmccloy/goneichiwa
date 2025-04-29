@@ -44,7 +44,13 @@ export default function SignUpForm() {
 
   const onSubmit = async (data) => {
     const { email, password, name, newsletter } = data;
-    await handleSignUpSubmit(email, password, name, newsletter);
+
+    try {
+      await handleSignUpSubmit(email, password, name, newsletter);
+    } catch (err) {
+      console.error("[SignUpForm onSubmit Error]:", err);
+      toast.error("Something went wrong during sign up. Please try again.");
+    }
   };
 
   return (
@@ -133,7 +139,9 @@ export default function SignUpForm() {
         </div>
       </form>
       <div className="flex justify-center">
-        <Button onClick={handleGoogleLogin}>Sign Up With Google</Button>
+        <Button onClick={handleGoogleLogin} isActive={!isSubmitting}>
+          {isSubmitting ? "Signing Up..." : "Sign Up With Google"}
+        </Button>
       </div>
     </div>
   );

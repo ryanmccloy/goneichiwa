@@ -2,10 +2,20 @@
 
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { loginWithEmail } from "../auth-service";
+import { loginWithEmail, sendResetPasswordEmail } from "../auth-service";
 
 export const useLogIn = () => {
   const router = useRouter();
+
+  const errorMap = {
+    "auth/user-not-found": "Invalid email or password.",
+    "auth/wrong-password": "Invalid email or password.",
+    "auth/invalid-credential": "Invalid email or password.",
+    "auth/invalid-email": "Please enter a valid email.",
+    "auth/too-many-requests": "Too many attempts. Try again later.",
+    "auth/network-request-failed":
+      "Network error. Please check your connection.",
+  };
 
   const handleSubmit = async (email, password) => {
     try {
@@ -13,25 +23,22 @@ export const useLogIn = () => {
       toast.success(`Welcome ${user.email}!`);
       router.push("/account");
     } catch (err) {
-      console.error("Login error:", err);
-
-      switch (err.code) {
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-        case "auth/invalid-credential":
-          toast.error("Invalid email or password");
-          break;
-        case "auth/invalid-email":
-          toast.error("Please enter a valid email");
-          break;
-        case "auth/too-many-requests":
-          toast.error("Too many attempts. Try again later.");
-          break;
-        default:
-          toast.error("Something went wrong. Try again.");
-      }
+      const message =
+        errorMap[err.code] || "Unable to sign in. Please try again.";
+      toast.error(message);
     }
   };
 
-  return { handleSubmit };
+  const handleForgotPassword = async (email) => {
+    try {
+      await sendResetPasswordEmail(email);
+      toast.success("Password reset email sent! Please check your inbox.");
+    } catch (err) {
+      const message =
+        errorMap[err.code] || "Unable to send reset email. Please try again.";
+      toast.error(message);
+    }
+  };
+
+  return { handleSubmit, handleForgotPassword };
 };
