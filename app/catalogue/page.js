@@ -6,7 +6,7 @@ export const metadata = {
   title: "Catalogue",
 };
 
-export default function Page() {
+export default async function Page() {
   return (
     <div className="top-page-spacing">
       <TrendingGuides />
