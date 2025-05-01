@@ -42,7 +42,7 @@ export const metadata = {
   ],
 
   icons: {
-    // icon: "/icon.png",
+    icon: "/icon.svg",
   },
 
   themeColor: "#80b5d9",
