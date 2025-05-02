@@ -134,12 +134,12 @@
 /* ACCOUNT */
 
 .account-settings-form-div {
-  @apply flex flex-col gap-15
+  @apply flex flex-col gap-15;
 }
 
 /* FOOTER */
 .footer-styles {
-  @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase;
+  @apply w-screen bg-off-black text-off-white py-30 lg:py-60 uppercase text-sm;
 }
 
 /* BUTTON */
@@ -177,6 +177,3 @@
   background-color: var(--color-off-black-40);
   border-radius: 100px;
 }
-
-
-

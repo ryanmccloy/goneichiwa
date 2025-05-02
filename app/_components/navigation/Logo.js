@@ -13,7 +13,7 @@ export default function Logo() {
   return (
     <Link
       href="/"
-      className="h-12 lg:h-16 flex-1 flex justify-center lg:justify-start lg:order-first "
+      className="h-12 lg:h-16  flex-1 flex justify-center lg:justify-start lg:order-first"
     >
       <div className="relative h-full w-[100px] md:w-[150px]  ">
         <Image

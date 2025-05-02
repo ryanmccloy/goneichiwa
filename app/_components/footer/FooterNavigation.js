@@ -4,10 +4,12 @@ import Logo from "../navigation/Logo";
 export default function FooterNavigation() {
   return (
     <div className="flex flex-col gap-30 items-start">
-      <Logo />
+      <div className="w-[100px] md:w-[150px]">
+        <Logo />
+      </div>
       <ul className="flex flex-col gap-15" aria-label="Footer navigation">
         <li>
-          <Link href="/">About</Link>
+          <Link href="/">Home</Link>
         </li>
         <li>
           <Link href="/catalogue">Catalogue</Link>
