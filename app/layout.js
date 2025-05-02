@@ -20,8 +20,8 @@ const montserrat = Montserrat({
 
 export const metadata = {
   title: {
-    template: "%s - Here & There",
-    default: "Here & There | Travel Guides for Smart Explorers",
+    template: "%s - Goneichiwa",
+    default: "Goneichiwa | Travel Guides & Blog",
   },
   description:
     "Discover expertly crafted travel guides for stress-free adventures. Explore top destinations with handpicked recommendations, local tips, and detailed trip plans. Instantly download your guide today!",
@@ -48,20 +48,23 @@ export const metadata = {
   themeColor: "#80b5d9",
 
   openGraph: {
-    title: "Here & There | Travel Guides for Smart Explorers",
+    title: "Goneichiwa | Travel Guides & Blog",
     description:
       "Instantly download beautifully curated travel itineraries and guides. Navigate the world smarter.",
-    // url: "https://yourdomain.com",
-    // siteName: "Here & There",
-    // images: [
-    //   {
-    //     url: "https://yourdomain.com/images/social-cover.jpg",
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Here & There travel guides",
-    //   },
-    // ],
-    // type: "website",
+    url: "https://goneichiwa.com",
+    siteName: "Goneichiwa",
+    images: [
+      {
+        url: "https://goneichiwa.com/images/bestsellers/canada.webp",
+        width: 1200,
+        height: 630,
+        alt: "Goneichiwa Travel Guides & Blog",
+      },
+    ],
+    type: "website",
+    alternates: {
+      canonical: "https://goneichiwa.com",
+    },
   },
 };
 

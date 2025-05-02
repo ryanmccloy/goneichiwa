@@ -1,14 +1,40 @@
 import GuideCannotBeFound from "@/app/_components/product-page/GuideCannotBeFound";
 import GuideSuggestions from "@/app/_components/product-page/GuideSuggestions";
 import ProductOverview from "@/app/_components/product-page/ProductOverview";
-import { getSpecificTravelGuide } from "@/app/_lib/data-service";
-import formatTitleRoute from "@/app/_lib/helpers/formatTitleRoute";
+import { getImageUrl, getSpecificTravelGuide } from "@/app/_lib/data-service";
 
 export async function generateMetadata({ params }) {
-  const { destination } = await params;
-  const name = formatTitleRoute(destination);
+  const guide = await getSpecificTravelGuide(params.destination);
+
+  if (!guide) {
+    return {
+      title: "Guide Not Found | Goneichiwa",
+      description:
+        "Sorry, we couldn't find the travel guide you were looking for.",
+    };
+  }
+
+  const imageUrl = await getImageUrl(guide.coverImage.path);
+  const title = `${guide.title} Travel Guide | Goneichiwa`;
+  const metaDescription =
+    guide.metaDescription ||
+    `Explore ${guide.title} with our curated travel guide including top attractions, local tips, and day trips.`;
+
   return {
-    title: `${name}`,
+    title,
+    description: metaDescription,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${guide.title} travel guide`,
+        },
+      ],
+    },
   };
 }
 
@@ -21,14 +47,10 @@ export default async function Page({ params }) {
     return <GuideCannotBeFound />;
   }
 
-  
-
   return (
     <>
       <ProductOverview guide={guide} />
-      <GuideSuggestions
-       guide={guide}
-      />
+      <GuideSuggestions guide={guide} />
     </>
   );
 }

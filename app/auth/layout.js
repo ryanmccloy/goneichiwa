@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 export const metadata = {
-  title: {
-    template: "%s - Here & There",
-    default: "Here & There | Travel Guides for Smart Explorers",
+  robots: {
+    index: false,
+    follow: false,
   },
 };
 

@@ -2,6 +2,13 @@ import ProtectedRoute from "@/app/_components/account/ProtectedRoute";
 import AccountNavigation from "../_components/account/AccountNavigation";
 import AccountClientProvider from "../_components/account/AccountClientProvider";
 
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default function AccountLayout({ children }) {
   return (
     <ProtectedRoute>

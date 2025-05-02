@@ -3,7 +3,9 @@ import FeaturedArticles from "../_components/blog/FeaturedArticles";
 import NewsLetter from "../_components/newsletter/NewsLetter";
 
 export const metadata = {
-  title: "Blog",
+  title: "Blog | Goneichiwa",
+  description:
+    "Travel tips, stories, and local insights. Read the latest from the Goneichiwa travel blog.",
 };
 
 export default function Page() {
