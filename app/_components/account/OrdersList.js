@@ -1,3 +1,5 @@
+"use client";
+
 import { useAccountStore } from "@/app/_lib/stores/accountStore";
 import { format } from "date-fns";
 
