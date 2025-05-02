@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Saved Blog Posts | Goneichiwa",
+  title: "Saved Blog Posts",
 };
 
 function page() {

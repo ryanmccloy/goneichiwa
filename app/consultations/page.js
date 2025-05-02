@@ -5,7 +5,7 @@ import ReviewsBanner from "../_components/landing/reviews-banner/ReviewsBanner";
 import ConsultationProcess from "../_components/consultations/ConsultationProcess";
 
 export const metadata = {
-  title: "Consultations | Goneichiwa",
+  title: "Consultations",
   description:
     "Get personalized travel advice with Goneichiwa consultations. Custom itineraries tailored to you.",
 };

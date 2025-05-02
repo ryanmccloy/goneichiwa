@@ -3,7 +3,7 @@ import TrendingGuides from "@/app/_components/catalogue/TrendingGuides.js";
 import NewsLetter from "@/app/_components/newsletter/NewsLetter";
 
 export const metadata = {
-  title: "Catalogue | Goneichiwa",
+  title: "Catalogue",
   description:
     "Browse all Goneichiwa travel guides and destinations. Discover your next adventure.",
 };

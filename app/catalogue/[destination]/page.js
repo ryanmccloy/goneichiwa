@@ -8,14 +8,14 @@ export async function generateMetadata({ params }) {
 
   if (!guide) {
     return {
-      title: "Guide Not Found | Goneichiwa",
+      title: "Guide Not Found",
       description:
         "Sorry, we couldn't find the travel guide you were looking for.",
     };
   }
 
   const imageUrl = await getImageUrl(guide.coverImage.path);
-  const title = `${guide.title} Travel Guide | Goneichiwa`;
+  const title = `${guide.title} Travel Guide`;
   const metaDescription =
     guide.metaDescription ||
     `Explore ${guide.title} with our curated travel guide including top attractions, local tips, and day trips.`;
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
     description: metaDescription,
     openGraph: {
       title,
-      description,
+      description: metaDescription,
       images: [
         {
           url: imageUrl,

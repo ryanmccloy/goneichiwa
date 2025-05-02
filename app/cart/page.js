@@ -1,7 +1,7 @@
 import ClientCartPage from "../_components/cartComponents/ClientCartPage";
 
 export const metadata = {
-  title: "Cart | Goneichiwa",
+  title: "Cart",
   robots: {
     index: false,
     follow: false,

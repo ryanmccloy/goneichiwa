@@ -21,7 +21,7 @@ const montserrat = Montserrat({
 export const metadata = {
   title: {
     template: "%s - Goneichiwa",
-    default: "Goneichiwa | Travel Guides & Blog",
+    default: "Goneichiwa - Travel Guides & Blog",
   },
   description:
     "Discover expertly crafted travel guides for stress-free adventures. Explore top destinations with handpicked recommendations, local tips, and detailed trip plans. Instantly download your guide today!",

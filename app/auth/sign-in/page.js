@@ -1,7 +1,7 @@
 import SignInForm from "@/app/_components/auth/SignInForm";
 
 export const metadata = {
-  title: "Sign In | Goneichiwa",
+  title: "Sign In",
   description:
     "Access your Goneichiwa account to view guides, orders, and settings.",
 };

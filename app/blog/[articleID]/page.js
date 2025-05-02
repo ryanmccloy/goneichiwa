@@ -3,7 +3,7 @@
 
 //   if (!post) {
 //     return {
-//       title: "Article Not Found | Goneichiwa",
+//       title: "Article Not Found",
 //       description: "We couldn't find the blog post you're looking for.",
 //     };
 //   }
@@ -11,7 +11,7 @@
 //   const { title, metaDescription, coverImage } = post;
 
 //   return {
-//     title: `${title} | Goneichiwa Blog`,
+//     title: `${title}`,
 //     description: metaDescription || `Read insights, tips, and travel inspiration in our latest post: ${title}.`,
 //     openGraph: {
 //       title: `${title} | Goneichiwa Blog`,

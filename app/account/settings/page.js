@@ -1,7 +1,7 @@
 import AccountSettingsForm from "@/app/_components/account/AccountSettingsForm";
 
 export const metadata = {
-  title: "Settings | Goneichiwa",
+  title: "Settings",
 };
 
 function page() {

@@ -1,7 +1,7 @@
 import SignUpForm from "@/app/_components/auth/SignUpForm";
 
 export const metadata = {
-  title: "Create Account | Goneichiwa",
+  title: "Create Account",
   description:
     "Sign up to personalize your travel planning experience with Goneichiwa.",
 };

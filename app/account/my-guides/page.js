@@ -1,7 +1,7 @@
-import MyGuidesClient from "../_components/account/MyGuidesClient";
+import MyGuidesClient from "@/app/_components/account/MyGuidesClient";
 
 export const metadata = {
-  title: "My Travel Guides | Goneichiwa",
+  title: "My Travel Guides",
 };
 
 export default function Page() {
