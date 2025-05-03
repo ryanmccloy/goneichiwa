@@ -2,8 +2,9 @@ import dynamic from "next/dynamic";
 import SectionHeading from "../ui/SectionHeading";
 import TrendingCardMobile from "./TrendingCardMobile";
 
+const Slider = dynamic(() => import("../ui/Slider"));
+
 export default function TrendingGuidesMobile({ trending }) {
-  const Slider = dynamic(() => import("../ui/Slider"));
   return (
     <div className="block lg:hidden">
       <SectionHeading>Featured Guides</SectionHeading>
