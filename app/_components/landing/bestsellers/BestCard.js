@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import ArrowLinkRight from "../../ui/ArrowLinkRight";
 import ComingSoonOverlay from "../../catalogue/ComingSoonOverlay";
 
 export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
+  const [isLoaded, setIsLoaded] = useState(false);
   // Reference to the card container
   const ref = useRef(null);
 
@@ -23,6 +24,11 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
 
   // Move the image slightly up/down
   const translateY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  // skeleton for loading bg images
+  const Skeleton = (
+    <div className="absolute inset-0 h-full w-full bg-gray-200 animate-pulse rounded-global z-10" />
+  );
 
   return !lastCard ? (
     <Link
@@ -37,18 +43,22 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
           style={{ translateY, scale: 1.1 }}
           className="absolute inset-0 w-full h-full"
         >
+          {!isLoaded && Skeleton}
           <Image
             src={url}
             alt={alt}
             fill
             sizes="(min-width: 1024px) 350px, 300px"
             style={{ objectFit: "cover" }}
-            className="rounded-global"
+            className={`rounded-global transition-opacity duration-500 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
             quality={70}
             aria-label={alt}
+            onLoadingComplete={() => setIsLoaded(true)}
           />
           {/* Overlay */}
-          {!isActive && <ComingSoonOverlay />}
+          {!isActive && isLoaded && <ComingSoonOverlay />}
         </motion.div>
       </div>
 
@@ -68,21 +78,27 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
           style={{ translateY, scale: 1.1 }}
           className="absolute inset-0 w-full h-full"
         >
+          {!isLoaded && Skeleton}
           <Image
             src={url}
             alt={alt}
             fill
             sizes="(min-width: 1024px) 350px, 300px"
             style={{ objectFit: "cover" }}
-            className="rounded-global"
+            className={`rounded-global transition-opacity duration-500 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
             quality={70}
+            onLoadingComplete={() => setIsLoaded(true)}
           />
         </motion.div>
 
-        <motion.div
-          className={`absolute rounded-global inset-0 bg-off-black-40
+        {isLoaded && (
+          <motion.div
+            className={`absolute rounded-global inset-0 bg-off-black-40
          `}
-        ></motion.div>
+          ></motion.div>
+        )}
 
         <RightArrow color="white" size="10" />
       </div>

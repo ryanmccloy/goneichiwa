@@ -1,14 +1,13 @@
 import BestCard from "./BestCard";
 import Slider from "../../ui/Slider";
+import { getFormattedFeaturedGuides } from "@/app/_lib/helpers/getFormattedFeaturedGuides";
 
-export default function GuidesCards({ guides }) {
-  if (!guides?.length)
-    return (
-      <p>
-        We&apos;re having trouble displaying the featured guides. Please try
-        again later.
-      </p>
-    );
+export default async function GuidesCards() {
+  const guides = await getFormattedFeaturedGuides();
+
+  if (!guides?.length) {
+    return <p>We&apos;re having trouble displaying the featured guides :(</p>;
+  }
 
   return (
     <Slider>
