@@ -5,7 +5,7 @@ export default function FooterNavigation() {
   return (
     <div className="flex flex-col gap-30 items-start">
       <div className="w-[100px] md:w-[150px]">
-        <Logo />
+        <Logo footer={true} />
       </div>
       <ul className="flex flex-col gap-15" aria-label="Footer navigation">
         <li>

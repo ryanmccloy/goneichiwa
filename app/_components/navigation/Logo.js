@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Logo() {
+export default function Logo({ footer = false }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  const logoSrc = isHome ? "/logo/logo-light.svg" : "/logo/logo-dark.svg";
+  const logoSrc =
+    isHome || footer === true ? "/logo/logo-light.svg" : "/logo/logo-dark.svg";
 
   return (
     <Link

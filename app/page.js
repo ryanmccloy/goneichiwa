@@ -6,7 +6,9 @@ import ReviewsBanner from "@/app/_components/landing/reviews-banner/ReviewsBanne
 import FinalCTA from "@/app/_components/landing/final-cta/FinalCTA";
 import NewsLetter from "@/app/_components/newsletter/NewsLetter";
 
-export default function Page() {
+export default async function Page() {
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // simulate server fetch delay
+
   return (
     <>
       <Hero />
