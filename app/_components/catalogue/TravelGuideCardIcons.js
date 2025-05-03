@@ -1,9 +1,5 @@
-import dynamic from "next/dynamic";
-
-const AddToCartIcon = dynamic(() => import("../ui/icons/AddToCartIcon"));
-const ArrowRightSimpleIcon = dynamic(() =>
-  import("../ui/icons/ArrowRightSimpleIcon")
-);
+import AddToCartIcon from "../ui/icons/AddToCartIcon";
+import ArrowRightSimpleIcon from "../ui/icons/ArrowRightSimpleIcon";
 
 export default function TravelGuideCardIcons({ item, isActive }) {
   if (!item) return null;

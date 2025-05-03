@@ -1,9 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
 import ComingSoonOverlay from "./ComingSoonOverlay";
+import { useState } from "react";
+import ImageSkeleton from "../skeletons/SkeletonImage";
 
 export default function TrendingCardMobile({ guide }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const item = {
     id: guide.id,
     title: guide.title,
@@ -18,15 +24,19 @@ export default function TrendingCardMobile({ guide }) {
         href={`/catalogue/${guide.id}`}
         className="absolute inset-0 z-10 rounded-global"
       >
+        <ImageSkeleton isLoaded={isLoaded} />
         <Image
           src={guide.coverImageUrl}
           alt={guide.coverImageAlt}
           fill
           sizes="(max-width: 768px) 300px, 100vw"
-          className="rounded-global object-cover"
+          className={`rounded-global object-cover transition-opacity duration-500 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={() => setIsLoaded(true)}
         />
 
-        {!guide.isActive && <ComingSoonOverlay />}
+        {!guide.isActive && isLoaded && <ComingSoonOverlay />}
       </Link>
 
       {/* Title */}

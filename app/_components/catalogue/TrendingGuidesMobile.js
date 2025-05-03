@@ -1,8 +1,6 @@
-import dynamic from "next/dynamic";
 import SectionHeading from "../ui/SectionHeading";
+import Slider from "../ui/Slider";
 import TrendingCardMobile from "./TrendingCardMobile";
-
-const Slider = dynamic(() => import("../ui/Slider"));
 
 export default function TrendingGuidesMobile({ trending }) {
   return (

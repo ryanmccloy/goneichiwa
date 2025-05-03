@@ -46,7 +46,7 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
             fill
             sizes="(min-width: 1024px) 350px, 300px"
             style={{ objectFit: "cover" }}
-            className={`rounded-global transition-opacity duration-500 ${
+            className={`rounded-global object-cover transition-opacity duration-500 ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
             quality={70}
