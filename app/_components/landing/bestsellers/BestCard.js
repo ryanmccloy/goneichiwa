@@ -10,6 +10,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import RightArrow from "../../ui/icons/RightArrow";
 import ArrowLinkRight from "../../ui/ArrowLinkRight";
 import ComingSoonOverlay from "../../catalogue/ComingSoonOverlay";
+import ImageSkeleton from "../../skeletons/SkeletonImage";
 
 export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,11 +26,6 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
   // Move the image slightly up/down
   const translateY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
-  // skeleton for loading bg images
-  const Skeleton = (
-    <div className="absolute inset-0 h-full w-full bg-gray-200 animate-pulse rounded-global z-10" />
-  );
-
   return !lastCard ? (
     <Link
       href={`/catalogue/${id}`}
@@ -43,7 +39,7 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
           style={{ translateY, scale: 1.1 }}
           className="absolute inset-0 w-full h-full"
         >
-          {!isLoaded && Skeleton}
+          <ImageSkeleton isLoaded={isLoaded} />
           <Image
             src={url}
             alt={alt}
@@ -55,7 +51,7 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
             }`}
             quality={70}
             aria-label={alt}
-            onLoadingComplete={() => setIsLoaded(true)}
+            onLoad={() => setIsLoaded(true)}
           />
           {/* Overlay */}
           {!isActive && isLoaded && <ComingSoonOverlay />}
@@ -78,7 +74,7 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
           style={{ translateY, scale: 1.1 }}
           className="absolute inset-0 w-full h-full"
         >
-          {!isLoaded && Skeleton}
+          <ImageSkeleton isLoaded={isLoaded} />
           <Image
             src={url}
             alt={alt}
@@ -89,7 +85,7 @@ export default function BestCard({ id, title, url, alt, lastCard, isActive }) {
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
             quality={70}
-            onLoadingComplete={() => setIsLoaded(true)}
+            onLoad={() => setIsLoaded(true)}
           />
         </motion.div>
 

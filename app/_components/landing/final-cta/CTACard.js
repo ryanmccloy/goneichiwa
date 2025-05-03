@@ -2,13 +2,15 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import ArrowLinkRight from "../../ui/ArrowLinkRight";
+import ImageSkeleton from "../../skeletons/SkeletonImage";
 
 export default function CTACard({ title, url, alt, href }) {
+  const [isLoaded, setIsLoaded] = useState(false);
   // Reference to the card container
   const ref = useRef(null);
 
@@ -29,14 +31,18 @@ export default function CTACard({ title, url, alt, href }) {
           style={{ translateY, scale: 1.1 }}
           className="absolute inset-0 w-full h-full"
         >
+          <ImageSkeleton />
           <Image
             src={url}
             alt={alt}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="rounded-global object-cover"
+            className={`rounded-global object-cover transition-opacity duration-500 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
             quality={70}
             aria-label={alt}
+            onLoad={() => setIsLoaded(true)}
           />
         </motion.div>
       </div>

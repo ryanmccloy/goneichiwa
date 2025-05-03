@@ -7,9 +7,7 @@ export const metadata = {
   description:
     "Browse all Goneichiwa travel guides and destinations. Discover your next adventure.",
 };
-export default async function Page() {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // simulate server fetch delay
-
+export default function Page() {
   return (
     <div className="top-page-spacing">
       <TrendingGuides />

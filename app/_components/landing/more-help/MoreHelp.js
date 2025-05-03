@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Button from "../../ui/Button";
 import SectionHeading from "../../ui/SectionHeading";
+import snowMountains from "@/public/images/landing/snow-mountains.webp";
 
 function MoreHelp() {
   return (
@@ -24,13 +25,13 @@ function MoreHelp() {
 
         <div className="lg:absolute relative lg:w-[40vw]  lg:h-full lg:left-2/3 h-[350px] w-screen -mx-30 md:-mx-60">
           <Image
-            src="/images/landing/snow-mountains.webp"
+            src={snowMountains}
             alt="Snowy Mountains in the Winter"
+            placeholder="blur"
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
-            className=" object-[0%_33%] object-cover lg:object-center"
+            className={`object-[0%_33%] object-cover lg:object-center `}
             quality={100}
-            priority={true}
           />
         </div>
       </div>

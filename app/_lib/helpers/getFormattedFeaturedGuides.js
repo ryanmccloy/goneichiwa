@@ -2,10 +2,10 @@ import { getFeaturedTravelGuides } from "../data-service";
 import { formatGuidesByIsActive } from "./filterFunctions/formatGuidesByIsActive";
 import { formatGuidesWithImageUrl } from "./formatGuidesWithImageUrl";
 
+// testing delay
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getFormattedFeaturedGuides = async () => {
-  await wait(3000);
   const featuredGuides = await getFeaturedTravelGuides();
   const guidesWithImages = await formatGuidesWithImageUrl(featuredGuides);
   const sorted = formatGuidesByIsActive(guidesWithImages);
