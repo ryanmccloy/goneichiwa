@@ -43,7 +43,8 @@ function CartIcon() {
         </svg>
       </button>
 
-      {isMiniCartOpen && <MiniCart handleClose={closeMiniCart} />}
+      {/* {isMiniCartOpen && <MiniCart handleClose={closeMiniCart} />} */}
+      <MiniCart isVisible={isMiniCartOpen} handleClose={closeMiniCart} />
     </div>
   );
 }

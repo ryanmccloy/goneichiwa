@@ -3,11 +3,12 @@
 import { useAddToCartWithFeedback } from "@/app/_lib/utils/useAddToCartWithFeedback";
 
 export default function AddToCartIcon({ isActive, item }) {
-  const addToCartWithFeedback = useAddToCartWithFeedback();
+  const handleAddToCart = useAddToCartWithFeedback();
+
   return (
     <button
       type="button"
-      onClick={() => addToCartWithFeedback(item)}
+      onClick={() => handleAddToCart(item)}
       disabled={!isActive}
       className={`guide-icons ${
         !isActive ? "opacity-40 cursor-not-allowed" : "cursor-pointer"
