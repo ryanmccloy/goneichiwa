@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
 import TravelGuideCardIcons from "./TravelGuideCardIcons";
 import ComingSoonOverlay from "./ComingSoonOverlay";
+import ImageSkeleton from "../skeletons/SkeletonImage";
+import { useState } from "react";
 
 export default function TravelGuideCard({
   id,
@@ -13,6 +17,8 @@ export default function TravelGuideCard({
   isActive,
   suggestion = false,
 }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const item = {
     id,
     title,
@@ -27,16 +33,20 @@ export default function TravelGuideCard({
     >
       <Link href={`/catalogue/${id}`} className="cursor-pointer">
         <div className=" relative w-full h-[300px]">
+          <ImageSkeleton isLoaded={isLoaded} />
           <Image
             src={url}
             alt={alt}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
-            className="object-cover rounded-global object-top"
+            className={`rounded-global object-cover object-top transition-opacity duration-500 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            onLoad={() => setIsLoaded(true)}
           />
 
           {/* Overlay */}
-          {!isActive && <ComingSoonOverlay />}
+          {!isActive && isLoaded && <ComingSoonOverlay />}
         </div>
       </Link>
 
