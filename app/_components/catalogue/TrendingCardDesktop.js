@@ -6,17 +6,12 @@ import TravelGuideCardIcons from "./TravelGuideCardIcons";
 import ComingSoonOverlay from "./ComingSoonOverlay";
 import { useState } from "react";
 import ImageSkeleton from "../skeletons/SkeletonImage";
+import { formatCartItem } from "@/app/_lib/helpers/formatCartItem";
 
 function TrendingCardDesktop({ guide, sizes = "" }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const item = {
-    id: guide.id,
-    title: guide.title,
-    price: guide.price,
-    image: guide.coverImageUrl,
-    quantity: 1,
-  };
+  const item = formatCartItem(guide);
   return (
     <div className="hidden group relative rounded-global lg:flex flex-col justify-between p-15">
       {/* Image and Title wrapped in Link */}

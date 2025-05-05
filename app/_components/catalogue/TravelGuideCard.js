@@ -7,36 +7,23 @@ import TravelGuideCardIcons from "./TravelGuideCardIcons";
 import ComingSoonOverlay from "./ComingSoonOverlay";
 import ImageSkeleton from "../skeletons/SkeletonImage";
 import { useState } from "react";
+import { formatCartItem } from "@/app/_lib/helpers/formatCartItem";
 
-export default function TravelGuideCard({
-  id,
-  title,
-  price,
-  url,
-  alt,
-  isActive,
-  suggestion = false,
-}) {
+export default function TravelGuideCard({ guide, suggestion = false }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const item = {
-    id,
-    title,
-    price,
-    image: url,
-    quantity: 1,
-  };
+  const item = formatCartItem(guide);
 
   return (
     <div
       className={`flex flex-col gap-15   ${suggestion ? "min-w-[300px]" : ""}`}
     >
-      <Link href={`/catalogue/${id}`} className="cursor-pointer">
+      <Link href={`/catalogue/${guide.id}`} className="cursor-pointer">
         <div className=" relative w-full h-[300px]">
           <ImageSkeleton isLoaded={isLoaded} />
           <Image
-            src={url}
-            alt={alt}
+            src={guide.coverImageUrl}
+            alt={guide.coverImageAlt}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
             className={`rounded-global object-cover object-top transition-opacity duration-500 ${
@@ -46,16 +33,16 @@ export default function TravelGuideCard({
           />
 
           {/* Overlay */}
-          {!isActive && isLoaded && <ComingSoonOverlay />}
+          {!guide.isActive && isLoaded && <ComingSoonOverlay />}
         </div>
       </Link>
 
       <div className="flex justify-between">
         <div className="flex flex-col">
-          <h5 className="uppercase">{title}</h5>
-          <span>£{price}</span>
+          <h5 className="uppercase">{guide.title}</h5>
+          <span>£{guide.price}</span>
         </div>
-        <TravelGuideCardIcons isActive={isActive} item={item} />
+        <TravelGuideCardIcons isActive={guide.isActive} item={item} />
       </div>
     </div>
   );

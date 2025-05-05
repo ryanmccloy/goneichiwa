@@ -30,10 +30,15 @@ export const getTravelGuides = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "travel-guides"));
 
-    const guides = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const guides = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate().toISOString() || null,
+      };
+    });
 
     return guides;
   } catch (err) {
@@ -47,10 +52,13 @@ export const getSpecificTravelGuide = async (destination) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
+    const data = docSnap.data();
+
     return {
       id: docSnap.id,
-      ...docSnap.data(),
-      reviews: docSnap.data().reviews ?? [],
+      ...data,
+      createdAt: data.createdAt?.toDate().toISOString() || null, // ✅ serialize here too
+      reviews: data.reviews ?? [],
     };
   } else {
     // docSnap.data() will be undefined in this case
@@ -68,7 +76,12 @@ export const getTravelGuidesByCountry = async (country) => {
   const querySnapshot = await getDocs(related);
   const guides = [];
   querySnapshot.forEach((doc) => {
-    guides.push({ id: doc.id, ...doc.data() });
+    const data = doc.data();
+    guides.push({
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate().toISOString() || null,
+    });
   });
   return guides;
 };
@@ -83,7 +96,12 @@ export const getTravelGuidesByContinent = async (continent) => {
   const querySnapshot = await getDocs(related);
   const guides = [];
   querySnapshot.forEach((doc) => {
-    guides.push({ id: doc.id, ...doc.data() });
+    const data = doc.data();
+    guides.push({
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate().toISOString() || null,
+    });
   });
   return guides;
 };
@@ -98,7 +116,12 @@ export const getFeaturedTravelGuides = async () => {
   const querySnapshot = await getDocs(related);
   const guides = [];
   querySnapshot.forEach((doc) => {
-    guides.push({ id: doc.id, ...doc.data() });
+    const data = doc.data();
+    guides.push({
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate().toISOString() || null,
+    });
   });
   return guides;
 };
@@ -125,10 +148,14 @@ export const getUserOrders = async (userId) => {
   const q = query(ordersRef, where("userId", "==", userId));
   const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate().toISOString() || null,
+    };
+  });
 };
 
 /// ----- ACCOUNT FUNCTIONS ------ ///

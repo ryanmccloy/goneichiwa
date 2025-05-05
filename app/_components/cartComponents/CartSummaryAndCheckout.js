@@ -1,48 +1,50 @@
+"use client";
+
 import Link from "next/link";
 import Button from "../ui/Button";
-import PromoCodeInput from "./PromoCodeInput";
 import { useCartStore } from "@/app/_lib/stores/cartStore";
+import { useAuthStore } from "@/app/_lib/stores/authStore";
+import { useCheckout } from "@/app/_lib/hooks/useCheckout";
+import { useState } from "react";
 
 function CartSummaryAndCheckout() {
-  const subTotal = useCartStore((state) => state.subTotal);
-  const discount = useCartStore((s) => s.getDiscount());
-
+  const [isLoading, setIsLoading] = useState(false);
+  const user = useAuthStore((state) => state.user);
+  const items = useCartStore((state) => state.items);
   const total = useCartStore((state) => state.getTotal());
 
+  const { handleCheckout } = useCheckout();
+
+  const handleClick = async () => {
+    setIsLoading(true);
+    await handleCheckout({ items, email: user?.email || null });
+    setIsLoading(false);
+  };
+
   return (
-    <aside className="bg-off-white rounded-md p-5 shadow-md h-fit sticky top-90 flex flex-col gap-30">
+    <aside className="bg-off-white rounded-md p-15 md:p-30 shadow-md h-fit sticky top-90 flex flex-col gap-30">
       <h3 className="text-lg font-semibold ">Order Summary</h3>
 
-      <div className="flex justify-between  ">
-        <span>Subtotal</span>
-        <span>£{subTotal.toFixed(2)}</span>
-      </div>
-
-      <PromoCodeInput />
-
-      {discount > 0 && (
-        <div className="flex justify-between text-sm text-green-600 font-medium">
-          <span>Promo Discount</span>
-          <span>-£{discount.toFixed(2)}</span>
-        </div>
-      )}
-
       <div className="flex justify-between font-semibold ">
-        <span>Total</span>
+        <span>Subtotal</span>
         <span>£{total.toFixed(2)}</span>
       </div>
 
       <div className="flex justify-center">
-        <Button>Proceed to Checkout</Button>
+        <Button isActive={!isLoading} onClick={handleClick}>
+          {!isLoading ? "Proceed to Checkout" : "Loading..."}
+        </Button>
       </div>
 
-      <p className="text-xs text-center text-neutral-500 ">
-        Already have an account or, would you like to create one?{" "}
-        <Link href="/auth" className="underline">
-          Login / SignUp
-        </Link>{" "}
-        or continue as guest.
-      </p>
+      {!user && (
+        <p className="text-xs text-center text-neutral-500 ">
+          Already have an account or, would you like to create one?{" "}
+          <Link href="/auth/sign-in?redirectTo=/cart" className="underline">
+            Login / SignUp
+          </Link>{" "}
+          or continue as guest.
+        </p>
+      )}
     </aside>
   );
 }

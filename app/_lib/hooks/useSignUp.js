@@ -9,13 +9,19 @@ export const useSignUp = () => {
   const router = useRouter();
   const { syncUserCartOnLogin } = useCartSync();
 
-  const handleSubmit = async (email, password, name, newsletter = false) => {
+  const handleSubmit = async (
+    email,
+    password,
+    name,
+    newsletter = false,
+    redirectTo
+  ) => {
     try {
       const user = await signUpWithEmail(email, password, name);
       await createUserDoc(user, newsletter);
       await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.email}!`);
-      router.push("/account");
+      router.push(redirectTo);
     } catch (err) {
       const message =
         errorMap[err.code] || "Something went wrong. Please try again.";

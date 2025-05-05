@@ -15,12 +15,12 @@ export const useGoogleLogIn = () => {
       "Network error. Please check your connection.",
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async (redirectTo = "/account") => {
     try {
       const user = await loginWithGoogle();
       await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.displayName || user.email}!`);
-      router.push("/account");
+      router.push(redirectTo);
     } catch (err) {
       console.error("[handleGoogleLogin Error]:", err);
       const message =

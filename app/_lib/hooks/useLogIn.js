@@ -19,12 +19,12 @@ export const useLogIn = () => {
       "Network error. Please check your connection.",
   };
 
-  const handleSubmit = async (email, password) => {
+  const handleSubmit = async (email, password, redirectTo="/account") => {
     try {
       const user = await loginWithEmail(email, password);
       await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.email}!`);
-      router.push("/account");
+      router.push(redirectTo);
     } catch (err) {
       const message =
         errorMap[err.code] || "Unable to sign in. Please try again.";

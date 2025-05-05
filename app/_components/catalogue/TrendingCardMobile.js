@@ -6,17 +6,13 @@ import TravelGuideCardIcons from "./TravelGuideCardIcons";
 import ComingSoonOverlay from "./ComingSoonOverlay";
 import { useState } from "react";
 import ImageSkeleton from "../skeletons/SkeletonImage";
+import { formatCartItem } from "@/app/_lib/helpers/formatCartItem";
 
 export default function TrendingCardMobile({ guide }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const item = {
-    id: guide.id,
-    title: guide.title,
-    price: guide.price,
-    image: guide.coverImageUrl,
-    quantity: 1,
-  };
+  const item = formatCartItem(guide);
+
   return (
     <div className="group min-w-[300px] rounded-global relative h-[450px] snap-start lg:hidden overflow-hidden">
       {/* Image and Link only */}

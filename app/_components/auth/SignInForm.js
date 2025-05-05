@@ -11,6 +11,7 @@ import Button from "@/app/_components/ui/Button";
 import { useLogIn } from "@/app/_lib/hooks/useLogIn";
 import { useGoogleLogIn } from "@/app/_lib/hooks/useGoogleLogIn";
 import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
 // Schema
 const signInSchema = z.object({
@@ -19,6 +20,8 @@ const signInSchema = z.object({
 });
 
 export default function SignInForm() {
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/account";
   const { handleSubmit: handleEmailSignIn, handleForgotPassword } = useLogIn();
   const handleGoogleLogin = useGoogleLogIn();
 
@@ -34,7 +37,7 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
-      await handleEmailSignIn(email, password);
+      await handleEmailSignIn(email, password, redirectTo);
     } catch (err) {
       console.error("[SignInForm onSubmit Error]:", err);
       toast.error("Unable to sign in. Please try again.");
@@ -56,7 +59,10 @@ export default function SignInForm() {
         <ArrowLinkLeft>Back</ArrowLinkLeft>
         <span className="uppercase">
           Don&apos;t have an account?{" "}
-          <Link href="/auth/sign-up" className="font-semibold cursor-pointer">
+          <Link
+            href={`/auth/sign-up?redirectTo=${redirectTo}`}
+            className="font-semibold cursor-pointer"
+          >
             Sign Up
           </Link>
         </span>
@@ -104,7 +110,10 @@ export default function SignInForm() {
 
       {/* Google Sign In Button */}
       <div className="flex justify-center">
-        <Button onClick={handleGoogleLogin} isActive={!isSubmitting}>
+        <Button
+          onClick={() => handleGoogleLogin(redirectTo)}
+          isActive={!isSubmitting}
+        >
           {" "}
           {isSubmitting ? "Signing In..." : "Sign In With Google"}
         </Button>

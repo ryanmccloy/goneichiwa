@@ -10,6 +10,7 @@ import SectionHeading from "@/app/_components/ui/SectionHeading";
 import Button from "@/app/_components/ui/Button";
 import { useSignUp } from "@/app/_lib/hooks/useSignUp";
 import { useGoogleLogIn } from "@/app/_lib/hooks/useGoogleLogIn";
+import { useSearchParams } from "next/navigation";
 
 // 1. Schema
 const signUpSchema = z
@@ -31,6 +32,8 @@ const signUpSchema = z
   });
 
 export default function SignUpForm() {
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/account";
   const { handleSubmit: handleSignUpSubmit } = useSignUp();
   const handleGoogleLogin = useGoogleLogIn();
 
@@ -46,7 +49,7 @@ export default function SignUpForm() {
     const { email, password, name, newsletter } = data;
 
     try {
-      await handleSignUpSubmit(email, password, name, newsletter);
+      await handleSignUpSubmit(email, password, name, newsletter, redirectTo);
     } catch (err) {
       console.error("[SignUpForm onSubmit Error]:", err);
       toast.error("Something went wrong during sign up. Please try again.");
@@ -139,7 +142,10 @@ export default function SignUpForm() {
         </div>
       </form>
       <div className="flex justify-center">
-        <Button onClick={handleGoogleLogin} isActive={!isSubmitting}>
+        <Button
+          onClick={() => handleGoogleLogin(redirectTo)}
+          isActive={!isSubmitting}
+        >
           {isSubmitting ? "Signing Up..." : "Sign Up With Google"}
         </Button>
       </div>

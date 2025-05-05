@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { saveUserCart } from "../data-service";
 import { useAuthStore } from "./authStore";
 
-let miniCartTimeout = null;
+
 
 export const useCartStore = create((set, get) => ({
   items: [],
