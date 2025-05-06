@@ -24,7 +24,9 @@ export default function Hero() {
           Handpicked travel guides designed by experts. Save time, avoid hassle,
           and explore like a local.
         </p>
-        <Button href="/catalogue">Find Your Perfect Guide</Button>
+        <Button href="/catalogue" textSize="big">
+          Find Your Perfect Guide
+        </Button>
       </div>
     </section>
   );
