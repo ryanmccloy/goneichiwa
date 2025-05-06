@@ -4,13 +4,11 @@ import { create } from "zustand";
 import { saveUserCart } from "../data-service";
 import { useAuthStore } from "./authStore";
 
-
-
 export const useCartStore = create((set, get) => ({
   items: [],
   subTotal: null,
   isMiniCartOpen: false,
-  promo: null,
+  // promo: null,
 
   // Set the cart when the user logs in
   setCart: (cartItems) => {
@@ -72,7 +70,7 @@ export const useCartStore = create((set, get) => ({
   // clearing entire cart
   clearCart: () => {
     set({ items: [], subTotal: 0 });
-
+    localStorage.removeItem("cart");
     get().syncCart();
   },
 
@@ -87,35 +85,57 @@ export const useCartStore = create((set, get) => ({
     set((state) => ({ isMiniCartOpen: !state.isMiniCartOpen })),
 
   // applying a promo code to the subTotal
-  applyPromo: (promo) => {
-    set({ promo });
-  },
+  // applyPromo: (promo) => {
+  //   set({ promo });
+  // },
 
   // getting discount value
-  getDiscount: () => {
-    const { subTotal, promo } = get();
+  // getDiscount: () => {
+  //   const { subTotal, promo } = get();
 
-    if (!promo) return 0;
+  //   if (!promo) return 0;
 
-    return promo.type === "percentage"
-      ? (subTotal * promo.amount) / 100
-      : promo.amount;
-  },
+  //   return promo.type === "percentage"
+  //     ? (subTotal * promo.amount) / 100
+  //     : promo.amount;
+  // },
 
   // removing a promo code from the cart
-  removePromo: () => set({ promo: null }),
+  // removePromo: () => set({ promo: null }),
 
   // getting the total cart value including any discounts
-  getTotal: () => {
-    const { subTotal, promo } = get();
+  // getTotal: () => {
+  //   const { subTotal, promo } = get();
 
-    if (!promo) return subTotal;
+  //   if (!promo) return subTotal;
 
-    const discount =
-      promo.type === "percentage"
-        ? (subTotal * promo.amount) / 100
-        : promo.amount;
+  //   const discount =
+  //     promo.type === "percentage"
+  //       ? (subTotal * promo.amount) / 100
+  //       : promo.amount;
 
-    return Math.max(0, subTotal - discount); // Ensure total can't go negative
-  },
+  //   return Math.max(0, subTotal - discount); // Ensure total can't go negative
+  // },
 }));
+
+if (typeof window !== "undefined") {
+  try {
+    const { user } = useAuthStore.getState();
+    if (!user) {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        const parsed = JSON.parse(storedCart);
+        useCartStore.setState({
+          items: parsed,
+          subTotal: parsed.reduce((acc, i) => acc + i.price * i.quantity, 0),
+        });
+      }
+    }
+
+    useCartStore.subscribe((state) => {
+      localStorage.setItem("cart", JSON.stringify(state.items));
+    });
+  } catch (err) {
+    console.error("Failed to hydrate cart from localStorage", err);
+  }
+}

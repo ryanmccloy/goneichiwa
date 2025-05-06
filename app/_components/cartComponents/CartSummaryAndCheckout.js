@@ -11,7 +11,7 @@ function CartSummaryAndCheckout() {
   const [isLoading, setIsLoading] = useState(false);
   const user = useAuthStore((state) => state.user);
   const items = useCartStore((state) => state.items);
-  const total = useCartStore((state) => state.getTotal());
+  const subTotal = useCartStore((state) => state.subTotal);
 
   const { handleCheckout } = useCheckout();
 
@@ -27,10 +27,10 @@ function CartSummaryAndCheckout() {
 
       <div className="flex justify-between font-semibold ">
         <span>Subtotal</span>
-        <span>£{total.toFixed(2)}</span>
+        <span>£{subTotal.toFixed(2)}</span>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center text-sm">
         <Button isActive={!isLoading} onClick={handleClick}>
           {!isLoading ? "Proceed to Checkout" : "Loading..."}
         </Button>
