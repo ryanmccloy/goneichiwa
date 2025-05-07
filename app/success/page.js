@@ -7,6 +7,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 import Button from "@/app/_components/ui/Button";
 import { useAuthStore } from "../_lib/stores/authStore";
+import confetti from "canvas-confetti";
+import confettiFire from "../_lib/helpers/confettiFire";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -17,6 +19,10 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [downloadUrl, setDownloadUrl] = useState("download");
+
+  useEffect(() => {
+    confettiFire();
+  }, []);
 
   useEffect(() => {
     const fetchSession = async () => {
