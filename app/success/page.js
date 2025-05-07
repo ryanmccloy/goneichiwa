@@ -7,8 +7,11 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 import Button from "@/app/_components/ui/Button";
 import { useAuthStore } from "../_lib/stores/authStore";
-import confetti from "canvas-confetti";
 import confettiFire from "../_lib/helpers/confettiFire";
+
+import SuccessPageItem from "../_components/success/SuccessPageItem";
+
+const testItem = {};
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -54,8 +57,8 @@ export default function Page() {
   const isSignedIn = !!user;
 
   return (
-    <section className="section-styles width-size text-center top-page-spacing">
-      <div className="flex flex-col gap-90">
+    <section className="section-styles width-size text-center top-page-spacing negative-top-spacing ">
+      <div className="flex flex-col gap-60">
         <div className="flex flex-col gap-30 items-center">
           <CheckCircleIcon className="h-12 w-12 text-green-500" />
           <h1 className="text-2xl font-bold">
@@ -64,18 +67,16 @@ export default function Page() {
 
           <p className="text-neutral-600 max-w-md">
             Your travel guide is on its way to your inbox
-            {email && ` at ${email}`}.
+            {email && ` at ${email}`}. You can also download your guides below:
           </p>
 
           {downloadUrl && (
-            <a
-              href={downloadUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2"
-            >
-              <Button>Download Now</Button>
-            </a>
+            <div className="flex justify-center gap-15 max-w-[700px] flex-wrap">
+              <SuccessPageItem />
+              <SuccessPageItem />
+              <SuccessPageItem />
+              <SuccessPageItem />
+            </div>
           )}
         </div>
 

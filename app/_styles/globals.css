@@ -64,7 +64,8 @@
 }
 
 .top-page-spacing {
-  @apply pt-[135px] md:pt-[165px] lg:pt-[195px];
+  @apply pt-[135px] md:pt-[165px] 
+  /* lg:pt-[195px]; */;
 }
 
 .negative-bottom-spacing {
