@@ -3,7 +3,7 @@ import DownloadIcon from "../ui/icons/DownloadIcon";
 
 function SuccessPageItem() {
   return (
-    <li className="flex flex-col gap-15 items-start">
+    <li className="flex flex-col gap-15 items-start w-[150px]">
       <div className="relative h-[150px] w-full">
         <Image
           src="/images/bestsellers/canada.webp"
@@ -14,7 +14,7 @@ function SuccessPageItem() {
       </div>
 
       <div className="flex gap-30 justify-between">
-        <p className="text-sm">Canada</p>
+        <p className="text-sm text-start">Canada Travel Guide</p>
 
         <DownloadIcon />
       </div>

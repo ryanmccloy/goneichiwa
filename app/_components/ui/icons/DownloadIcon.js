@@ -6,7 +6,7 @@ function DownloadIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1}
       stroke="currentColor"
-      className="size-4"
+      className="size-4 cursor-pointer"
     >
       <path
         strokeLinecap="round"

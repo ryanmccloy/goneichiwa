@@ -83,39 +83,6 @@ export const useCartStore = create((set, get) => ({
   // toggling the open and closing MiniCart
   toggleMiniCart: () =>
     set((state) => ({ isMiniCartOpen: !state.isMiniCartOpen })),
-
-  // applying a promo code to the subTotal
-  // applyPromo: (promo) => {
-  //   set({ promo });
-  // },
-
-  // getting discount value
-  // getDiscount: () => {
-  //   const { subTotal, promo } = get();
-
-  //   if (!promo) return 0;
-
-  //   return promo.type === "percentage"
-  //     ? (subTotal * promo.amount) / 100
-  //     : promo.amount;
-  // },
-
-  // removing a promo code from the cart
-  // removePromo: () => set({ promo: null }),
-
-  // getting the total cart value including any discounts
-  // getTotal: () => {
-  //   const { subTotal, promo } = get();
-
-  //   if (!promo) return subTotal;
-
-  //   const discount =
-  //     promo.type === "percentage"
-  //       ? (subTotal * promo.amount) / 100
-  //       : promo.amount;
-
-  //   return Math.max(0, subTotal - discount); // Ensure total can't go negative
-  // },
 }));
 
 if (typeof window !== "undefined") {

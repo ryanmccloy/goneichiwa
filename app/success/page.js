@@ -11,8 +11,6 @@ import confettiFire from "../_lib/helpers/confettiFire";
 
 import SuccessPageItem from "../_components/success/SuccessPageItem";
 
-const testItem = {};
-
 export default function Page() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
@@ -71,7 +69,7 @@ export default function Page() {
           </p>
 
           {downloadUrl && (
-            <div className="flex justify-center gap-15 max-w-[700px] flex-wrap">
+            <div className="flex justify-center gap-15 max-w-[800px] flex-wrap">
               <SuccessPageItem />
               <SuccessPageItem />
               <SuccessPageItem />
