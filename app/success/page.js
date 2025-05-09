@@ -21,8 +21,10 @@ export default function Page() {
   const isSignedIn = !!user;
 
   useEffect(() => {
-    confettiFire();
-  }, []);
+    if (!loading && !authLoading) {
+      confettiFire();
+    }
+  }, [loading, authLoading]);
 
   if (loading || authLoading) {
     return (
