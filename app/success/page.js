@@ -10,39 +10,19 @@ import { useAuthStore } from "../_lib/stores/authStore";
 import confettiFire from "../_lib/helpers/confettiFire";
 
 import SuccessPageItem from "../_components/success/SuccessPageItem";
+import { useSuccessSession } from "../_lib/hooks/useSuccessSession";
 
 export default function Page() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
+  const { email, items: purchaseItems, loading } = useSuccessSession(sessionId);
 
   const { user, loading: authLoading } = useAuthStore();
-
-  const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState("");
-  const [downloadUrl, setDownloadUrl] = useState("download");
+  const isSignedIn = !!user;
 
   useEffect(() => {
     confettiFire();
   }, []);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      if (!sessionId) return setLoading(false);
-
-      try {
-        const res = await fetch(`/api/stripe-session?session_id=${sessionId}`);
-        const data = await res.json();
-        setEmail(data.customer_email || "");
-        setDownloadUrl(data.download_url || "");
-      } catch (err) {
-        console.error("Error fetching Stripe session:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSession();
-  }, [sessionId]);
 
   if (loading || authLoading) {
     return (
@@ -51,8 +31,6 @@ export default function Page() {
       </section>
     );
   }
-
-  const isSignedIn = !!user;
 
   return (
     <section className="section-styles width-size text-center top-page-spacing negative-top-spacing ">
@@ -68,12 +46,11 @@ export default function Page() {
             {email && ` at ${email}`}. You can also download your guides below:
           </p>
 
-          {downloadUrl && (
+          {purchaseItems && (
             <div className="flex justify-center gap-15 max-w-[800px] flex-wrap">
-              <SuccessPageItem />
-              <SuccessPageItem />
-              <SuccessPageItem />
-              <SuccessPageItem />
+              {purchaseItems.map((item) => {
+                <SuccessPageItem key={item.id} title={item.title} />;
+              })}
             </div>
           )}
         </div>

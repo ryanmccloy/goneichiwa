@@ -24,8 +24,18 @@ export async function POST(req) {
       };
     });
 
+    const metadata = {
+      items: JSON.stringify(
+        items.map((item) => ({
+          id: item.id,
+          title: item.title,
+        }))
+      ),
+    };
+
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
+      metadata,
       line_items,
       mode: "payment",
       ...(email && { customer_email: email }),
