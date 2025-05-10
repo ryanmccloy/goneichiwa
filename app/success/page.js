@@ -11,6 +11,7 @@ import confettiFire from "../_lib/helpers/confettiFire";
 
 import SuccessPageItem from "../_components/success/SuccessPageItem";
 import { useSuccessSession } from "../_lib/hooks/useSuccessSession";
+import useDownloadLinks from "../_lib/hooks/useDownloadLinks";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -19,6 +20,9 @@ export default function Page() {
 
   const { user, loading: authLoading } = useAuthStore();
   const isSignedIn = !!user;
+
+  const { downloadLinks, loading: linksLoading } =
+    useDownloadLinks(purchaseItems);
 
   useEffect(() => {
     if (!loading && !authLoading) {
@@ -56,7 +60,12 @@ export default function Page() {
           {purchaseItems && (
             <div className="flex flex-col justify-center gap-15 ">
               {purchaseItems.map((item) => (
-                <SuccessPageItem key={item.id} title={item.title} />
+                <SuccessPageItem
+                  key={item.id}
+                  title={item.title}
+                  downloadUrl={downloadLinks[item.id]}
+                  isLoading={linksLoading}
+                />
               ))}
             </div>
           )}

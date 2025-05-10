@@ -133,13 +133,30 @@ export const getImageUrl = async (path) => {
   return url;
 };
 
-// fetching promo code
-export const getPromoCodeFromFirebase = async (code) => {
-  const promoRef = doc(db, "promo-codes", code.toUpperCase());
-  const promoSnap = await getDoc(promoRef);
+// fetching guide download link
+export const getDownloadLink = async (guideId) => {
+  try {
+    const guideSnap = await getDoc(doc(db, "travel-guides", guideId));
 
-  if (promoSnap.exists()) return promoSnap.data();
-  return null;
+    if (!guideSnap.exists()) {
+      throw new Error("Travel guide not found");
+    }
+
+    const data = guideSnap.data();
+    const pdfPath = data.pdfPath;
+
+    if (!pdfPath) {
+      throw new Error("PDF path not found for this guide");
+    }
+
+    const fileRef = ref(storage, pdfPath);
+    const url = await getDownloadURL(fileRef);
+
+    return url;
+  } catch (err) {
+    console.error("[getDownloadLink Error]:", err);
+    throw err;
+  }
 };
 
 // fetching user orders
