@@ -26,7 +26,7 @@ export const useCheckout = () => {
       }
     } catch (err) {
       console.error("Checkout error:", err);
-      toast.error(err.message || "Failed to start checkout. Please try again.");
+      toast.error("Failed to start checkout. Please try again.");
     }
   };
 

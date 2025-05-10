@@ -38,6 +38,7 @@ export async function POST(req) {
       metadata,
       line_items,
       mode: "payment",
+      customer_creation: "always",
       ...(email && { customer_email: email }),
 
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,

@@ -17,7 +17,10 @@ function CartSummaryAndCheckout() {
 
   const handleClick = async () => {
     setIsLoading(true);
-    await handleCheckout({ items, email: user?.email || null });
+    await handleCheckout({
+      items,
+      ...(user?.email ? { email: user.email } : {}),
+    });
     setIsLoading(false);
   };
 

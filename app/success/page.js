@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 import Button from "@/app/_components/ui/Button";
@@ -44,28 +44,30 @@ export default function Page() {
           </h1>
 
           <p className="text-neutral-600 max-w-md">
-            Your travel guide is on its way to your inbox
-            {email && ` at ${email}`}. You can also download your guides below:
+            Your travel guide is on its way to your inbox{" "}
+            {email && (
+              <>
+                at <span className="font-semibold">{email}</span>.{" "}
+              </>
+            )}
+            You can also download your guides below:
           </p>
 
           {purchaseItems && (
-            <div className="flex justify-center gap-15 max-w-[800px] flex-wrap">
-              {purchaseItems.map((item) => {
-                <SuccessPageItem key={item.id} title={item.title} />;
-              })}
+            <div className="flex flex-col justify-center gap-15 ">
+              {purchaseItems.map((item) => (
+                <SuccessPageItem key={item.id} title={item.title} />
+              ))}
             </div>
           )}
         </div>
 
-        <div className="flex flex-col gap-30">
+        <div className="flex flex-col gap-30 items-center">
           {isSignedIn ? (
-            <div className="flex gap-15">
-              <Link href="/account">
-                <Button>Go to My Account</Button>
-              </Link>
-              <Link href="/">
-                <Button variant="ghost">Return to Home</Button>
-              </Link>
+            <div className="flex flex-col md:flex-row gap-30 items-center">
+              <Button href="/account">Go to My Account</Button>
+
+              <Button href="/">Return to Home</Button>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-30 ">
@@ -74,9 +76,11 @@ export default function Page() {
                 it again anytime.
               </p>
 
-              <Button href="/sign-up">Create an Account</Button>
+              <div className="flex flex-col md:flex-row gap-30 items-center">
+                <Button href="/sign-up">Create an Account</Button>
 
-              <Button href="/">Return to Home</Button>
+                <Button href="/">Return to Home</Button>
+              </div>
             </div>
           )}
         </div>

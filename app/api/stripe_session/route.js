@@ -13,7 +13,8 @@ export async function GET(req) {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     return NextResponse.json({
-      customer_email: session.customer_email,
+      customer_email:
+        session.customer_email || session.customer_details?.email || "",
       items: session.metadata?.items || "[]", // stringified array
     });
   } catch (err) {
