@@ -12,12 +12,14 @@ import confettiFire from "../_lib/helpers/confettiFire";
 import SuccessPageItem from "../_components/success/SuccessPageItem";
 import { useSuccessSession } from "../_lib/hooks/useSuccessSession";
 import useDownloadLinks from "../_lib/hooks/useDownloadLinks";
+import { useCartStore } from "../_lib/stores/cartStore";
 
 export default function Page() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const { email, items: purchaseItems, loading } = useSuccessSession(sessionId);
 
+  const clearCart = useCartStore((state) => state.clearCart);
   const { user, loading: authLoading } = useAuthStore();
   const isSignedIn = !!user;
 
@@ -29,6 +31,12 @@ export default function Page() {
       confettiFire();
     }
   }, [loading, authLoading]);
+
+  useEffect(() => {
+    if (!loading && purchaseItems.length > 0) {
+      clearCart();
+    }
+  }, [loading, purchaseItems.length, clearCart]);
 
   if (loading || authLoading) {
     return (
