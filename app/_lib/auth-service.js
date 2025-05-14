@@ -8,7 +8,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { auth, db } from "./firebase";
+import { auth, db } from "./firebase-client";
 import { useAuthStore } from "./stores/authStore";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 

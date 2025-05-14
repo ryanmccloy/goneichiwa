@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 
 export const useCheckout = () => {
-  const handleCheckout = async ({ items, email }) => {
+  const handleCheckout = async ({ items, email, uid }) => {
     if (!items || items.length === 0) {
       toast.error("Your cart is empty.");
       return;
@@ -14,6 +14,7 @@ export const useCheckout = () => {
         body: JSON.stringify({
           items,
           email,
+          uid,
         }),
       });
 

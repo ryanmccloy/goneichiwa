@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -13,12 +13,14 @@ import SuccessPageItem from "../_components/success/SuccessPageItem";
 import { useSuccessSession } from "../_lib/hooks/useSuccessSession";
 import useDownloadLinks from "../_lib/hooks/useDownloadLinks";
 import { useCartStore } from "../_lib/stores/cartStore";
+import { useSaveOrder } from "../_lib/hooks/useSaveOrder";
 
 export default function Page() {
+  const [orderSaved, setOrderSaved] = useState(false);
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const { email, items: purchaseItems, loading } = useSuccessSession(sessionId);
-
+  const { saveOrder } = useSaveOrder();
   const clearCart = useCartStore((state) => state.clearCart);
   const { user, loading: authLoading } = useAuthStore();
   const isSignedIn = !!user;
@@ -33,10 +35,15 @@ export default function Page() {
   }, [loading, authLoading]);
 
   useEffect(() => {
-    if (!loading && purchaseItems.length > 0) {
-      clearCart();
+    if (sessionId && !orderSaved && !loading && !authLoading) {
+      saveOrder(sessionId).then((success) => {
+        if (success) {
+          setOrderSaved(true);
+          clearCart();
+        }
+      });
     }
-  }, [loading, purchaseItems.length, clearCart]);
+  }, [sessionId, loading, authLoading, clearCart, saveOrder, orderSaved]);
 
   if (loading || authLoading) {
     return (
@@ -65,7 +72,7 @@ export default function Page() {
             You can also download your guides below:
           </p>
 
-          {purchaseItems && (
+          {purchaseItems.length > 0 && (
             <div className="flex flex-col justify-center gap-15 ">
               {purchaseItems.map((item) => (
                 <SuccessPageItem

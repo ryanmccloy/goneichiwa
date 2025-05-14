@@ -5,7 +5,7 @@ import { stripe } from "@/app/_lib/stripe";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { items, email } = body;
+    const { items, email, uid } = body;
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "No items in cart." }, { status: 400 });
@@ -31,6 +31,7 @@ export async function POST(req) {
           title: item.title,
         }))
       ),
+      uid,
     };
 
     // Create Checkout Sessions from body params.

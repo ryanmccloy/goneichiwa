@@ -9,7 +9,7 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
-import { auth, db, storage } from "./firebase";
+import { auth, db, storage } from "./firebase-client";
 import {
   collection,
   deleteDoc,
