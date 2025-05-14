@@ -1,6 +1,6 @@
 "use client";
 
-import { useAddToCartWithFeedback } from "@/app/_lib/utils/useAddToCartWithFeedback";
+import { useAddToCartWithFeedback } from "@/app/_lib/hooks/useAddToCartWithFeedback";
 
 export default function AddToCartIcon({ isActive, item }) {
   const handleAddToCart = useAddToCartWithFeedback();

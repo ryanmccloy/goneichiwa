@@ -1,6 +1,6 @@
 "use client";
 
-import { useAddToCartWithFeedback } from "@/app/_lib/utils/useAddToCartWithFeedback";
+import { useAddToCartWithFeedback } from "@/app/_lib/hooks/useAddToCartWithFeedback";
 import Button from "../ui/Button";
 import TickIcon from "../ui/icons/TickIcon";
 import ProductDestinationHeading from "../ui/ProductDestinationHeading";

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export function useSuccessSession(sessionId) {
   const [email, setEmail] = useState("");
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!sessionId) return setLoading(false);
@@ -15,6 +17,8 @@ export function useSuccessSession(sessionId) {
         setEmail(data.customer_email || "");
         setItems(JSON.parse(data.items || "[]"));
       } catch (err) {
+        setError(true);
+        toast.error("Failed to get checkout session. Please contact support");
         console.error("Error fetching Stripe session:", err);
       } finally {
         setLoading(false);
@@ -24,5 +28,5 @@ export function useSuccessSession(sessionId) {
     fetchSession();
   }, [sessionId]);
 
-  return { email, items, loading };
+  return { email, items, loading, error };
 }

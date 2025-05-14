@@ -2,6 +2,7 @@ import { stripe } from "@/app/_lib/stripe";
 import { adminDb } from "@/app/_lib/firebase-admin";
 import { Timestamp } from "firebase-admin/firestore";
 import { NextResponse } from "next/server";
+import generateOrderNumber from "@/app/_lib/helpers/generateOrderNumber";
 
 export async function POST(req) {
   try {
@@ -11,15 +12,26 @@ export async function POST(req) {
       return NextResponse.json({ error: "Missing sessionId" }, { status: 400 });
     }
 
-    // 🔐 Server-side verification of Stripe session
+    // check if order already exists
+    const existing = await adminDb.collection("orders").doc(sessionId).get();
+    if (existing.exists) {
+      return NextResponse.json({
+        success: true,
+        orderNumber: existing.data().orderNumber,
+      });
+    }
+
+    // Server-side verification of Stripe session
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     const email =
       session.customer_details?.email || session.customer_email || null;
     const metadataItems = JSON.parse(session.metadata?.items || "[]");
     const userId = session.metadata?.userId || null;
+    const orderNumber = generateOrderNumber();
 
     const orderData = {
+      orderNumber,
       email,
       userId,
       items: metadataItems,
@@ -33,7 +45,7 @@ export async function POST(req) {
     const docRef = adminDb.collection("orders").doc(sessionId);
     await docRef.set(orderData);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, orderNumber });
   } catch (err) {
     console.error("[save-order error]", err);
     return NextResponse.json(

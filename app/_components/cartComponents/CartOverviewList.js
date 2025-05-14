@@ -25,7 +25,7 @@ function CartOverviewList() {
               className="rounded object-cover"
             />
             <div>
-              <span className="font-medium">{item.title} Travel Guide</span>
+              <span className="font-medium">{item.title}</span>
               <p className="text-sm text-neutral-500">Qty: {item.quantity}</p>
             </div>
           </Link>
