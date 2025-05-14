@@ -12,28 +12,43 @@ function OrdersList() {
     return <p className="text-sm">You haven&apos;t placed any orders yet.</p>;
   }
 
+  console.log(orders);
+
   return (
-    <ul className="flex flex-col gap-30 text-sm">
+    <ul className="flex flex-col gap-30 text-sm ">
       {orders.map((order) => (
         <li
           key={order.id}
-          className="rounded-md p-15 bg-white shadow-sm flex flex-row gap-30 flex-wrap justify-between items-center"
+          className="rounded-md p-15 bg-white shadow-sm flex flex-col md:flex-row gap-30 flex-wrap justify-between"
         >
-          <div className="flex flex-col lg:flex-row gap-15 lg:gap-30 lg:justify-between lg:min-w-[300px]">
+          <div className="flex flex-col gap-15 lg:gap-30 min-w-0 flex-1">
             <p>
-              <span className="font-medium">Guide:</span> {order.title}
+              <span className="font-medium">Purchased:</span>{" "}
+              {order.items?.length > 0
+                ? order.items.map((item) => item.title).join(", ")
+                : "No guides"}
             </p>
             <p>
+              <span className="font-medium">Order Number:</span>{" "}
+              {order.orderNumber}
+            </p>
+
+            <p>
               <span className="font-medium">Date:</span>{" "}
-              {order.createdAt?.toDate
-                ? format(order.createdAt.toDate(), "dd MMM yyyy")
+              {order.createdAt
+                ? format(new Date(order.createdAt), "dd MMM yyyy")
                 : "Unknown"}
             </p>
           </div>
 
-          <div className="flex flex-col items-end lg:flex-row-reverse gap-15 lg:gap-30 ">
-            {order.amount && (
-              <p className=" font-semibold ">${order.amount.toFixed(2)}</p>
+          <div className="flex flex-row md:flex-col min-w-[120px]  md:items-end justify-between  ">
+            {order.totalAmount && (
+              <p className=" font-semibold ">
+                {new Intl.NumberFormat("en", {
+                  style: "currency",
+                  currency: order.currency || "GBP",
+                }).format(order.totalAmount)}
+              </p>
             )}
             <p
               className={` uppercase ${

@@ -24,10 +24,12 @@ export async function POST(req) {
     // Server-side verification of Stripe session
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+    console.log("SAVE ORDER", session);
+
     const email =
       session.customer_details?.email || session.customer_email || null;
     const metadataItems = JSON.parse(session.metadata?.items || "[]");
-    const userId = session.metadata?.userId || null;
+    const userId = session.metadata?.uid || null;
     const orderNumber = generateOrderNumber();
 
     const orderData = {
@@ -39,7 +41,7 @@ export async function POST(req) {
       currency: session.currency.toUpperCase(),
       createdAt: Timestamp.now(),
       sessionId,
-      downloadReady: true,
+      status: "fulfilled",
     };
 
     const docRef = adminDb.collection("orders").doc(sessionId);

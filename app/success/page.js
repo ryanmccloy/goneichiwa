@@ -15,7 +15,7 @@ import confettiFire from "../_lib/helpers/confettiFire";
 import { useSuccessSession } from "../_lib/hooks/useSuccessSession";
 import useDownloadLinks from "../_lib/hooks/useDownloadLinks";
 import { useSaveOrder } from "../_lib/hooks/useSaveOrder";
-import SuccessPageButtons from "./SuccessPageButtons";
+import SuccessPageButtons from "../_components/success/SuccessPageButtons";
 
 export default function Page() {
   const [orderNumber, setOrderNumber] = useState(null);

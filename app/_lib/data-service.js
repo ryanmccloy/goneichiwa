@@ -167,10 +167,15 @@ export const getUserOrders = async (userId) => {
 
   return snapshot.docs.map((doc) => {
     const data = doc.data();
+
     return {
       id: doc.id,
-      ...data,
+      orderNumber: data.orderNumber,
+      items: data.items || [],
       createdAt: data.createdAt?.toDate().toISOString() || null,
+      currency: data.currency,
+      totalAmount: data.totalAmount,
+      status: data.status,
     };
   });
 };

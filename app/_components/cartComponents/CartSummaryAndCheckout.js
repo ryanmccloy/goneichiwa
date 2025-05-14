@@ -20,7 +20,7 @@ function CartSummaryAndCheckout() {
     await handleCheckout({
       items,
       ...(user?.email ? { email: user.email } : {}),
-      ...(user?.uid && { userId: user.uid }),
+      ...(user?.uid ? { uid: user.uid } : {}),
     });
     setIsLoading(false);
   };

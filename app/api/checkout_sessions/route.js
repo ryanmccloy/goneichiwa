@@ -7,6 +7,8 @@ export async function POST(req) {
     const body = await req.json();
     const { items, email, uid } = body;
 
+    console.log("CHECKOUT SESSIONS", uid)
+
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "No items in cart." }, { status: 400 });
     }

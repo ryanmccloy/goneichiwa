@@ -1,4 +1,4 @@
-import Button from "../_components/ui/Button";
+import Button from "../ui/Button";
 
 function SuccessPageButtons({ isSignedIn }) {
   return (
