@@ -16,6 +16,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  or,
   query,
   setDoc,
   updateDoc,
@@ -160,24 +161,40 @@ export const getDownloadLink = async (guideId) => {
 };
 
 // fetching user orders
-export const getUserOrders = async (userId) => {
+export const getUserOrders = async ({ userId, email }) => {
   const ordersRef = collection(db, "orders");
-  const q = query(ordersRef, where("userId", "==", userId));
+
+  const q = query(
+    ordersRef,
+    or(
+      ...(userId ? [where("userId", "==", userId)] : []),
+      ...(email ? [where("email", "==", email)] : [])
+    )
+  );
+
   const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => {
-    const data = doc.data();
+  // Deduplicate by doc ID
+  const seen = new Set();
+  const orders = [];
 
-    return {
-      id: doc.id,
-      orderNumber: data.orderNumber,
-      items: data.items || [],
-      createdAt: data.createdAt?.toDate().toISOString() || null,
-      currency: data.currency,
-      totalAmount: data.totalAmount,
-      status: data.status,
-    };
+  snapshot.forEach((doc) => {
+    if (!seen.has(doc.id)) {
+      seen.add(doc.id);
+      const data = doc.data();
+      orders.push({
+        id: doc.id,
+        orderNumber: data.orderNumber,
+        items: data.items || [],
+        createdAt: data.createdAt?.toDate().toISOString() || null,
+        currency: data.currency,
+        totalAmount: data.totalAmount,
+        status: data.status,
+      });
+    }
   });
+
+  return orders;
 };
 
 /// ----- ACCOUNT FUNCTIONS ------ ///

@@ -6,8 +6,8 @@ export const useAccountStore = create((set) => ({
   savedBlogPosts: [],
   settings: {},
   isLoading: true,
-  fetchOrders: async (userId) => {
-    const orders = await getUserOrders(userId);
+  fetchOrders: async ({ userId, email }) => {
+    const orders = await getUserOrders({ userId, email });
     set({ orders, isLoading: false });
   },
   setSettings: (settings) => set({ settings }),

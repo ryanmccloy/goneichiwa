@@ -11,10 +11,10 @@ export default function AccountClientProvider({ children }) {
 
   useEffect(() => {
     if (user?.uid) {
-      fetchOrders(user.uid);
+      fetchOrders({ userId: user?.uid, email: user?.email });
       fetchSettings(user.uid);
     }
-  }, [user?.uid, fetchOrders, fetchSettings]);
+  }, [user?.uid, user?.email, fetchOrders, fetchSettings]);
 
   return <>{children}</>;
 }

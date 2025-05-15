@@ -38,8 +38,10 @@ function MyGuidesCard({ guideId }) {
           className="object-cover object-top rounded-global"
         />
       </div>
-      <div className="flex justify-between flex-wrap">
-        <span className="text-xs sm:text-sm uppercase">{guide.title}</span>
+      <div className="flex justify-between gap-15 flex-wrap">
+        <span className="text-xs sm:text-sm uppercase flex-1 min-w-0">
+          {guide.title}
+        </span>
         <DownloadIcon />
       </div>
     </Link>
