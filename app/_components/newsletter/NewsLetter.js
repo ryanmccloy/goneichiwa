@@ -3,7 +3,7 @@ import SectionHeading from "../ui/SectionHeading";
 
 export default function NewsLetter() {
   return (
-    <section className="width-size section-styles negative-bottom-spacing">
+    <section className="width-size section-styles negative-top-spacing">
       <SectionHeading>Sign Up For Our NewsLetter</SectionHeading>
 
       <div className="flex flex-col gap-60 lg:flex-row lg:gap-90 ">

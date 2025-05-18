@@ -3,7 +3,7 @@ import TravelGuides from "./TravelGuides";
 
 export default async function FullCatalogue() {
   return (
-    <section className="width-size section-styles">
+    <section className="width-size section-styles negative-top-spacing">
       <SectionHeading>All Travel guides</SectionHeading>
 
       <TravelGuides />

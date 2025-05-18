@@ -15,7 +15,11 @@ export default async function GuidesCards() {
         <BestCard
           key={guide.id}
           title={guide.title}
-          url={guide.coverImageUrl}
+          url={
+            guide.coverImageUrlFeatured
+              ? guide.coverImageUrlFeatured
+              : guide.coverImageUrl
+          }
           alt={guide.coverImageAlt}
           lastCard={index === guides.length - 1}
           isActive={guide.isActive}

@@ -19,7 +19,7 @@ export default function TravelGuideCard({ guide, suggestion = false }) {
       className={`flex flex-col gap-15   ${suggestion ? "min-w-[300px]" : ""}`}
     >
       <Link href={`/catalogue/${guide.id}`} className="cursor-pointer">
-        <div className=" relative w-full h-[300px]">
+        <div className=" relative w-full aspect-[4/3]">
           <ImageSkeleton isLoaded={isLoaded} />
           <Image
             src={guide.coverImageUrl}

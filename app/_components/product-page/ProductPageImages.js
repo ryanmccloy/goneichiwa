@@ -21,7 +21,7 @@ export default function ProductPageImages({ images }) {
             return (
               <div
                 key={index}
-                className="relative min-w-[300px] h-[300px] rounded-global"
+                className="relative min-w-[300px] aspect-[4/3] rounded-global"
               >
                 <ImageSkeleton isLoaded={isLoaded} />
                 <Image
@@ -40,8 +40,8 @@ export default function ProductPageImages({ images }) {
         </Slider>
       </div>
 
-      <div className="hidden lg:flex flex-col gap-15 h-[450px]  ">
-        <div className="relative flex-grow ">
+      <div className="hidden lg:flex flex-col gap-15  ">
+        <div className="relative aspect-[4/3] w-full ">
           <ImageSkeleton isLoaded={isLoaded} />
           <Image
             src={images[activeImage].url}
@@ -62,7 +62,7 @@ export default function ProductPageImages({ images }) {
               return (
                 <div
                   key={index}
-                  className="relative min-w-[125px] h-[75px] rounded-global"
+                  className="relative aspect-[4/3] h-[75px] rounded-global cursor-pointer"
                   onClick={() => handleImageClick(index)}
                 >
                   <ImageSkeleton isLoaded={isLoaded} />

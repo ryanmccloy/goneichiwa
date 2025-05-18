@@ -68,8 +68,8 @@
   /* lg:pt-[195px]; */;
 }
 
-.negative-bottom-spacing {
-  @apply -mt-60 lg:-mt-90 lg:-mt-120;
+.negative-top-spacing {
+  @apply -mt-60 lg:-mt-90;
 }
 
 .rounded-global {
