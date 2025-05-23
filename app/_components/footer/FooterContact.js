@@ -5,7 +5,7 @@ export default function FooterContact() {
     <div className="flex flex-col gap-90 md:justify-between md:items-end break-all">
       <div className="flex flex-col gap-30 md:items-end">
         <h5 className="uppercase font-semibold lg:text-large">Questions?</h5>
-        <a href="mailto:hello@hereandthere.com">hello@hereandthere.com</a>
+        <a href="mailto:contact@goneichiwa.com">contact@goneichiwa.com</a>
       </div>
       <Link
         href="https://www.webdevryan.com"
