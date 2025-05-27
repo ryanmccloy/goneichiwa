@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 export function useSuccessSession(sessionId) {
   const [email, setEmail] = useState("");
   const [items, setItems] = useState([]);
+  const [amount, setAmount] = useState("");
+  const [orderDate, setorderDate] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,8 +16,13 @@ export function useSuccessSession(sessionId) {
       try {
         const res = await fetch(`/api/stripe_session?session_id=${sessionId}`);
         const data = await res.json();
+
         setEmail(data.customer_email || "");
         setItems(JSON.parse(data.items || "[]"));
+        setAmount(data.amount_total || "");
+        setorderDate(
+          data.created ? new Date(data.created * 1000).toISOString() : ""
+        );
       } catch (err) {
         setError(true);
         toast.error("Failed to get checkout session. Please contact support");
@@ -28,5 +35,5 @@ export function useSuccessSession(sessionId) {
     fetchSession();
   }, [sessionId]);
 
-  return { email, items, loading, error };
+  return { email, items, amount, orderDate, loading, error };
 }

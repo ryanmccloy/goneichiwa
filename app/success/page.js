@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -16,8 +16,10 @@ import { useSuccessSession } from "../_lib/hooks/useSuccessSession";
 import useDownloadLinks from "../_lib/hooks/useDownloadLinks";
 import { useSaveOrder } from "../_lib/hooks/useSaveOrder";
 import SuccessPageButtons from "../_components/success/SuccessPageButtons";
+import { useSendConfirmationEmail } from "../_lib/hooks/useSendConfirmationEmail";
 
 export default function Page() {
+  const hasFired = useRef(false);
   const [orderNumber, setOrderNumber] = useState(null);
 
   const clearCart = useCartStore((state) => state.clearCart);
@@ -31,6 +33,8 @@ export default function Page() {
   const {
     email,
     items: purchaseItems,
+    amount,
+    orderDate,
     loading: sessionIdLoading,
     error: stripeSessionError,
   } = useSuccessSession(sessionId);
@@ -49,7 +53,14 @@ export default function Page() {
     error: saveOrderError,
   } = useSaveOrder();
 
-  // after successful save to firestore, returning the order number, clearing the cart, and firing the confetti cannon
+  // sending confirmation email
+  const {
+    sendConfirmationEmail,
+    loading: confirmationEmailLoading,
+    error: confirmationEmailError,
+  } = useSendConfirmationEmail();
+
+  // after successful save to firestore, returning the order number, clearing the cart,  and firing the confetti cannon
   useEffect(() => {
     if (!sessionId) return;
 
@@ -61,6 +72,46 @@ export default function Page() {
       }
     });
   }, [sessionId, saveOrder, clearCart]);
+
+
+  // sending confirmation email after order has saved to firebase
+  useEffect(() => {
+    // all required data must be loaded and present
+    const ready =
+      email &&
+      orderNumber &&
+      orderDate &&
+      amount &&
+      purchaseItems.length > 0 &&
+      Object.keys(downloadLinks).length > 0 &&
+      !saveOrderLoading;
+
+   
+
+    if (!ready || hasFired.current) return;
+
+    hasFired.current = true;
+  
+
+    sendConfirmationEmail(
+      email,
+      orderNumber,
+      amount,
+      orderDate,
+      purchaseItems,
+      downloadLinks
+    );
+  }, [
+    email,
+    amount,
+    orderDate,
+    purchaseItems,
+    downloadLinks,
+    orderNumber,
+    linksLoading,
+    saveOrderLoading,
+    sendConfirmationEmail,
+  ]);
 
   if (sessionIdLoading || linksLoading || saveOrderLoading) {
     return (

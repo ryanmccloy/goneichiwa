@@ -12,10 +12,14 @@ export async function GET(req) {
   try {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+    // console.log("STRIPE SESSION:", session);
+
     return NextResponse.json({
       customer_email:
         session.customer_email || session.customer_details?.email || "",
       items: session.metadata?.items || "[]", // stringified array
+      amount_total: session.amount_total,
+      created: session.created,
     });
   } catch (err) {
     console.error("[Stripe Session Fetch Error]:", err);

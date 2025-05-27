@@ -24,8 +24,6 @@ export async function POST(req) {
     // Server-side verification of Stripe session
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-    console.log("SAVE ORDER", session);
-
     const email =
       session.customer_details?.email || session.customer_email || null;
     const metadataItems = JSON.parse(session.metadata?.items || "[]");

@@ -9,11 +9,11 @@ import {
 } from "@react-email/components";
 
 export default function OrderConfirmationEmail({
-  customerName = "null",
   orderNumber = "null",
   orderTotal = "null",
   orderDate = "null",
   items = "null",
+  downloadLinks = "null",
 }) {
   return (
     <Html>
@@ -32,9 +32,7 @@ export default function OrderConfirmationEmail({
             alt="Goneichiwa Logo"
             style={styles.logo}
           />
-          <Text style={styles.heading}>
-            {`Your Next Adventure Awaits${customerName ? `, ${customerName}!` : "!"}`}
-          </Text>
+          <Text style={styles.heading}>Your Next Adventure Awaits!</Text>
           <Text style={styles.paragraph}>
             Thank you for your order with <strong>Goneichiwa</strong> ✈️ We're
             thrilled to help guide your next adventure.
@@ -62,7 +60,7 @@ export default function OrderConfirmationEmail({
                   <tr style={styles.tableRow}>
                     <td style={styles.tableCellLeft}>{item.title}</td>
                     <td style={styles.tableCellRight}>
-                      <a href={item.downloadUrl} style={styles.button}>
+                      <a href={downloadLinks[item.id]} style={styles.button}>
                         <Img
                           src="https://img.icons8.com/?size=100&id=14100&format=png&color=fdfdfd"
                           alt="Download"
