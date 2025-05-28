@@ -4,17 +4,23 @@ import { useRouter } from "next/navigation";
 
 export default function ArrowRightSimpleIcon({ id, destination }) {
   const router = useRouter();
+  const isDisabled = !id;
 
   const handleClick = () => {
-    if (!id) return;
+    if (isDisabled) return;
     router.push(`/catalogue/${id}`);
   };
 
   return (
     <button
       type="button"
+      disabled={isDisabled}
       onClick={handleClick}
-      className="guide-icons cursor-pointer hover:-rotate-25 transition-transform duration-300"
+      className={`guide-icons transition-transform duration-300 ${
+        isDisabled
+          ? "cursor-not-allowed opacity-50"
+          : "cursor-pointer hover:-rotate-25"
+      }`}
       aria-label={`View Travel Guide: ${destination}`}
       title={`View Travel Guide: ${destination}`}
     >

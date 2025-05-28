@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import ArrowRightSimpleIcon from "../ui/icons/ArrowRightSimpleIcon";
 import ArticleTag from "./ArticleTag";
+import ComingSoonOverlay from "../catalogue/ComingSoonOverlay";
 
 function FeaturedArticleCardDesktop({ title, url, alt, href, tags }) {
   return (
-    <Link href={href} className="group  w-full h-[450px] grow-1">
+    <div className="group  w-full h-[450px] grow-1">
       <div className="w-full h-full relative">
         <Image
           src={url}
@@ -13,6 +14,7 @@ function FeaturedArticleCardDesktop({ title, url, alt, href, tags }) {
           fill
           className="object-cover rounded-global"
         />
+        <ComingSoonOverlay />
         <span className="absolute z-30 top-15 right-15">
           <ArrowRightSimpleIcon />
         </span>
@@ -29,7 +31,7 @@ function FeaturedArticleCardDesktop({ title, url, alt, href, tags }) {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

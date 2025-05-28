@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ArrowRightSimpleIcon from "../ui/icons/ArrowRightSimpleIcon";
 import ArticleTag from "./ArticleTag";
+import ComingSoonOverlay from "../catalogue/ComingSoonOverlay";
 
 export default function ArticleCard({
   href,
@@ -12,8 +13,7 @@ export default function ArticleCard({
   featured = false,
 }) {
   return (
-    <Link
-      href={href}
+    <div
       className={`group rounded-global snap-start flex flex-col gap-15 ${
         featured ? "min-w-[300px]" : ""
       }`}
@@ -30,6 +30,7 @@ export default function ArticleCard({
         <span className="absolute z-30 top-15 right-15">
           <ArrowRightSimpleIcon />
         </span>
+        <ComingSoonOverlay />
       </div>
 
       <h5 className="uppercase">{title}</h5>
@@ -39,6 +40,6 @@ export default function ArticleCard({
           return <ArticleTag key={tag} tag={tag} />;
         })}
       </div>
-    </Link>
+    </div>
   );
 }
