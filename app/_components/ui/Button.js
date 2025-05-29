@@ -4,7 +4,7 @@ export default function Button({
   children,
   href,
   onClick,
-  isActive = "true",
+  isActive = true,
   textSize = "medium",
 }) {
   if (href) {
