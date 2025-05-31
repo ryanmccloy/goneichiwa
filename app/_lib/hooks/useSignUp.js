@@ -4,10 +4,12 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { createUserDoc, signUpWithEmail } from "../auth-service";
 import { useCartSync } from "./useCartSync";
+import useNewsletterSubscription from "./useNewsletterSubscription";
 
 export const useSignUp = () => {
   const router = useRouter();
   const { syncUserCartOnLogin } = useCartSync();
+  const { subscribe } = useNewsletterSubscription();
 
   const handleSubmit = async (
     email,
@@ -19,6 +21,9 @@ export const useSignUp = () => {
     try {
       const user = await signUpWithEmail(email, password, name);
       await createUserDoc(user, newsletter);
+      if (newsletter) {
+        await subscribe(email);
+      }
       await syncUserCartOnLogin(user.uid);
       toast.success(`Welcome ${user.email}!`);
       router.push(redirectTo);

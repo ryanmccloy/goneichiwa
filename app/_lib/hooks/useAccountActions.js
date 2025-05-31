@@ -12,11 +12,13 @@ import {
 } from "../data-service";
 import { useAuthStore } from "../stores/authStore";
 import { useAccountStore } from "../stores/accountStore";
+import useNewsletterSubscription from "./useNewsletterSubscription";
 
 export const useAccountActions = () => {
   const { user } = useAuthStore();
   const { settings } = useAccountStore();
   const setSettings = useAccountStore((s) => s.setSettings);
+  const { subscribe, unsubscribe } = useNewsletterSubscription();
 
   const saveSettings = async ({
     isVerified,
@@ -80,7 +82,12 @@ export const useAccountActions = () => {
       if (shouldUpdateNewsletterSubscription) {
         await updateNewsletterPreference(user, newsletter);
         setSettings({ newsletter: newsletter });
-        toast.success("Newsletter subscription updated!");
+
+        if (newsletter) {
+          await subscribe(user.email);
+        } else {
+          await unsubscribe(user.email);
+        }
       }
     } catch (err) {
       handleAccountError(err);

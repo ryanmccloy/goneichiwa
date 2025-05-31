@@ -1,35 +1,50 @@
 import { useState } from "react";
 import { subscribeToNewsletter } from "../newsletter-service";
 import toast from "react-hot-toast";
+import { unsubscribeFromNewsletter } from "../newsletter-service";
 
 export default function useNewsletterSubscription() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [subscribeLoading, setSubscribeLoading] = useState(false);
 
   const subscribe = async (email) => {
-    setLoading(true);
-
-    setSuccess(false);
+    setSubscribeLoading(true);
 
     try {
       const result = await subscribeToNewsletter(email);
       if (result.success) {
-        setSuccess(true);
         toast.success("Successfully subscribed to our newsletter ✉️");
       }
     } catch (err) {
       console.error("[useNewsletterSubscription]", err);
       if (err?.message === "already_subscribed") {
-        toast.error("You're already subscribed to our newsletter.");
+        toast("You're already subscribed to our newsletter ✉️");
       } else {
         toast.error(
           "Something went wrong. Please contact support@goneichiwa.com"
         );
       }
     } finally {
-      setLoading(false);
+      setSubscribeLoading(false);
     }
   };
 
-  return { subscribe, loading, success };
+  const unsubscribe = async (email) => {
+    try {
+      const result = await unsubscribeFromNewsletter(email);
+      if (result.success) {
+        toast("Unsubscribed from our newsletter ✉️");
+      }
+    } catch (err) {
+      console.error("[useNewsletterSubscription]", err);
+      if (err?.message === "email_not_found") {
+        toast.error("Newsletter subscription not found ✉️");
+      } else {
+        toast.error(
+          "Something went wrong. Please contact support@goneichiwa.com"
+        );
+      }
+    }
+  };
+
+  return { subscribe, unsubscribe, subscribeLoading };
 }

@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { newsletterSchema } from "@/app/_lib/schemas/newsletterSchema";
 
 export default function NewsLetter() {
-  const { subscribe, loading } = useNewsletterSubscription();
+  const { subscribe, subscribeLoading } = useNewsletterSubscription();
 
   const {
     register,
@@ -47,8 +47,8 @@ export default function NewsLetter() {
             <p className="text-sm text-red-500">{errors.email.message}</p>
           )}
 
-          <Button isActive={!isSubmitting && !loading}>
-            {isSubmitting || loading ? "Subscribing..." : "Subscribe"}
+          <Button isActive={!isSubmitting && !subscribeLoading}>
+            {isSubmitting || subscribeLoading ? "Subscribing..." : "Subscribe"}
           </Button>
         </form>
       </div>
