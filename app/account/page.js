@@ -1,9 +1,8 @@
-
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Account",
 };
-
 export default function Page() {
-  return <div>Hello</div>;
+  redirect("/account/my-guides");
 }

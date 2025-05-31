@@ -3,7 +3,7 @@ export const metadata = {
 };
 
 function page() {
-  return <div>saved posts</div>;
+  return <div className="text-sm">You haven't saved any blog posts yet</div>;
 }
 
 export default page;

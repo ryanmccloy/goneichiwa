@@ -22,7 +22,7 @@ function Page() {
   if (orders.length === 0) {
     return (
       <p className="text-sm">
-        You haven&apos;t purchased any travel guides yet...
+        You haven&apos;t purchased any travel guides yet.
       </p>
     );
   }
