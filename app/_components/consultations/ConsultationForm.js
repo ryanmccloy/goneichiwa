@@ -1,107 +1,83 @@
 "use client";
 
+import { consultationSchema } from "@/app/_lib/schemas/consultationSchema";
 import Button from "../ui/Button";
+import useConsultationRequest from "@/app/_lib/hooks/useConsultationRequest";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ConsultationForm() {
   const layoutSpacing = "flex flex-col gap-30 lg:flex-row";
-  const inputStyles = "bg-light-grey rounded-global p-2 grow";
+  const baseInputStyles =
+    "bg-light-grey rounded-global p-2 grow border transition-colors duration-200";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // FORM SUBMISSION LOGIC
+  const { sendConsultationRequest } = useConsultationRequest();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(consultationSchema),
+  });
+
+  const onSubmit = async (data) => {
+    await sendConsultationRequest(data);
+    reset();
   };
 
+  const inputClass = (field) =>
+    `${baseInputStyles} ${errors[field] ? "border-red-500" : "border-transparent"}`;
+
   return (
-    <form onSubmit={handleSubmit} className={`flex flex-col gap-30`}>
-      <h4 className={`uppercase  text-regular`}>Request A Consultation</h4>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-30">
+      <h4 className="uppercase text-regular">Request A Consultation</h4>
 
-      <div className={`${layoutSpacing}`}>
-        <label htmlFor="name" className="sr-only">
-          Name
-        </label>
-
+      <div className={layoutSpacing}>
         <input
-          type="text"
-          name="name"
-          id="name"
-          required
+          {...register("name")}
           placeholder="Name"
-          aria-label="Name"
-          className={`${inputStyles} `}
-          autoComplete="name"
+          className={inputClass("name")}
         />
-        <label htmlFor="consultation-date" className="sr-only">
-          Consultation date
-        </label>
 
         <input
-          type="text"
-          name="consultation-date"
-          id="consultation-date"
-          required
+          {...register("consultationDate")}
           placeholder="Requested date"
-          aria-label="Requested date"
-          className={`${inputStyles} `}
+          className={inputClass("consultationDate")}
         />
       </div>
-
-      <label htmlFor="email" className="sr-only">
-        Email
-      </label>
 
       <input
-        type="email"
-        name="email"
-        id="email"
-        required
+        {...register("email")}
         placeholder="Email"
-        aria-label="Email"
-        className={`${inputStyles} max-h-fit`}
-        autoComplete="email"
+        className={`${inputClass("email")} max-h-fit`}
       />
-      <label htmlFor="destination" className="sr-only">
-        Destination
-      </label>
 
-      <div className={`${layoutSpacing}`}>
+      <div className={layoutSpacing}>
         <input
-          type="text"
-          name="destination"
-          id="destination"
-          required
+          {...register("destination")}
           placeholder="Destination"
-          aria-label="Destination"
-          className={`${inputStyles} `}
+          className={inputClass("destination")}
         />
-        <label htmlFor="duration" className="sr-only">
-          Trip Duration
-        </label>
 
         <input
-          type="text"
-          name="duration"
-          id="duration"
-          required
+          {...register("duration")}
           placeholder="Trip duration"
-          aria-label="Trip duration"
-          className={`${inputStyles} `}
+          className={inputClass("duration")}
         />
       </div>
 
-      <label htmlFor="message" className="sr-only">
-        Message
-      </label>
-
       <textarea
-        name="message"
-        id="message"
+        {...register("message")}
         placeholder="Any questions or specific requests?..."
-        aria-label="Message"
-        className={`${inputStyles} min-h-[150px] `}
+        className={`${inputClass("message")} min-h-[150px]`}
       />
 
       <span className="flex justify-center lg:justify-start mt-30">
-        <Button>Send Request</Button>
+        <Button isActive={!isSubmitting}>
+          {isSubmitting ? "Sending..." : "Send Request"}
+        </Button>
       </span>
     </form>
   );

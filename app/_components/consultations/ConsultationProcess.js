@@ -8,19 +8,19 @@ const processes = [
     icon: <CalendarIcon />,
     title: "Book Your Video Consultation",
     description:
-      "Choose a time that works for you and book your consultation in just a few clicks. Secure your session instantly, and receive a confirmation email with all the details—including a private video call link.",
+      "Request a consultation in just a few clicks. Secure your session, and receive a confirmation email with all the details—including a private video call link.",
   },
   {
     icon: <VideoIcon />,
     title: "1-on-1 Expert Travel Consultation",
     description:
-      "Jump on a live video call with a travel expert who will answer your questions, fine-tune your itinerary, and provide tailored recommendations based on your interests, budget, and travel style.",
+      "Jump on a live video call with a travel expert who will discuss the details of your trip, and get all of the information required to create your personal travel guide",
   },
   {
     icon: <PencilIcon />,
     title: "Receive a Customized PDF Travel Guide",
     description:
-      "After your consultation, we’ll send you a customized PDF travel guide packed with recommendations, must-see spots, hidden gems, and everything discussed in the session—so you have a plan tailored just for you.",
+      "Receive a customized PDF travel guide packed with recommendations, must-see spots, hidden gems, and everything discussed in the session—so you have a plan tailored just for you.",
   },
 ];
 
