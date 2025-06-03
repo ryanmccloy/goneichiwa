@@ -11,23 +11,23 @@ export const metadata = {
 export default function Page() {
   const featuredArticles = [
     {
-      title: "Best Neighbourhoods to explore in tokyo",
+      title: "Best neighbourhoods to explore in tokyo",
       href: "",
-      url: "/images/featured/tokyo.webp",
+      url: "/images/blog/tokyo.webp",
       alt: "Tokyo Neighbourhood",
       tags: ["Japan", "Sightseeing"],
     },
     {
-      title: "Best Things To Do In Rome",
+      title: "Ultimate Rome weekend itinerary",
       href: "",
-      url: "/images/featured/rome.webp",
+      url: "/images/blog/rome.webp",
       alt: "Roman Colessuem",
       tags: ["Italy", "Sightseeing"],
     },
     {
       title: "10 Must do hikes in the italian Dolomites",
       href: "",
-      url: "/images/featured/dolomites.webp",
+      url: "/images/blog/dolomites.webp",
       alt: "Italian Dolomoites",
       tags: ["Italy", "Outdoors"],
     },
@@ -35,25 +35,25 @@ export default function Page() {
 
   const newestArticles = [
     {
-      title: "Best Ramen in tokyo",
-      href: "",
-      url: "/images/featured/tokyo.webp",
-      alt: "Tokyo Neighbourhood",
-      tags: ["Japan", "Sightseeing"],
-    },
-    {
-      title: "Why Is Rome The Perfect Weekend Getaway?",
-      href: "",
-      url: "/images/featured/rome.webp",
-      alt: "Roman Colessuem",
-      tags: ["Italy", "Sightseeing"],
-    },
-    {
       title: "7 Day Dolomite Itinerary",
       href: "",
-      url: "/images/featured/dolomites.webp",
+      url: "/images/blog/dolomites2.webp",
       alt: "Italian Dolomoites",
       tags: ["Italy", "Outdoors"],
+    },
+    {
+      title: "What to do in Banff",
+      href: "",
+      url: "/images/blog/banff.webp",
+      alt: "Banff Avenue",
+      tags: ["Canada", "Sightseeing"],
+    },
+    {
+      title: "Chamonix Ski Guide",
+      href: "",
+      url: "/images/blog/chamonix.webp",
+      alt: "Chamonix Mountain",
+      tags: ["France", "Winter"],
     },
   ];
 
