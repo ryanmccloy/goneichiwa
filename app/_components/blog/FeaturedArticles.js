@@ -5,7 +5,7 @@ import FeaturedArticlesMobile from "./FeaturedArticlesMobile";
 
 export default function FeaturedArticles({ title, featured }) {
   return (
-    <section className="width-size section-styles negative-bottom-spacing">
+    <section className="width-size section-styles negative-top-spacing">
       <div className="flex gap-15 lg:gap-30 flex-col lg:flex-row lg:items-center">
         <SectionHeading>{title}</SectionHeading>
         <div className="-mt-60 lg:mb-2">

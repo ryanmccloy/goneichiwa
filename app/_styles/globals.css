@@ -64,12 +64,11 @@
 }
 
 .top-page-spacing {
-  @apply pt-[135px] md:pt-[165px] 
-  /* lg:pt-[195px]; */;
+  @apply pt-[135px] md:pt-[165px];
 }
 
 .negative-top-spacing {
-  @apply -mt-60 lg:-mt-90;
+  @apply -mt-60 lg:-mt-120;
 }
 
 .rounded-global {

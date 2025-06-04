@@ -11,6 +11,7 @@ export default function ProductDescription({ guide }) {
     description,
     country,
     continent,
+    destination,
     type,
     language,
     price,
@@ -49,7 +50,8 @@ export default function ProductDescription({ guide }) {
       <div>
         <p>
           <span className="font-medium">Destination: </span>
-          {title}, {country}, {continent}
+          {destination === country ? "" : `${destination},`} {country},{" "}
+          {continent}
         </p>
         <p>
           <span className="font-medium">Format: </span>

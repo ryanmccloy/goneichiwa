@@ -73,7 +73,6 @@ export default function Page() {
     });
   }, [sessionId, saveOrder, clearCart]);
 
-
   // sending confirmation email after order has saved to firebase
   useEffect(() => {
     // all required data must be loaded and present
@@ -86,12 +85,9 @@ export default function Page() {
       Object.keys(downloadLinks).length > 0 &&
       !saveOrderLoading;
 
-   
-
     if (!ready || hasFired.current) return;
 
     hasFired.current = true;
-  
 
     sendConfirmationEmail(
       email,
@@ -122,7 +118,7 @@ export default function Page() {
   }
 
   return (
-    <section className="section-styles width-size text-center top-page-spacing negative-top-spacing ">
+    <section className="section-styles width-size text-center top-page-spacing  ">
       <div className="flex flex-col gap-60">
         <div className="flex flex-col gap-30 items-center">
           <CheckCircleIcon className="h-12 w-12 text-green-500" />

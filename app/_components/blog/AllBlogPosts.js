@@ -48,7 +48,7 @@ export default function AllBlogPosts() {
   ];
 
   return (
-    <section className="width-size section-styles negative-bottom-spacing">
+    <section className="width-size section-styles negative-top-spacing">
       <SectionHeading>All Blog Posts</SectionHeading>
 
       <div className="grid gap-x-30 gap-y-60 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

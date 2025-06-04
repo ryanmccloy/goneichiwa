@@ -12,8 +12,7 @@ import IsGoogleUserEmailUpdateWarning from "./IsGoogleUserEmailUpdateWarning";
 import IsGoogleUserPasswordUpdateWarning from "./IsGoogleUserPasswordUpdateWarning";
 
 function AccountSettingsForm() {
-  const { saveSettings, deleteAccount } =
-    useAccountActions();
+  const { saveSettings, deleteAccount } = useAccountActions();
   const { user } = useAuthStore();
   const { settings } = useAccountStore();
 
@@ -114,8 +113,11 @@ function AccountSettingsForm() {
   };
 
   return (
-    <form onSubmit={handleSave} className="flex flex-col gap-30 max-w-xl">
-      <IsNotVerifiedBanner isVerified={isVerified}  />
+    <form
+      onSubmit={handleSave}
+      className="flex flex-col gap-30 max-w-xl justify-start"
+    >
+      <IsNotVerifiedBanner isVerified={isVerified} />
 
       <div className="account-settings-form-div">
         <label className="block text-sm font-medium">Name</label>

@@ -16,9 +16,8 @@ export default async function GuideSuggestions({ guide }) {
 
   // fetching travel guides in same country
   const relatedCountryGuides = await getTravelGuidesByCountry(country);
-  const suggestedGuidesByCountry = await formatGuidesWithImageUrl(
-    relatedCountryGuides
-  );
+  const suggestedGuidesByCountry =
+    await formatGuidesWithImageUrl(relatedCountryGuides);
 
   //fetching travel guides in same continent
   const relatedContinentGuides = await getTravelGuidesByContinent(continent);
@@ -40,7 +39,7 @@ export default async function GuideSuggestions({ guide }) {
 
   // returning suggestions if there are any
   return (
-    <section className="section-styles width-size negative-bottom-spacing">
+    <section className="section-styles negative-top-spacing width-size ">
       <SectionHeading>You May Also Be Interested In...</SectionHeading>
 
       <Slider>

@@ -33,7 +33,7 @@ export default async function ProductOverview({ guide }) {
     );
 
   return (
-    <section className="section-styles top-page-spacing   width-size flex flex-col gap-60 lg:grid lg:grid-cols-2 xl:gap-120">
+    <section className="section-styles top-page-spacing width-size flex flex-col gap-60 lg:grid lg:grid-cols-2 xl:gap-120">
       <div className="relative flex flex-col gap-15 ">
         <ProductPageImages images={guideWithImageUrl.gallery} />
         <div className="hidden lg:block lg:mt-[45px]">{reviewsSection}</div>
