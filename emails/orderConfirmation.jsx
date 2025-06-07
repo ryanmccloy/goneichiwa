@@ -89,7 +89,7 @@ export default function OrderConfirmationEmail({
               <tr>
                 <td style={styles.ctaImageCell}>
                   <Img
-                    src="https://goneichiwa-ji0zbr7tr-webdevryans-projects.vercel.app/emails/order-confirmation/consultations.png"
+                    src="https://goneichiwa.com/emails/order-confirmation/consultations.png"
                     width="100"
                     alt="Private Travel Consultation"
                     style={styles.ctaImage}
@@ -98,7 +98,7 @@ export default function OrderConfirmationEmail({
                 <td style={styles.ctaContentCell}>
                   <Text style={styles.ctaTitle}>Plan With an Expert</Text>
                   <a
-                    href="https://goneichiwa-c3rt4zbyu-webdevryans-projects.vercel.app/consultations"
+                    href="https://goneichiwa.com/consultations"
                     style={styles.ctaLink}
                   >
                     Book a consultation →
@@ -109,7 +109,7 @@ export default function OrderConfirmationEmail({
               <tr>
                 <td style={styles.ctaImageCell}>
                   <Img
-                    src="https://goneichiwa-ji0zbr7tr-webdevryans-projects.vercel.app/emails/order-confirmation/catalogue.png"
+                    src="https://goneichiwa.com/emails/order-confirmation/catalogue.png"
                     width="100"
                     alt="Travel Guides"
                     style={styles.ctaImage}
@@ -118,7 +118,7 @@ export default function OrderConfirmationEmail({
                 <td style={styles.ctaContentCell}>
                   <Text style={styles.ctaTitle}>Explore More Guides</Text>
                   <a
-                    href="https://goneichiwa-c3rt4zbyu-webdevryans-projects.vercel.app/catalogue"
+                    href="https://goneichiwa.com/catalogue"
                     style={styles.ctaLink}
                   >
                     View collection →
@@ -129,7 +129,7 @@ export default function OrderConfirmationEmail({
               <tr>
                 <td style={styles.ctaImageCell}>
                   <Img
-                    src="https://goneichiwa-ji0zbr7tr-webdevryans-projects.vercel.app/emails/order-confirmation/blog.png"
+                    src="https://goneichiwa.com/emails/order-confirmation/blog.png"
                     width="100"
                     alt="Blog"
                     style={styles.ctaImage}
@@ -137,10 +137,7 @@ export default function OrderConfirmationEmail({
                 </td>
                 <td style={styles.ctaContentCell}>
                   <Text style={styles.ctaTitle}>Get Travel Tips</Text>
-                  <a
-                    href="https://goneichiwa-c3rt4zbyu-webdevryans-projects.vercel.app/blog"
-                    style={styles.ctaLink}
-                  >
+                  <a href="https://goneichiwa.com/blog" style={styles.ctaLink}>
                     Read the blog →
                   </a>
                 </td>
