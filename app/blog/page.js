@@ -63,8 +63,8 @@ export default function Page() {
         🚧 Our travel blog is launching soon. Stay tuned for wanderlust-worthy
         reads! 🚧
       </div>
-      <FeaturedArticles title="Featured Posts" featured={featuredArticles} />
-      <FeaturedArticles title="Newest Posts" featured={newestArticles} />
+      <FeaturedArticles title="Featured Posts" articles={featuredArticles} />
+      <FeaturedArticles title="Newest Posts" articles={newestArticles} />
 
       <AllBlogPosts />
 
