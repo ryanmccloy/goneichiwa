@@ -12,7 +12,7 @@ export const getFormattedFeaturedGuides = async () => {
   sanitized.push({
     id: "view-all-guides",
     title: "View All Guides",
-    coverImageUrl: "/images/bestsellers/view-all.webp",
+    coverImageUrl: "/images/landing/bestsellers/view-all.webp",
     coverImageAlt: "Japanese Souvenir Collage",
   });
 
