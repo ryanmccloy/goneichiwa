@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Goneichiwa 🌏✈️
 
-## Getting Started
+Welcome to **Goneichiwa**, your one-stop online destination for curated **PDF travel guides**, **private travel consultations**, and soon, a detailed **travel blog** to inspire your next journey.
 
-First, run the development server:
+🌐 [Visit Goneichiwa →](https://www.goneichiwa.com/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- 🗺️ **Premium PDF Travel Guides** – Instant digital downloads with expert travel itineraries.
+- 💬 **Private Travel Consultations** – Personalized advice tailored to your travel goals.
+- 📝 **Travel Blog** _(Coming Soon)_ – Tips, destination highlights, and planning resources.
+- 🔐 Secure payments with **Stripe**.
+- 🔥 Real-time updates via **Firebase**.
+- 💌 Email confirmations and notifications via **Resend**.
+- ⚡ Fast and optimized with **Next.js** & **Tailwind CSS**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧱 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+| Tech         | Use Case                                  |
+| ------------ | ----------------------------------------- |
+| Next.js      | Full-stack React framework                |
+| Tailwind CSS | Styling with utility-first CSS            |
+| Zustand      | Global state management                   |
+| Firebase     | Auth, Firestore (DB), Storage             |
+| Resend       | Transactional email service               |
+| Stripe       | Payment processing for digital goods      |
+| Vercel       | Deployment & serverless backend functions |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+/\_components → Reusable UI components
+/\_lib → Firebase & other library setups
+/\_styles → Tailwind CSS styles
+/store → Zustand global state
+/utils → Helper functions (e.g. stripe, email)
+/api → Next.js API routes
+/pages → Next.js routes
+/emails → Resend email templates
+/public → Static assets
