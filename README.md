@@ -34,12 +34,12 @@ Welcome to **Goneichiwa**, your one-stop online destination for curated **PDF tr
 
 ### Project Structure
 
-/\_components → Reusable UI components
-/\_lib → Firebase & other library setups
-/\_styles → Tailwind CSS styles
-/store → Zustand global state
-/utils → Helper functions (e.g. stripe, email)
-/api → Next.js API routes
-/pages → Next.js routes
-/emails → Resend email templates
-/public → Static assets
+- /\_components → Reusable UI components
+- /\_lib → Firebase & other library setups
+- /\_styles → Tailwind CSS styles
+- /store → Zustand global state
+- /utils → Helper functions (e.g. stripe, email)
+- /api → Next.js API routes
+- /pages → Next.js routes
+- /emails → Resend email templates
+- /public → Static assets
