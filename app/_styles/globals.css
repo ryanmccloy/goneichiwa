@@ -68,7 +68,7 @@
 }
 
 .negative-top-spacing {
-  @apply -mt-60 lg:-mt-120;
+  @apply -mt-60 lg:-mt-121;
 }
 
 .rounded-global {
