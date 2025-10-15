@@ -16,6 +16,7 @@ export default function ProductDescription({ guide }) {
     language,
     price,
     id,
+    stripePriceId,
     coverImage,
     isActive,
   } = guide;
@@ -24,6 +25,7 @@ export default function ProductDescription({ guide }) {
     id,
     title,
     price,
+    stripePriceId,
     image: coverImage,
     quantity: 1,
   };
