@@ -60,8 +60,8 @@ export default function Page() {
   return (
     <div className="top-page-spacing">
       <div className="bg-accent-blue border-b border-white   text-center py-2 px-4 mb-30">
-        🚧 Our travel blog is launching soon. Stay tuned for wanderlust-worthy
-        reads! 🚧
+        🚧 Our travel blog is launching soon! Stay tuned for wanderlust-worthy
+        reads. 🚧
       </div>
       <FeaturedArticles title="Featured Posts" articles={featuredArticles} />
       <FeaturedArticles title="Newest Posts" articles={newestArticles} />
