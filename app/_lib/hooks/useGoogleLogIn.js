@@ -10,7 +10,7 @@ export const useGoogleLogIn = () => {
   const { syncUserCartOnLogin } = useCartSync();
 
   const errorMap = {
-    "auth/popup-closed-by-user": "Sign in canceled. Please try again.",
+    "auth/popup-closed-by-user": "Sign in cancelled. Please try again.",
     "auth/network-request-failed":
       "Network error. Please check your connection.",
   };
